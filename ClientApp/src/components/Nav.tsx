@@ -19,7 +19,7 @@ export function Nav() {
                     </Col>
                     
                     <Col sm={4} className="d-flex justify-content-center align-items-center">
-                            <img src={ birdLogo } alt="Logo of a colorful bird" />
+                            <img src={ birdLogo } alt="Logo of a colorful bird"/>
                     </Col>
                     
                     <Col sm={4} className="d-flex justify-content-end align-items-center">

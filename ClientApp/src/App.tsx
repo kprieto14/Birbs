@@ -1,5 +1,8 @@
 import React from 'react'
 import { Nav } from './components/Nav'
+import { Home } from './pages/Home'
+import { Route, Routes } from 'react-router-dom'
+import { Footer } from './components/Footer'
 
 export function App() {
   return (
@@ -8,10 +11,12 @@ export function App() {
     <Nav></Nav>
     
     <main>
-      Hello, World 
-
-      <p>Image by logturnal on Freepik</p>
+      <Routes>
+        <Route path={'/'} element={<Home />}/>
+      </Routes>
     </main>
+
+    <Footer />
   </div>
   )
 }

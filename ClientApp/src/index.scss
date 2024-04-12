@@ -1,5 +1,6 @@
 #root {
   min-height: 100vh;
+  font-size: 16px;
 }
 
 html {
@@ -12,8 +13,8 @@ body {
   min-width: 100%;
 }
 
-img {
-  max-width: 50px;
+h1, h2, h3, h4 {
+  margin: 0;
 }
 
 a, a:visited {
@@ -37,11 +38,56 @@ nav {
       color: #F6F5F5;
     }
   }
+
+  img {
+    max-width: 50px;
+  }
 }
 
 main {
-  margin-top: 9rem;
+  margin-top: 2rem;
   font-family: "Playfair Display", serif;
-//   display: flex;
-//   justify-content: center;
+  display: flex;
+  justify-content: center;
+  color: #0C359E;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #0C359E;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
+
+
+  h1, h2, h3 {
+      text-align: center;
+  }
+
+  .bold-underline {
+    text-decoration: underline;
+    font-weight: bolder;
+  }
+  
+  .bird-card-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+}
+
+.bird-cage-card {
+  max-width: 50%;
+  background-color: #FFE3CA;
+
+  img {
+    padding-bottom: 1rem;
+  }
 }
