@@ -10,7 +10,7 @@ export function Nav() {
         <Container>
                 <Row>
                     <Col sm={4} className="d-flex justify-content-start align-items-center">
-                        <Link to={'/'}>
+                        <Link to={'/birdcage-list'}>
                             <div style={{display: "flex", justifyContent: "center", gap:"5px"}}>
                                 <GiBirdHouse size={30} title="Bird cartoon facing to the right"/>
                                 <span> My Aviary</span>
@@ -25,8 +25,8 @@ export function Nav() {
                     
                     <Col sm={4} className="d-flex justify-content-end align-items-center">
                         {/* Span is needed for hover to work correctly for some reason */}
-                        <Link to={'/'}><span className="nav-gap">Register</span></Link>
-                        <Link to={'/'}><span>Login</span></Link>
+                        <Link to={'/register'}><span className="nav-gap">Register</span></Link>
+                        <Link to={'/login'}><span>Login</span></Link>
                     </Col>
                 </Row>
         </Container>

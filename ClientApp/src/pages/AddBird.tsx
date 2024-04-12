@@ -6,6 +6,7 @@ export function AddBird() {
     return (
         <section className="add-bird">
             <h3>Add a Bird to Your Aviary</h3>
+            
             <Card className="add-bird-card">
                 <Form>
                     <Form.Group controlId="formFile" className="mb-3">

@@ -5,6 +5,8 @@ import { Route, Routes } from 'react-router-dom'
 import { Footer } from './components/Footer'
 import { AddBird } from './pages/AddBird'
 import { BirdCageList } from './pages/BirdCageList'
+import { Register } from './pages/Register'
+import { SignIn } from './pages/SignIn'
 
 export function App() {
   return (
@@ -17,6 +19,8 @@ export function App() {
         <Route path={'/'} element={<Home />}/>
         <Route path={'/birdcage-list'} element={<BirdCageList />}/>
         <Route path={'/add-bird'} element={<AddBird />}/>
+        <Route path={'/login'} element={<SignIn />} />
+        <Route path={'/register'} element={<Register />} />
       </Routes>
     </main>
 

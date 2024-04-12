@@ -84,7 +84,7 @@ footer {
 }
 
 .bird-cage-card {
-  max-width: 50%;
+  max-width: 60%;
   background-color: #FFE3CA;
 
   img {
@@ -92,15 +92,22 @@ footer {
   }
 }
 
+.add-bird-card {
+  max-width: 60%;
+  padding: 2rem;
+  background-color: #FFE3CA;
+}
+
 .add-bird {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
 
-  .add-bird-card {
-    max-width: 60%;
-    padding: 2rem;
-    background-color: #FFE3CA;
-  }
+.sign-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
