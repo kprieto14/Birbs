@@ -16,6 +16,7 @@ export function Nav() {
                                 <span> My Aviary</span>
                             </div>
                         </Link>
+                        <Link to={'/'}><span className="nav-gap">Home</span></Link>
                     </Col>
                     
                     <Col sm={4} className="d-flex justify-content-center align-items-center">
@@ -24,6 +25,7 @@ export function Nav() {
                     
                     <Col sm={4} className="d-flex justify-content-end align-items-center">
                         {/* Span is needed for hover to work correctly for some reason */}
+                        <Link to={'/'}><span className="nav-gap">Register</span></Link>
                         <Link to={'/'}><span>Login</span></Link>
                     </Col>
                 </Row>

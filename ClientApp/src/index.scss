@@ -27,8 +27,6 @@ nav {
   font-family: "DM Serif Display", serif;
 
   padding: 1rem 2rem;
-  border: solid #FFE3CA 2px;
-  border-style: dotted;
   width: 100%;
 
   a {
@@ -42,13 +40,15 @@ nav {
   img {
     max-width: 50px;
   }
+
+  .nav-gap {
+    padding: 0 15px;
+  }
 }
 
 main {
   margin-top: 2rem;
   font-family: "Playfair Display", serif;
-  display: flex;
-  justify-content: center;
   color: #0C359E;
 }
 
@@ -89,5 +89,18 @@ footer {
 
   img {
     padding-bottom: 1rem;
+  }
+}
+
+.add-bird {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .add-bird-card {
+    max-width: 60%;
+    padding: 2rem;
+    background-color: #FFE3CA;
   }
 }
