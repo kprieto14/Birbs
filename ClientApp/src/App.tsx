@@ -21,6 +21,7 @@ export function App() {
         <Route path={'/add-bird'} element={<AddBird />}/>
         <Route path={'/login'} element={<SignIn />} />
         <Route path={'/register'} element={<Register />} />
+        {/* <Route path={'/followers'} element={<Follow />} /> */}
       </Routes>
     </main>
 
