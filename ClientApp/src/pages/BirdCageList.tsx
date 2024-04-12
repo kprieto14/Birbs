@@ -3,7 +3,7 @@ import { Button, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import IconCenter from "../components/IconCenter";
 import { FaSortDown } from "react-icons/fa6";
-import { BirdCage } from "../components/BirdCage";
+import { NoTitleCage } from "../components/NoTitleCage";
 
 export function BirdCageList() {
     return (
@@ -23,16 +23,16 @@ export function BirdCageList() {
 
             <h3>Season: Spring</h3>
             <div className="bird-grid">
-                <BirdCage />
-                <BirdCage />
-                <BirdCage />
+                <NoTitleCage />
+                <NoTitleCage />
+                <NoTitleCage />
             </div>
 
             <h3>Season: Summer</h3>
             <div className="bird-grid">
-                <BirdCage />
-                <BirdCage />
-                <BirdCage />
+                <NoTitleCage />
+                <NoTitleCage />
+                <NoTitleCage />
             </div>
             
         </section>
