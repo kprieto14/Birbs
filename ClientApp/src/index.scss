@@ -1,5 +1,10 @@
-#root {
-  min-height: 100vh;
+:root {
+  --darkblue: #8274E819;
+  --lightblue: #4BC9FE;
+  --blue: #0F2F94; 
+  --yellow: #FFDFC3;
+  --pink: #EB8EBA; 
+
   font-size: 16px;
 }
 
@@ -9,11 +14,12 @@ html {
 
 body {
   margin: 0;
-  min-height: 100%;
+  min-height: 100vh;
   min-width: 100%;
+  font-family: "Playfair Display", serif;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
@@ -22,99 +28,54 @@ a, a:visited {
   text-decoration: none;
 }
 
-nav {
-  background-color: #EE99C2;
+button {
+  background: none;
+  color: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+header {
+  background-color: var(--pink);
   font-family: "DM Serif Display", serif;
-
-  padding: 1rem 2rem;
-  width: 100%;
-
-  a {
-    font-size: 1.5rem;
-  
-    :hover {
-      color: #F6F5F5;
-    }
-  }
-
-  img {
-    max-width: 50px;
-  }
-
-  .nav-gap {
-    padding: 0 15px;
-  }
+  padding: 9px 0;
+  border-radius: 0 0 1.5rem 1.5rem;
 }
 
-main {
-  margin-top: 2rem;
-  font-family: "Playfair Display", serif;
-  color: #0C359E;
-}
-
-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  color: #0C359E;
-}
-
-.home {
+nav {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  margin: 0 auto;
   padding: 0 1rem;
+  max-width: 80rem;
 
-
-  h1, h2, h3 {
-      text-align: center;
-  }
-
-  .bold-underline {
-    text-decoration: underline;
-    font-weight: bolder;
-  }
-  
-  .bird-card-header {
+  div {
     display: flex;
-    justify-content: space-between;
-  }
-  
-}
-
-.bird-cage-card {
-  background-color: #FFE3CA;
-
-  img {
-    padding-bottom: 1rem;
+    align-items: center;
+    gap: 1rem;
   }
 }
 
-.add-bird-card {
-  max-width: 60%;
-  padding: 2rem;
-  background-color: #FFE3CA;
+.blue-outline {
+  color: var(--blue);
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  border: 2px solid var(--blue);
+  border-radius: 2rem;
+  padding: 12px 34px;
+  box-shadow: 0px 3px 12px var(--darkblue);
 }
 
-.add-bird, .bird-list, .sign-in {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 1.5rem;
+.gradient-button {
+  background: linear-gradient(178deg, var(--lightblue), #5052FE);
+  color: white;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  padding: 12px 34px;
+  border-radius: 2rem;
 }
 
-
-.bird-list {
-  padding: 0 2rem;
-
-  .bird-grid {
-  display: grid;
-  grid-template-columns: repeat(3, .75fr);
-  grid-template-rows: repeat(.75fr);
-  gap: 1.5rem;
-}
-}
 
 
