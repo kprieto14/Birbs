@@ -10,22 +10,22 @@ import { SignIn } from './pages/SignIn'
 
 export function App() {
   return (
-  <div>
-    
-    <Nav />
-    
-    <main>
-      <Routes>
-        <Route path={'/'} element={<Home />}/>
-        <Route path={'/birdcage-list'} element={<BirdCageList />}/>
-        <Route path={'/add-bird'} element={<AddBird />}/>
-        <Route path={'/login'} element={<SignIn />} />
-        <Route path={'/register'} element={<Register />} />
-        {/* <Route path={'/followers'} element={<Follow />} /> */}
-      </Routes>
-    </main>
+    <div>
+      
+        <Nav />
+        
+        <main>
+          <Routes>
+            <Route path={'/'} element={<Home />}/>
+            <Route path={'/birdcage-list'} element={<BirdCageList />}/>
+            <Route path={'/add-bird'} element={<AddBird />}/>
+            <Route path={'/login'} element={<SignIn />} />
+            <Route path={'/register'} element={<Register />} />
+            {/* <Route path={'/followers'} element={<Follow />} /> */}
+          </Routes>
+        </main>
 
-    <Footer />
-  </div>
+        <Footer />
+    </div>
   )
 }
