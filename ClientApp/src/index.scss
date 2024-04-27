@@ -87,7 +87,7 @@ section {
   align-items: center;
 }
 
-.register, .sign-in {
+.register, .sign-in, .add-bird {
   color: var(--blue);
   padding: 0 1rem;
   background-image: url('./assets/Background\ Image\ Divider@2x.png');
@@ -108,9 +108,16 @@ section {
     height: 3rem;
   }
 
+  .react-bird-icon {
+    width: 3rem;
+    height: 4.25rem;
+  }
+
   .input {
     border-radius: 1.5rem;
   }
 }
+
+
 
 
