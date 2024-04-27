@@ -90,6 +90,10 @@ section {
 .register {
   color: var(--blue);
   padding: 0 1rem;
+  background-image: url('./assets/Background\ Image\ Divider@2x.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 
   .middle-card {
     max-width: 50rem;
