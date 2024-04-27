@@ -1,40 +1,67 @@
 import React from "react";
-import background from '../assets/BirdsBackground.png'
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
+import { FaClipboardCheck } from "react-icons/fa";
 
 export function Register() {
     return (
         <>
-            <div className="yellow-background"></div>
-            <aside>
-                    <img 
-                        src={background} 
-                        className="background-image"
-                        alt="Background image of different fabric birds" 
-                    />
-            </aside>
-
             <section className="register">
-                <aside className="left-side w-50">
+                <div className="middle-card w-100">
+                    <FaClipboardCheck className="react-icon mb-3"/>
                     <h2 className="mb-4">Register Your Account</h2>
                     <Form>
+                        <Row>
+                            <Col>
+                                <Form.Label className="h3 mb-3">First Name</Form.Label>
+                                <Form.Control
+                                    type="text" 
+                                    placeholder="Enter your first name" 
+                                    className="mb-3 input"
+                                    size="lg"
+                                    onChange={() => console.log("Changed")}
+                                />
+                            </Col>
+
+                            <Col>
+                                <Form.Label className="h3 mb-3">Last Name</Form.Label>
+                                <Form.Control
+                                    type="text" 
+                                    placeholder="Enter your last name/ initial" 
+                                    className="mb-3 input"
+                                    size="lg"
+                                    onChange={() => console.log("Changed")}
+                                />
+                            </Col>
+                        </Row>
+
                         <Form.Group className="" controlId="">
-                            <Form.Label className="h3">Email</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your email"></Form.Control>
+                            <Form.Label className="h3 mb-3">Email</Form.Label>
+                            <Form.Control
+                                    type="text" 
+                                    placeholder="Enter your email" 
+                                    className="mb-3 input"
+                                    size="lg"
+                                    onChange={() => console.log("Changed")}
+                            />
                         </Form.Group>
 
                         <Form.Group className="" controlId="">
-                            <Form.Label className="h3">Password</Form.Label>
-                            <Form.Control type="text" placeholder="Enter password"></Form.Control>
+                            <Form.Label className="h3 mb-3">Password</Form.Label>
+                            <Form.Control
+                                    type="text" 
+                                    placeholder="********" 
+                                    className="mb-3 input"
+                                    size="lg"
+                                    onChange={() => console.log("Changed")}
+                            />
                         </Form.Group>
 
-                        <button className="gradient-button w-100">
-                            Register
+                        <button className="gradient-button w-100 mt-3">
+                            <h4>Register</h4>
                         </button>
                     </Form>
-                </aside>
-            </section>            
+                </div>
+            </section>     
         </>
-
     )
 }
