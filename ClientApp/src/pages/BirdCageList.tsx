@@ -1,17 +1,56 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Collapse, Row } from "react-bootstrap";
 import IconCenter from "../components/IconCenter";
 import { FaPlus } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa";
-import { NoTitleCage } from "../components/NoTitleCage";
+import { BirdCage } from "../components/BirdCage";
+import useToggle from "../hooks/useToggle";
 
 export function BirdCageList() {
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 
+    const [isOpenSpring, toggleSpring] = useToggle(true);
+    const [isOpenSummer, toggleSummer] = useToggle(true);
+    const [isOpenFall, toggleFall] = useToggle(true);
+    const [isOpenWinter, toggleWinter] = useToggle(true);
+
+    function toggle(season: string) {
+        switch(season) {
+            case "Spring":
+                toggleSpring()
+                break;
+
+            case "Summer":
+                toggleSummer()
+                break;
+            case "Fall":
+                toggleFall()
+                break;
+            case "Winter":
+                toggleWinter()
+                break;
+        }
+    }
+
+    function isOpen(season: string): boolean {
+        switch(season) {
+            case "Spring":
+                return isOpenSpring
+            case "Summer":
+                return isOpenSummer
+            case "Fall":
+                return isOpenFall
+            case "Winter":
+                return isOpenWinter
+            default:
+                return true;
+        }
+    }
+
     return (
-        <main className="bird-list">
+        <main className="bird-cage-list">
             <header>
                 <Row className="mb-3">
                     <Col md={8}>
@@ -29,29 +68,32 @@ export function BirdCageList() {
                                     <IconCenter reactIcon={<FaPlus />} text="Add Bird"/>
                                 </button>
                             </Link>
-
                         </div>
                     </Col>
                 </Row>
                 
                 <p>A list of your birds by season, you may sort your birds by name or year in each season.</p>
-                <p>You may also add a bird if you so wish.</p>
+                <p className="pb-5">You may also add a bird if you want.</p>
             </header>
 
-            <div className="bird-list">
+            <div className="bird-list mt-5">
                 {
                     seasons.map((season, index) => (
                     <section key={index}>
-                        <header className="season-header mb-3">
+                        <header className="season-header mb-3" onClick={() => toggle(season)}>
                             <FaAngleDown className="season-icon"/>
                             <h2>Season: {season}</h2>
                         </header>
 
-                        <div className="mb-5 season-list">
-                            <NoTitleCage />
-                            <NoTitleCage />
-                            <NoTitleCage />
-                        </div>
+                        <Collapse in={isOpen(season)}>
+                            <div>
+                                <div className="mb-5 season-list">
+                                    <BirdCage />
+                                    <BirdCage />
+                                    <BirdCage />
+                                </div>  
+                            </div>
+                        </Collapse>
                     </section>
                 ))}
             </div>
