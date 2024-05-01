@@ -1,40 +1,33 @@
 import React from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Col, Row } from "react-bootstrap";
 import IconCenter from "../components/IconCenter";
-import { FaSortDown } from "react-icons/fa6";
-import { NoTitleCage } from "../components/NoTitleCage";
+import { FaPlus } from "react-icons/fa";
+import { TiArrowSortedDown } from "react-icons/ti";
 
 export function BirdCageList() {
     return (
-        <section className="bird-list">
-            <h3>Hello, User!</h3>
-
+        <main className="bird-list">
             <Row>
-                <Col>
-                    <Link to='/add-bird'><Button>Add Birdhouse or Follow</Button></Link>  
+                <Col md={8}>
+                    <h2>Hello, Username!</h2> 
                 </Col>
-            
-                <Col>
-                    <IconCenter reactIcon={<FaSortDown />} text="View By"/>
-                    <IconCenter reactIcon={<FaSortDown />} text="Sort By"/>
+
+                <Col md={4}>
+                    <div className="float-end">
+                        <button className="blue-outline me-3">
+                            <IconCenter reactIcon={<TiArrowSortedDown />} text="Sort By"/>
+                        </button>
+
+                        <button className="gradient-button">
+                            <IconCenter reactIcon={<FaPlus />} text="Add Bird"/>
+                        </button>
+                    </div>
                 </Col>
+               
             </Row>
-
-            <h3>Season: Spring</h3>
-            <div className="bird-grid">
-                <NoTitleCage />
-                <NoTitleCage />
-                <NoTitleCage />
-            </div>
-
-            <h3>Season: Summer</h3>
-            <div className="bird-grid">
-                <NoTitleCage />
-                <NoTitleCage />
-                <NoTitleCage />
-            </div>
             
-        </section>
+            <p>Here is some text to describe the page</p>
+            
+        </main>
     )
 }

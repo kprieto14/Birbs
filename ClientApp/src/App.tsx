@@ -14,7 +14,7 @@ export function App() {
       
         <Nav />
         
-        <main>
+        <div className='background-image'>
           <Routes>
             <Route path={'/'} element={<Home />}/>
             <Route path={'/birdcage-list'} element={<BirdCageList />}/>
@@ -23,7 +23,7 @@ export function App() {
             <Route path={'/register'} element={<Register />} />
             {/* <Route path={'/followers'} element={<Follow />} /> */}
           </Routes>
-        </main>
+        </div>
 
         {/* <Footer /> */}
     </div>

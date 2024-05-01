@@ -11,9 +11,12 @@ export function Nav() {
                 <button className="blue-outline">
                     <IconCenter reactIcon={ <GiBirdHouse/> } text="Home"/>
                 </button>
-                <button className="blue-outline">
-                    My Aviary
-                </button>
+
+                <Link to='/birdcage-list'>
+                    <button className="blue-outline">
+                        My Aviary
+                    </button>
+                </Link>
              </div>
 
              <div>

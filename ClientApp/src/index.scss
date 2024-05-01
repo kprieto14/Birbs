@@ -68,6 +68,15 @@ section {
   align-items: center;
 }
 
+.background-image {
+  color: var(--blue);
+  padding: 0 1rem;
+  background-image: url('./assets/Background\ Image\ Divider@2x.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 .blue-outline {
   color: var(--blue);
   font-size: 1.25rem;
@@ -98,13 +107,6 @@ section {
 }
 
 .register, .sign-in, .add-bird {
-  color: var(--blue);
-  padding: 0 1rem;
-  background-image: url('./assets/Background\ Image\ Divider@2x.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-
   .middle-card {
     max-width: 50rem;
     padding: 200px 100px 100px 100px;
@@ -126,6 +128,12 @@ section {
   .input {
     border-radius: 1.5rem;
   }
+}
+
+.bird-list {
+  padding: 110px 1.25rem 0 1.25rem;
+  max-width: 80rem;
+  margin: 0 auto;
 }
 
 
