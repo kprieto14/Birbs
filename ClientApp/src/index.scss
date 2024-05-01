@@ -62,6 +62,12 @@ nav {
   }
 }
 
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .blue-outline {
   color: var(--blue);
   font-size: 1.25rem;
@@ -81,10 +87,14 @@ nav {
   border-radius: 2rem;
 }
 
-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.upload-button {
+  background: linear-gradient(178deg, var(--lightblue), #5052FE);
+  color: white;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  padding: 0 34px;
+  height: 49px;
+  border-radius: 2rem;
 }
 
 .register, .sign-in, .add-bird {

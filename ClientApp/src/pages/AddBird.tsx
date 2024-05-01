@@ -1,6 +1,8 @@
 import React from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { GiNestBirds } from "react-icons/gi";
+import IconCenter from "../components/IconCenter";
+import { MdAddAPhoto } from "react-icons/md";
 
 export function AddBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
@@ -11,6 +13,24 @@ export function AddBird() {
                 <GiNestBirds className="react-bird-icon mb-3"/>
                 <h2 className="mb-4">Add a Bird to Your Aviary</h2>
                 <Form>
+                    <Row>
+                        <Form.Group>
+                            <Form.Label className="h4 mb-3">Upload Bird Photo</Form.Label>
+                            <InputGroup>
+                                <button className="upload-button"><IconCenter reactIcon={<MdAddAPhoto />} text="Choose File"/></button>
+                                <Form.Control
+                                    type="text"
+                                    id="photo-input"
+                                    className="mb-3 input"
+                                    size="lg"
+                                    value={"No file chosen"}
+                                    disabled
+                                />
+                            </InputGroup>
+
+                        </Form.Group>
+                    </Row>
+
                     <Row>
                         <Col>
                             <Form.Label className="h4 mb-3">Name</Form.Label>
