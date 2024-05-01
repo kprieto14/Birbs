@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export function Nav() {
     return (
-    <header>
+    <header className="nav-header">
         <nav>
             <div>
                 <button className="blue-outline">
