@@ -47,9 +47,11 @@ export function BirdCageList() {
                             <h2>Season: {season}</h2>
                         </header>
 
-                        <article className="mb-5">
+                        <div className="mb-5 season-list">
                             <NoTitleCage />
-                        </article>
+                            <NoTitleCage />
+                            <NoTitleCage />
+                        </div>
                     </section>
                 ))}
             </div>

@@ -5,14 +5,16 @@ export function NoTitleCage() {
     return (
         <article className="bird-cage">
             <aside>
-                <h3 className="mb-3">Junior</h3>
-                <p><strong>Season:</strong> Spring</p>
-                <p><strong>Holiday:</strong> Easter</p>
-                <p><strong>Year:</strong> 2024</p>
-                <p><strong>Adopted From:</strong> Target</p>
+                <h3 className="mb-3"><strong>Junior</strong></h3>
+                <p className="mb-1"><strong>Season:</strong> Spring</p>
+                <p className="mb-1"><strong>Holiday:</strong> Easter</p>
+                <p className="mb-1"><strong>Year:</strong> 2024</p>
+                <p className="mb-1"><strong>Adopted From:</strong> Target</p>
             </aside>
             
-            {/* <img src={Junior} alt="Fabric Bird" /> */}
+            <div className="h-100">
+              <img src={Junior} alt="Fabric Bird" />  
+            </div>  
         </article>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { Nav } from './components/Nav'
 import { Home } from './pages/Home'
 import { Route, Routes } from 'react-router-dom'
-// import { Footer } from './components/Footer'
+import { Footer } from './components/Footer'
 import { AddBird } from './pages/AddBird'
 import { BirdCageList } from './pages/BirdCageList'
 import { Register } from './pages/Register'
@@ -25,7 +25,7 @@ export function App() {
           </Routes>
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
     </div>
   )
 }
