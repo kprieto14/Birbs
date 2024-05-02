@@ -12,18 +12,31 @@ export type LoginUserType = {
 
 export type LoginSuccess = {
     token: string
-    user: {
-        id: number
-        fullName: string
-        email: string
-    }
+    user: User
+}
+
+export type User = {
+    id: string,
+    firstName: string
+    lastName: string
+    password: string
 }
 
 export type Bird = {
     id: number
-    name: string
+    Name: string
+    AdoptedFrom: string
+    HolidayCollection: string
+    YearPublished: number
+    SeasonCollection: 'Spring' | 'Summer' | 'Fall' | 'Winter'
+    userId: number
 }
 
 export type BirdParams = {
-    name: string
+    Name: string
+    AdoptedFrom: string
+    HolidayCollection: string
+    YearPublished: number
+    SeasonCollection: 'Spring' | 'Summer' | 'Fall' | 'Winter'
+    userId: number
 }

@@ -10,6 +10,7 @@ namespace Birbs.Models
         public string Name { get; set; }
         public string AdoptedFrom { get; set; }
         // Change to YearReleased?
+        [Required(ErrorMessage = "You must provide a year for your bird")]
         public int YearPublished { get; set; }
         
         [Required(ErrorMessage = "You must provide a season for your bird")]
