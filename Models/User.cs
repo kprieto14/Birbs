@@ -9,7 +9,10 @@ namespace Birbs.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "You must provide your name")]
-        public string FullName { get; set; }
+        public string firstName { get; set; }
+
+        [Required(ErrorMessage = "You must provide your name")]
+        public string lastName { get; set; }
 
         [Required(ErrorMessage = "You must provide your email")]
         public string Email { get; set; }

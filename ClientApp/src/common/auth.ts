@@ -10,7 +10,7 @@
 //    body: JSON.stringify(thing)
 // })
 
-import { LoginSuccess } from './types'
+import { LoginSuccess } from '../types'
 
 // Returns the Authorization header for the the currently logged in in user.
 // If there is no authorization data, we'll return an empty object

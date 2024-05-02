@@ -1,19 +1,29 @@
 export type NewUserType = {
-    fullName: string
+    firstName: string
+    lastName: string
     email: string
     password: string
   }
   
-  export type LoginUserType = {
+export type LoginUserType = {
     email: string
     password: string
-  }
-  
-  export type LoginSuccess = {
+}
+
+export type LoginSuccess = {
     token: string
     user: {
-      id: number
-      fullName: string
-      email: string
+        id: number
+        fullName: string
+        email: string
     }
-  }
+}
+
+export type Bird = {
+    id: number
+    name: string
+}
+
+export type BirdParams = {
+    name: string
+}
