@@ -13,7 +13,7 @@ export function EditBird() {
             <div className="middle-card w-100">
                 <GiNestBirds className="react-bird-icon mb-3"/>
                 <header className="delete-bird mb-4">
-                    <h2 className="mb-3">Edit Your Bird</h2>
+                    <h2>Edit Your Bird</h2>
                     <button className="pink-outline"><IconCenter reactIcon={<FaTrashCan />} text="Delete Bird"/></button>
                 </header>
                 

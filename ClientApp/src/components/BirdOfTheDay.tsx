@@ -1,29 +1,27 @@
 import React from "react";
-import { Card, Col } from "react-bootstrap";
 import { GiBirdCage } from "react-icons/gi";
 import Junior from "../assets/junior-bird.jpeg"
 
 export function BirdOfTheDay() {
     return (
-        <Card className="bird-cage-card">
-            <Card.Body>
-                <Card.Header className="text-center">
-                    <div className="bird-card-header">
-                        <GiBirdCage size={30}/>
-                        <h4>Bird of the Day</h4> 
-                        <GiBirdCage size={30}/>  
-                    </div>
-                </Card.Header>
-                <Card.Img variant="" src={Junior}/>
-                
-                <Col className="text-center">
-                    <Card.Text><span className="bold-underline h5">Name</span>: Junior</Card.Text>
-                    <Card.Text><span className="bold-underline h5">User</span>: Kristy</Card.Text>
-                    <Card.Text><span className="bold-underline h5">Season</span>: Spring</Card.Text>
-                    <Card.Text><span className="bold-underline h5">Holiday</span>: Easter</Card.Text>
-                    <Card.Text><span className="bold-underline h5">Year</span>: 2024</Card.Text>
-                </Col>
-            </Card.Body>
-        </Card>
+        <article className="bird-day">
+            <aside>
+                <img src={Junior} alt="Fabric bird of the day"/>
+            </aside>
+
+            <header className="day-header">
+                <GiBirdCage className="react-icon"/>
+                <h3>Bird of the Day</h3>
+                <GiBirdCage className="react-icon"/>
+            </header>
+
+            <div className="bird-day-info">
+                <h3 className="mb-3"><strong>Junior</strong></h3>
+                <h4 className="mb-2"><strong>User:</strong> Me</h4>
+                <h4 className="mb-2"><strong>Season:</strong> Spring</h4>
+                <h4 className="mb-2"><strong>Holiday:</strong> Easter</h4>
+                <h4 className="mb-2"><strong>Year:</strong> 2024</h4>
+            </div>
+        </article>
     )
 }

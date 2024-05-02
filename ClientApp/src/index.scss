@@ -53,6 +53,14 @@ nav {
   }
 }
 
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  color: var(--blue)
+}
+
 .nav-header {
   background-color: var(--pink);
   font-family: "DM Serif Display", serif;
@@ -107,7 +115,7 @@ nav {
   border-radius: 2rem;
 
   &:hover {
-    background: linear-gradient(178deg, #5052FE, var(--lightblue));
+    background: linear-gradient(178deg, #3B9EE0, #3F47E0);
   }
 }
 
@@ -119,6 +127,18 @@ nav {
   padding: 0 34px;
   height: 49px;
   border-radius: 2rem;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+
+  .home-header {
+    max-width: 60rem;
+    padding: 8rem 1.25rem 0 1.25rem;
+    margin: 0 auto;
+    text-align: center;
+  }
 }
 
 .register, .sign-in, .add-bird, .edit-bird {
@@ -211,6 +231,48 @@ nav {
   button {
     padding: 10px 20px;
     font-size: 18px;
+  }
+}
+
+.bird-day {
+  margin: 0 auto;
+  background-color: var(--yellow);
+  border-radius: 2rem;
+  border: 1px solid #E3C6AE;
+  box-shadow: 0px 3px 6px #8274E833;
+
+  aside {
+    background-color: white;
+    border-radius: 2rem 2rem 0 0;
+  }
+
+  img {
+    max-width: 26rem;
+    max-height: 26rem;
+    border-radius: 2rem;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 0 0 2rem 2rem;
+    padding: .75rem 1.5rem;
+  }
+
+  .bird-day-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 2rem 2rem;
+    padding: 1rem 0;
+  }
+
+  .react-icon {
+    height: 1.75rem;
+    width: 1.75rem;
   }
 }
 
