@@ -3,19 +3,24 @@ import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { GiNestBirds } from "react-icons/gi";
 import IconCenter from "../components/IconCenter";
 import { MdAddAPhoto } from "react-icons/md";
+import { FaTrashCan } from "react-icons/fa6";
 
-export function AddBird() {
+export function EditBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
 
     return (
-        <section className="add-bird">
+        <section className="edit-bird">
             <div className="middle-card w-100">
                 <GiNestBirds className="react-bird-icon mb-3"/>
-                <h2 className="mb-4">Add a Bird to Your Aviary</h2>
+                <header className="delete-bird mb-4">
+                    <h2 className="mb-3">Edit Your Bird</h2>
+                    <button className="pink-outline"><IconCenter reactIcon={<FaTrashCan />} text="Delete Bird"/></button>
+                </header>
+                
                 <Form>
                     <Row>
                         <Form.Group>
-                            <Form.Label className="h4 mb-3">Upload Bird Photo</Form.Label>
+                            <Form.Label className="h4 mb-3">Change Bird Photo</Form.Label>
                             <InputGroup>
                                 <button className="upload-button"><IconCenter reactIcon={<MdAddAPhoto />} text="Choose File"/></button>
                                 <Form.Control
@@ -27,6 +32,7 @@ export function AddBird() {
                                     disabled
                                 />
                             </InputGroup>
+
                         </Form.Group>
                     </Row>
 
@@ -97,9 +103,18 @@ export function AddBird() {
                     </Form.Group>
                 </Form>
 
-                <button className="gradient-button w-100 mt-3" onClick={() => console.log("Clicked")}>
-                        <h5>Add Bird</h5>
-                </button>
+                <Row>
+                    <Col>
+                        <button className="pink-outline w-100 mt-3 h-75">
+                            <h5>Cancel</h5>
+                        </button>
+                    </Col>
+                    <Col>
+                        <button className="gradient-button w-100 mt-3" onClick={() => console.log("Clicked")}>
+                                <h5>Save Bird</h5>
+                        </button>                    
+                    </Col>
+                </Row>
             </div>
         </section>
     )

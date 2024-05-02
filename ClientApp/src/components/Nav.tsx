@@ -8,9 +8,12 @@ export function Nav() {
     <header className="nav-header">
         <nav>
             <div>
-                <button className="blue-outline">
-                    <IconCenter reactIcon={ <GiBirdHouse/> } text="Home"/>
-                </button>
+                <Link to={'/'}>
+                    <button className="blue-outline">
+                        <IconCenter reactIcon={ <GiBirdHouse/> } text="Home"/>
+                    </button>
+                </Link>
+
 
                 <Link to='/birdcage-list'>
                     <button className="blue-outline">

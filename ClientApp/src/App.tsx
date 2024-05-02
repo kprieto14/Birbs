@@ -7,6 +7,7 @@ import { AddBird } from './pages/AddBird'
 import { BirdCageList } from './pages/BirdCageList'
 import { Register } from './pages/Register'
 import { SignIn } from './pages/SignIn'
+import { EditBird } from './pages/EditBird'
 
 export function App() {
   return (
@@ -19,6 +20,7 @@ export function App() {
             <Route path={'/'} element={<Home />}/>
             <Route path={'/birdcage-list'} element={<BirdCageList />}/>
             <Route path={'/add-bird'} element={<AddBird />}/>
+            <Route path={'/edit-bird'} element={<EditBird />}/>
             <Route path={'/login'} element={<SignIn />} />
             <Route path={'/register'} element={<Register />} />
             {/* <Route path={'/followers'} element={<Follow />} /> */}
