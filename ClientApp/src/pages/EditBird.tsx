@@ -4,6 +4,7 @@ import { GiNestBirds } from "react-icons/gi";
 import IconCenter from "../components/IconCenter";
 import { MdAddAPhoto } from "react-icons/md";
 import { FaTrashCan } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export function EditBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
@@ -105,9 +106,12 @@ export function EditBird() {
 
                 <Row>
                     <Col>
-                        <button className="pink-outline w-100 mt-3 h-75">
-                            <h5>Cancel</h5>
-                        </button>
+                        <Link to={'/birdcage-list'}>
+                            <button className="pink-outline w-100 mt-3 h-75">
+                                <h5>Cancel</h5>
+                            </button>                        
+                        </Link>
+
                     </Col>
                     <Col>
                         <button className="gradient-button w-100 mt-3" onClick={() => console.log("Clicked")}>

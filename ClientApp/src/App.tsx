@@ -8,6 +8,7 @@ import { BirdCageList } from './pages/BirdCageList'
 import { Register } from './pages/Register'
 import { SignIn } from './pages/SignIn'
 import { EditBird } from './pages/EditBird'
+import { ErrorPage } from './pages/404page'
 
 export function App() {
   return (
@@ -23,6 +24,7 @@ export function App() {
             <Route path={'/edit-bird'} element={<EditBird />}/>
             <Route path={'/login'} element={<SignIn />} />
             <Route path={'/register'} element={<Register />} />
+            <Route path={'*'} element={<ErrorPage />}/>
             {/* <Route path={'/followers'} element={<Follow />} /> */}
           </Routes>
         </div>
