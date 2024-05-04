@@ -4,12 +4,9 @@ import { FaUser } from "react-icons/fa";
 import { LoginSuccess, LoginUserType } from "../types";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import otherApi from "../api/otherApi";
-import { useNavigate } from "react-router";
 import { recordAuthentication } from "../api/auth";
 
 export function SignIn() {
-    const navigate = useNavigate()
-
     const [user, setUser] = useState<LoginUserType>({
         email: '',
         password: '',
@@ -20,10 +17,10 @@ export function SignIn() {
     const loginUserMutation: UseMutationResult<LoginSuccess, Error, LoginUserType> = useMutation<LoginSuccess, Error, LoginUserType> ({
         mutationFn: async(_variables: LoginUserType) => otherApi.loginUser(_variables),
         onSuccess: (data: LoginSuccess) => {
-            console.log(data)
-
             recordAuthentication(data)
-            navigate('/birdcage-list')
+
+            // Manually set the location to refresh page so navbar can automatically update, do not use navigate
+            window.location.assign('/')
         },
         onError: () => {
             setErrorMessage(Error.name)

@@ -2,10 +2,14 @@ import React from "react";
 import { GiBirdHouse } from "react-icons/gi";
 import IconCenter from "./IconCenter";
 import { Link } from "react-router-dom";
-import { isLoggedIn } from "../api/auth";
+import { isLoggedIn, logout } from "../api/auth";
 
 export function Nav() {
-    const loginStatus = isLoggedIn()
+    function handleLogout() {
+        logout()
+    
+        window.location.assign('/')
+    }
 
     return (
         <header className="nav-header">
@@ -13,7 +17,7 @@ export function Nav() {
                 <div>
                     {/* Should only show if user is logged in */}
                     {
-                        loginStatus ? (
+                        isLoggedIn() ? (
                             <>
                                 <Link to={'/'}>
                                     <button className="blue-outline">
@@ -35,13 +39,11 @@ export function Nav() {
                 <div>
                     {/* If user is logged in, make button to logout show, else show sign-in and register buttons */}
                     {
-                        loginStatus ? (
+                        isLoggedIn() ? (
                             <>
-                                <Link to='/birdcage-list'>
-                                    <button className="blue-outline">
-                                        Logout
-                                    </button>
-                                </Link>                     
+                                <button className="blue-outline" onClick={handleLogout}>
+                                    Logout
+                                </button>                 
                             </>
                         ) 
                         : 
