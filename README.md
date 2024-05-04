@@ -7,3 +7,5 @@ Welcome to the Birdhouse
 Future Ideas
 - Add ability to follow others and see profile pages
 - Add animations between pages
+- Add ability to edit password/ names
+- 404 page should reroute you back to home if loggedin or sign-in if not
