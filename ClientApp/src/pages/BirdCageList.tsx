@@ -7,9 +7,30 @@ import { Link } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa";
 import { BirdCage } from "../components/BirdCage";
 import useToggle from "../hooks/useToggle";
+import { getUserId } from "../api/auth";
+import { Bird } from "../types";
+import { useQuery } from "@tanstack/react-query";
+import birdAPI from "../api/birdAPI";
 
 export function BirdCageList() {
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+
+    const user = getUserId()
+
+    const nullBirdList: Bird[] = [];
+
+    const { data: birdsList = nullBirdList } = useQuery<Bird[]>({
+        queryKey: ['birds'],
+        queryFn: () => birdAPI.getBirds(Number(user))
+    })
+
+    console.log(birdsList)
+    // const springBirds = []
+    // const summerBirds
+    // const fallBirds
+    // const winterBirds
+    // // Make a list of unique payor names
+    // let uniquePayorNames = [...new Set(feeSchedules.map(item => item.payorName))];
 
     const [isOpenSpring, toggleSpring] = useToggle(true);
     const [isOpenSummer, toggleSummer] = useToggle(true);
