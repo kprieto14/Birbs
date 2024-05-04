@@ -4,7 +4,7 @@ import Junior from "../assets/junior-bird.jpeg"
 
 export function BirdOfTheDay() {
     return (
-        <article className="bird-day">
+        <article className="bird-day mt-5">
             <aside>
                 <img src={Junior} alt="Fabric bird of the day"/>
             </aside>
