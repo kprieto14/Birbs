@@ -16,9 +16,9 @@ function otherApi() {
             throw new Error('Failed to create new user');
         },
         loginUser: async (user: LoginUserType): Promise<LoginSuccess> => {
-            const loginUser = await axios.post(`${baseURL}/Users`, user)
+            const loginUser = await axios.post(`${baseURL}/Sessions`, user)
 
-            if (loginUser.status === 201) {
+            if (loginUser.status === 200) {
                 return loginUser.data
             }
 

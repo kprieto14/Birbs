@@ -31,6 +31,14 @@ export function Register() {
         }
     })
 
+    function handleStringFieldChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+        const { name, value } = e.target
+    
+        const updatedUser = { ...newUser, [name]: value }
+    
+        setNewUser(updatedUser)
+    }
+
     // When Register button is clicked, call for the mutation and send the register information
     function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault()
@@ -42,14 +50,6 @@ export function Register() {
         };
 
         createUserMutation.mutate(userParams)
-    }
-
-    function handleStringFieldChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-    const { name, value } = e.target
-
-    const updatedUser = { ...newUser, [name]: value }
-
-    setNewUser(updatedUser)
     }
   
     return (
