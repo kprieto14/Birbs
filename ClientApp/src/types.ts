@@ -29,7 +29,7 @@ export type Bird = {
     HolidayCollection: string
     YearPublished: number
     SeasonCollection: 'Spring' | 'Summer' | 'Fall' | 'Winter'
-    userId: number
+    UserId: number
 }
 
 export type BirdParams = {
@@ -38,5 +38,5 @@ export type BirdParams = {
     HolidayCollection: string
     YearPublished: number
     SeasonCollection: 'Spring' | 'Summer' | 'Fall' | 'Winter'
-    userId: number
+    UserId: number
 }

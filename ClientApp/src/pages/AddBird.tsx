@@ -17,11 +17,11 @@ export function AddBird() {
         HolidayCollection: '',
         YearPublished: 2012,
         SeasonCollection: 'Spring',
-        userId: Number(getUserId()),
+        UserId: Number(getUserId()),
         // In the future photoUrl here
     })
 
-    const createBirdMutation: UseMutationResult<Bird, Error, BirdParams> = useMutation<Bird, Error, BirdParams> ({
+    const createBirdMutation: UseMutationResult<Bird, Error, Bird> = useMutation<Bird, Error, Bird> ({
         mutationFn: async(_variables: BirdParams) => birdAPI.createNewBird(_variables),
         onSuccess: (data: Bird) => (
             console.log(data)
