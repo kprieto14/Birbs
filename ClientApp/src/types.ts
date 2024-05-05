@@ -23,7 +23,7 @@ export type User = {
 }
 
 export type Bird = {
-    id: number
+    id?: number
     Name: string
     AdoptedFrom: string
     HolidayCollection: string

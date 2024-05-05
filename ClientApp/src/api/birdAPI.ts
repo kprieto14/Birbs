@@ -25,12 +25,8 @@ function birdApi() {
 
             throw new Error('Failed to load bird')
         },
-        createNewBird: async (userId: number | undefined, newBirdData: BirdParams): Promise<Bird> => {
-            if (!userId) {
-                throw new Error('Company ID is required');
-            }
-            
-            const createBird = await axios.post(`${baseURL}/${userId}`, newBirdData);
+        createNewBird: async (newBirdData: BirdParams): Promise<Bird> => {            
+            const createBird = await axios.post(`${baseURL}`, newBirdData);
 
             if (createBird.status === 201) {
                 return createBird.data;

@@ -31,7 +31,7 @@ export function Register() {
         }
     })
 
-    function handleStringFieldChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    function handleStringFieldChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const { name, value } = e.target
     
         const updatedUser = { ...newUser, [name]: value }
