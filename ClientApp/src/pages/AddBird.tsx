@@ -23,9 +23,20 @@ export function AddBird() {
 
     const createBirdMutation: UseMutationResult<Bird, Error, Bird> = useMutation<Bird, Error, Bird> ({
         mutationFn: async(_variables: BirdParams) => birdAPI.createNewBird(_variables),
-        onSuccess: (data: Bird) => (
+        onSuccess: (data: Bird) => {
             console.log(data)
-        ),
+
+            const resetBird: Bird = {
+                Name: '',
+                AdoptedFrom: '',
+                HolidayCollection: '',
+                YearPublished: 2012,
+                SeasonCollection: 'Spring',
+                UserId: Number(getUserId()),
+            }
+
+            setNewBird(resetBird)
+        },
         onError: () => {
             console.log("error")
         }
@@ -78,6 +89,7 @@ export function AddBird() {
                                 placeholder="Enter name of bird" 
                                 className="mb-3 input"
                                 size="lg"
+                                value={ newBird.Name }
                                 onChange={ (e) => handleStringFieldChange(e) }
                             />
                         </Col>
@@ -90,6 +102,7 @@ export function AddBird() {
                                 placeholder="Enter where you bought your bird" 
                                 className="mb-3 input"
                                 size="lg"
+                                value={ newBird.AdoptedFrom }
                                 onChange={(e) => handleStringFieldChange(e)}
                             />
                         </Col>
@@ -100,9 +113,9 @@ export function AddBird() {
                             <Form.Label className="h4 mb-3">Year</Form.Label>
                             <Form.Select
                                 name="YearPublished"
-                                defaultValue="2012" 
                                 className="mb-3 input"
                                 size="lg"
+                                value={ newBird.YearPublished }
                                 onChange={ (e) => handleStringFieldChange(e) }
                             >
                                 {yearsOfRelease.map((year, index) => (
@@ -115,9 +128,9 @@ export function AddBird() {
                             <Form.Label className="h4 mb-3">Season</Form.Label>
                             <Form.Select
                                 name="SeasonCollection"
-                                defaultValue="Spring" 
                                 className="mb-3 input"
                                 size="lg"
+                                value={ newBird.SeasonCollection }
                                 onChange={ (e) => handleStringFieldChange(e) }
                             >
                                 <option>Spring</option>
@@ -136,6 +149,7 @@ export function AddBird() {
                                 placeholder="Enter the holiday of release" 
                                 className="mb-3 input"
                                 size="lg"
+                                value={ newBird.HolidayCollection }
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>

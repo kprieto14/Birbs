@@ -9,7 +9,7 @@ function birdApi() {
         getBirds: async (userId: number): Promise<Bird[]> => {
             const loadBirds = await axios.get(`${baseURL}/list/${userId}`)
 
-            if (loadBirds.status === 201) {
+            if (loadBirds.status === 200) {
                 return loadBirds.data;
             }
 

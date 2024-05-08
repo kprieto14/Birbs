@@ -35,7 +35,7 @@ namespace Birbs.Controllers
         {
             // Uses the database context in `_context` to request all of the Birds, sort
             // them by row id and return them as a JSON array.
-            return await _context.Birds.Where(row => row.Id == userId).ToListAsync();
+            return await _context.Birds.Where(user => user.UserId == userId).ToListAsync();
         }
 
         // GET: api/Birds/5
