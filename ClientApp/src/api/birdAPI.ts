@@ -13,7 +13,7 @@ function birdApi() {
                 return loadBirds.data;
             }
 
-            throw new Error('Failed to load users');
+            throw new Error('Failed to load bird');
         },
         // This grabs a single bird, UNFININSHED ENDPOINT FOR NOW
         getBird: async (birdId: number) => {

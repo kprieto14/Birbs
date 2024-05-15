@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 import { BirdCage } from "../components/BirdCage";
 import useToggle from "../hooks/useToggle";
 import { getUserId } from "../api/auth";
@@ -24,13 +25,8 @@ export function BirdCageList() {
         queryFn: () => birdAPI.getBirds(Number(user))
     })
 
-    console.log(birdsList)
-    // const springBirds = []
-    // const summerBirds
-    // const fallBirds
-    // const winterBirds
-    // // Make a list of unique payor names
-    // let uniquePayorNames = [...new Set(feeSchedules.map(item => item.payorName))];
+    // User is not showing either in object :[
+    // console.log(birdsList)
 
     const [isOpenSpring, toggleSpring] = useToggle(true);
     const [isOpenSummer, toggleSummer] = useToggle(true);
@@ -99,23 +95,57 @@ export function BirdCageList() {
 
             <div className="bird-list mt-5">
                 {
+                    // Goes through each of the seasons to create a collapseable section based on the list length
                     seasons.map((season, index) => (
-                    <section key={index}>
-                        <header className="season-header mb-3" onClick={() => toggle(season)}>
-                            <FaAngleDown className="season-icon"/>
-                            <h2>Season: {season}</h2>
-                        </header>
+                        birdsList.filter(seasonName => seasonName.seasonCollection === season).length > 0 ? 
+                            <section key={index}>
+                            <header className="season-header mb-3" onClick={() => toggle(season)}>
+                                {
+                                    // If the current collapseable section is opened, return a pic of an arrow facing down, else return an arrow to the left
+                                    isOpen(season) ?
+                                    <FaAngleDown className="season-icon"/> :
+                                    <FaAngleRight className="season-icon" />
+                                }
+                                <h2>Season: {season}</h2>
+                            </header>
 
-                        <Collapse in={isOpen(season)}>
-                            <div>
-                                <div className="mb-5 season-list">
-                                    <BirdCage />
-                                    <BirdCage />
-                                    <BirdCage />
-                                </div>  
-                            </div>
-                        </Collapse>
-                    </section>
+                            <Collapse in={isOpen(season)}>
+                                <div>
+                                    {
+                                        // Filters through the bird list by season and generates bird cards by season
+                                        birdsList.filter(seasonName => seasonName.seasonCollection === season).map((bird, index) => (
+                                            <Col md={4} className="mb-5" key={index}>
+                                                <BirdCage 
+                                                    name={ bird.name }
+                                                    season={ bird.seasonCollection }
+                                                    holiday={ bird.holidayCollection }
+                                                    year={ bird.yearPublished }
+                                                    adoptedFrom={ bird.adoptedFrom }
+                                                />
+                                            </Col> 
+                                        ))
+                                    }
+                                </div>
+                            </Collapse>
+                        </section> 
+                        : 
+                        <section key={index}>
+                            <header className="season-header mb-3" onClick={() => toggle(season)}>
+                                {
+                                    // If the current collapseable section is opened, return a pic of an arrow facing down, else return an arrow to the left
+                                    isOpen(season) ?
+                                    <FaAngleDown className="season-icon"/> :
+                                    <FaAngleRight className="season-icon" />
+                                }
+                                <h2>Season: {season}</h2>
+                            </header>
+
+                            <Collapse in={isOpen(season)}>
+                                <div>
+                                    <h5>There are no bird cages to show :(</h5>
+                                </div>
+                            </Collapse>
+                        </section>
                 ))}
             </div>
         </main>

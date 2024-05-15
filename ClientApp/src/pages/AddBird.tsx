@@ -11,28 +11,28 @@ import birdAPI from "../api/birdAPI";
 export function AddBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
 
-    const [newBird, setNewBird] = useState<Bird>({
-        Name: '',
-        AdoptedFrom: '',
-        HolidayCollection: '',
-        YearPublished: 2012,
-        SeasonCollection: 'Spring',
-        UserId: Number(getUserId()),
+    const [newBird, setNewBird] = useState<BirdParams>({
+        name: '',
+        adoptedFrom: '',
+        holidayCollection: '',
+        yearPublished: 2012,
+        seasonCollection: 'Spring',
+        userId: Number(getUserId()),
         // In the future photoUrl here
     })
 
-    const createBirdMutation: UseMutationResult<Bird, Error, Bird> = useMutation<Bird, Error, Bird> ({
+    const createBirdMutation: UseMutationResult<Bird, Error, BirdParams> = useMutation<Bird, Error, BirdParams> ({
         mutationFn: async(_variables: BirdParams) => birdAPI.createNewBird(_variables),
         onSuccess: (data: Bird) => {
             console.log(data)
 
-            const resetBird: Bird = {
-                Name: '',
-                AdoptedFrom: '',
-                HolidayCollection: '',
-                YearPublished: 2012,
-                SeasonCollection: 'Spring',
-                UserId: Number(getUserId()),
+            const resetBird: BirdParams = {
+                name: '',
+                adoptedFrom: '',
+                holidayCollection: '',
+                yearPublished: 2012,
+                seasonCollection: 'Spring',
+                userId: Number(getUserId()),
             }
 
             setNewBird(resetBird)
@@ -89,7 +89,7 @@ export function AddBird() {
                                 placeholder="Enter name of bird" 
                                 className="mb-3 input"
                                 size="lg"
-                                value={ newBird.Name }
+                                value={ newBird.name }
                                 onChange={ (e) => handleStringFieldChange(e) }
                             />
                         </Col>
@@ -102,7 +102,7 @@ export function AddBird() {
                                 placeholder="Enter where you bought your bird" 
                                 className="mb-3 input"
                                 size="lg"
-                                value={ newBird.AdoptedFrom }
+                                value={ newBird.adoptedFrom }
                                 onChange={(e) => handleStringFieldChange(e)}
                             />
                         </Col>
@@ -115,7 +115,7 @@ export function AddBird() {
                                 name="YearPublished"
                                 className="mb-3 input"
                                 size="lg"
-                                value={ newBird.YearPublished }
+                                value={ newBird.yearPublished }
                                 onChange={ (e) => handleStringFieldChange(e) }
                             >
                                 {yearsOfRelease.map((year, index) => (
@@ -130,7 +130,7 @@ export function AddBird() {
                                 name="SeasonCollection"
                                 className="mb-3 input"
                                 size="lg"
-                                value={ newBird.SeasonCollection }
+                                value={ newBird.seasonCollection }
                                 onChange={ (e) => handleStringFieldChange(e) }
                             >
                                 <option>Spring</option>
@@ -149,7 +149,7 @@ export function AddBird() {
                                 placeholder="Enter the holiday of release" 
                                 className="mb-3 input"
                                 size="lg"
-                                value={ newBird.HolidayCollection }
+                                value={ newBird.holidayCollection }
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>
