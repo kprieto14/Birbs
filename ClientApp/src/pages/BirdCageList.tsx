@@ -25,9 +25,6 @@ export function BirdCageList() {
         queryFn: () => birdAPI.getBirds(Number(user))
     })
 
-    // User is not showing either in object :[
-    // console.log(birdsList)
-
     const [isOpenSpring, toggleSpring] = useToggle(true);
     const [isOpenSummer, toggleSummer] = useToggle(true);
     const [isOpenFall, toggleFall] = useToggle(true);
@@ -103,19 +100,20 @@ export function BirdCageList() {
                                 {
                                     // If the current collapseable section is opened, return a pic of an arrow facing down, else return an arrow to the left
                                     isOpen(season) ?
-                                    <FaAngleDown className="season-icon"/> :
+                                    <FaAngleDown className="season-icon" /> :
                                     <FaAngleRight className="season-icon" />
                                 }
                                 <h2>Season: {season}</h2>
                             </header>
 
                             <Collapse in={isOpen(season)}>
-                                <div>
+                                <Row>
                                     {
                                         // Filters through the bird list by season and generates bird cards by season
                                         birdsList.filter(seasonName => seasonName.seasonCollection === season).map((bird, index) => (
                                             <Col md={4} className="mb-5" key={index}>
-                                                <BirdCage 
+                                                <BirdCage
+                                                    id={ Number(bird.id) } 
                                                     name={ bird.name }
                                                     season={ bird.seasonCollection }
                                                     holiday={ bird.holidayCollection }
@@ -125,16 +123,17 @@ export function BirdCageList() {
                                             </Col> 
                                         ))
                                     }
-                                </div>
+                                </Row>
                             </Collapse>
                         </section> 
                         : 
+                        // If there are no birds, generate a section that says there are no birds
                         <section key={index}>
                             <header className="season-header mb-3" onClick={() => toggle(season)}>
                                 {
                                     // If the current collapseable section is opened, return a pic of an arrow facing down, else return an arrow to the left
                                     isOpen(season) ?
-                                    <FaAngleDown className="season-icon"/> :
+                                    <FaAngleDown className="season-icon" /> :
                                     <FaAngleRight className="season-icon" />
                                 }
                                 <h2>Season: {season}</h2>

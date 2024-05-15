@@ -5,6 +5,7 @@ import { MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 type BirdProps = {
+    id: number
     name: string
     adoptedFrom: string
     holiday: string
@@ -12,7 +13,7 @@ type BirdProps = {
     season: 'Spring' | 'Summer' | 'Fall' | 'Winter'
 }
 
-export function BirdCage({name, adoptedFrom, holiday, year, season}: BirdProps) {
+export function BirdCage({id, name, adoptedFrom, holiday, year, season}: BirdProps) {
     return (
         <article className="bird-cage">
             <aside>
@@ -22,7 +23,7 @@ export function BirdCage({name, adoptedFrom, holiday, year, season}: BirdProps) 
                 <p className="mb-1"><strong>Year: </strong>{ year }</p>
                 <p className="mb-1"><strong>Adopted From: </strong>{ adoptedFrom }</p>
 
-                <Link to={'/edit-bird'}>
+                <Link to={`/edit-bird/${id}`}>
                     <button className="pink-outline mt-3">
                         <IconCenter reactIcon={<MdEdit />} text="Edit bird"/>
                     </button>

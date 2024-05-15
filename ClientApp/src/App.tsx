@@ -21,7 +21,7 @@ export function App() {
             <Route path={'/'} element={<Home />}/>
             <Route path={'/birdcage-list'} element={<BirdCageList />}/>
             <Route path={'/add-bird'} element={<AddBird />}/>
-            <Route path={'/edit-bird'} element={<EditBird />}/>
+            <Route path={'/edit-bird/:id'} element={<EditBird />}/>
             <Route path={'/login'} element={<SignIn />} />
             <Route path={'/register'} element={<Register />} />
             <Route path={'*'} element={<ErrorPage />}/>

@@ -4,14 +4,14 @@ import { GiNestBirds } from "react-icons/gi";
 import IconCenter from "../components/IconCenter";
 import { MdAddAPhoto } from "react-icons/md";
 import { getUserId } from "../api/auth";
-import { Bird, BirdParams } from "../types";
+import { Bird, NewBirdParams } from "../types";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import birdAPI from "../api/birdAPI";
 
 export function AddBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
 
-    const [newBird, setNewBird] = useState<BirdParams>({
+    const [newBird, setNewBird] = useState<NewBirdParams>({
         name: '',
         adoptedFrom: '',
         holidayCollection: '',
@@ -21,12 +21,12 @@ export function AddBird() {
         // In the future photoUrl here
     })
 
-    const createBirdMutation: UseMutationResult<Bird, Error, BirdParams> = useMutation<Bird, Error, BirdParams> ({
-        mutationFn: async(_variables: BirdParams) => birdAPI.createNewBird(_variables),
+    const createBirdMutation: UseMutationResult<Bird, Error, NewBirdParams> = useMutation<Bird, Error, NewBirdParams> ({
+        mutationFn: async(_variables: NewBirdParams) => birdAPI.createNewBird(_variables),
         onSuccess: (data: Bird) => {
             console.log(data)
 
-            const resetBird: BirdParams = {
+            const resetBird: NewBirdParams = {
                 name: '',
                 adoptedFrom: '',
                 holidayCollection: '',

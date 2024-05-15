@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Bird, BirdParams } from '../types';
+import { Bird, NewBirdParams } from '../types';
 
 const baseURL = 'http://localhost:5000/api/Birds'
 
@@ -19,13 +19,13 @@ function birdApi() {
         getBird: async (birdId: number) => {
             const getBird = await axios.get(`${baseURL}/${birdId}`)
 
-            if (getBird.status === 201) {
+            if (getBird.status === 200) {
                 return getBird.data
             }
 
             throw new Error('Failed to load bird')
         },
-        createNewBird: async (newBirdData: BirdParams): Promise<Bird> => {            
+        createNewBird: async (newBirdData: NewBirdParams): Promise<Bird> => {            
             const createBird = await axios.post(`${baseURL}`, newBirdData);
 
             if (createBird.status === 201) {
@@ -35,7 +35,7 @@ function birdApi() {
             throw new Error('Failed to create bird');
         },
         // This updates a single user
-        updateBird: async (birdId: number | undefined, birdData: BirdParams): Promise<Bird> => {
+        updateBird: async (birdId: number | undefined, birdData: NewBirdParams): Promise<Bird> => {
             if (!birdId) {
                 throw new Error('Bird ID is required');
             }
