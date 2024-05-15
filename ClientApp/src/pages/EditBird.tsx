@@ -37,7 +37,7 @@ export function EditBird() {
         seasonCollection: bird.seasonCollection,
     })
     
-    // Due to onSuccess being deprecated, the internet states the best way to set state on when useQuery is successful is to use useEffect instead
+    // Due to onSuccess being deprecated, the internet states the best way to set state on when useQuery is successful is to use useEffect instead and set state there
     useEffect(() => {
         const foundBird: EditBirdParams = {
             id: Number(bird.id),
@@ -50,6 +50,21 @@ export function EditBird() {
 
         setBirdToUpdate(foundBird)
     }, [bird])
+
+    function handleStringFieldChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+        e.preventDefault()
+        const { name, value } = e.target
+    
+        const updatedBird = { ...birdToUpdate, [name]: value }
+    
+        setBirdToUpdate(updatedBird)
+    }
+
+    function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault()
+
+        console.log(birdToUpdate)
+    }
 
     return (
         <section className="edit-bird">
@@ -87,8 +102,9 @@ export function EditBird() {
                                 placeholder="Enter name of bird" 
                                 className="mb-3 input"
                                 size="lg"
+                                name="name"
                                 value={ birdToUpdate.name }
-                                onChange={() => console.log("Changed")}
+                                onChange={ (e) => handleStringFieldChange(e) }
                             />
                         </Col>
 
@@ -99,8 +115,9 @@ export function EditBird() {
                                 placeholder="Enter where you bought your bird" 
                                 className="mb-3 input"
                                 size="lg"
+                                name="adoptedFrom"
                                 value={ birdToUpdate.adoptedFrom }
-                                onChange={() => console.log("Changed")}
+                                onChange={ (e) => handleStringFieldChange(e) }
                             />
                         </Col>
                     </Row>
@@ -111,8 +128,9 @@ export function EditBird() {
                             <Form.Select
                                 className="mb-3 input"
                                 size="lg"
+                                name="yearPublished"
                                 value={ birdToUpdate.yearPublished }
-                                onChange={() => console.log("Changed")}
+                                onChange={ (e) => handleStringFieldChange(e) }
                             >
                                 {yearsOfRelease.map((year, index) => (
                                     <option key={index} value={year}>{year}</option>
@@ -125,8 +143,9 @@ export function EditBird() {
                             <Form.Select
                                 className="mb-3 input"
                                 size="lg"
+                                name="seasonCollection"
                                 value={ birdToUpdate.seasonCollection }
-                                onChange={() => console.log("Changed")}
+                                onChange={ (e) => handleStringFieldChange(e) }
                             >
                                 <option>Spring</option>
                                 <option>Summer</option>
@@ -143,8 +162,9 @@ export function EditBird() {
                                 placeholder="Enter the holiday of release" 
                                 className="mb-3 input"
                                 size="lg"
+                                name="holidayCollection"
                                 value={ birdToUpdate.holidayCollection }
-                                onChange={() => console.log("Changed")}
+                                onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>
                 </Form>
@@ -159,7 +179,7 @@ export function EditBird() {
 
                     </Col>
                     <Col>
-                        <button className="gradient-button w-100 mt-3" onClick={() => console.log("Clicked")}>
+                        <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
                                 <h5>Save Bird</h5>
                         </button>                    
                     </Col>
