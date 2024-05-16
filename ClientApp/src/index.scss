@@ -278,6 +278,34 @@ footer {
 }
 
 
+.modal-content {
+  border-radius: 2rem;
+
+    .modal-header {
+      background-color: var(--pink);
+      border-radius: 2rem 2rem 0 0;
+    }
+
+    .pink-outline {
+      font-size: 1.15rem;
+    }
+
+    .confirm-button {
+        background: linear-gradient(178deg, var(--lightblue), #5052FE);
+        border-radius: 2rem;
+        font-size: 1.15rem;
+        box-shadow: 0px 3px 12px var(--box-shadow-blue);
+        padding: 7px 25px;
+        color: white;
+
+        &:hover {
+          background: linear-gradient(178deg, #3B9EE0, #3F47E0);
+        }
+    }
+}
+
+
+
 
 
 

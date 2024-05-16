@@ -3,11 +3,11 @@ import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { GiNestBirds } from "react-icons/gi";
 import IconCenter from "../components/IconCenter";
 import { MdAddAPhoto } from "react-icons/md";
-import { FaTrashCan } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Bird, EditBirdParams } from "../types";
 import birdAPI from "../api/birdAPI";
+import { DeleteBirdModal } from "../components/DeleteBirdModal";
 
 const nullBird: EditBirdParams = {
     id: 0,
@@ -72,7 +72,7 @@ export function EditBird() {
                 <GiNestBirds className="react-bird-icon mb-3"/>
                 <header className="delete-bird mb-4">
                     <h2>Edit Your Bird</h2>
-                    <button className="pink-outline"><IconCenter reactIcon={<FaTrashCan />} text="Delete Bird"/></button>
+                    <DeleteBirdModal id={ birdToUpdate.id } name={ birdToUpdate.name }/>
                 </header>
                 
                 <Form>
