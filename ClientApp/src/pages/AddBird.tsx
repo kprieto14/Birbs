@@ -7,6 +7,7 @@ import { getUserId } from "../api/auth";
 import { Bird, NewBirdParams } from "../types";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import birdAPI from "../api/birdAPI";
+import { useNavigate } from "react-router";
 
 export function AddBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
@@ -21,21 +22,12 @@ export function AddBird() {
         // In the future photoUrl here
     })
 
+    const navigate = useNavigate()
+
     const createBirdMutation: UseMutationResult<Bird, Error, NewBirdParams> = useMutation<Bird, Error, NewBirdParams> ({
         mutationFn: async(_variables: NewBirdParams) => birdAPI.createNewBird(_variables),
-        onSuccess: (data: Bird) => {
-            console.log(data)
-
-            const resetBird: NewBirdParams = {
-                name: '',
-                adoptedFrom: '',
-                holidayCollection: '',
-                yearPublished: 2012,
-                seasonCollection: 'Spring',
-                userId: Number(getUserId()),
-            }
-
-            setNewBird(resetBird)
+        onSuccess: () => {
+            navigate('/birdcage-list')
         },
         onError: () => {
             console.log("error")
@@ -43,6 +35,8 @@ export function AddBird() {
     })
 
     function handleStringFieldChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+        e.preventDefault()
+        
         const { name, value } = e.target
     
         const updatedBird = { ...newBird, [name]: value }
@@ -84,7 +78,7 @@ export function AddBird() {
                         <Col>
                             <Form.Label className="h4 mb-3">Name</Form.Label>
                             <Form.Control
-                                name="Name"
+                                name="name"
                                 type="text" 
                                 placeholder="Enter name of bird" 
                                 className="mb-3 input"
@@ -97,7 +91,7 @@ export function AddBird() {
                         <Col>
                             <Form.Label className="h4 mb-3">Adopted From</Form.Label>
                             <Form.Control
-                                name="AdoptedFrom"
+                                name="adoptedFrom"
                                 type="text" 
                                 placeholder="Enter where you bought your bird" 
                                 className="mb-3 input"
@@ -112,7 +106,7 @@ export function AddBird() {
                         <Col>
                             <Form.Label className="h4 mb-3">Year</Form.Label>
                             <Form.Select
-                                name="YearPublished"
+                                name="yearPublished"
                                 className="mb-3 input"
                                 size="lg"
                                 value={ newBird.yearPublished }
@@ -127,7 +121,7 @@ export function AddBird() {
                         <Col>
                             <Form.Label className="h4 mb-3">Season</Form.Label>
                             <Form.Select
-                                name="SeasonCollection"
+                                name="seasonCollection"
                                 className="mb-3 input"
                                 size="lg"
                                 value={ newBird.seasonCollection }
@@ -144,7 +138,7 @@ export function AddBird() {
                     <Form.Group className="" controlId="">
                         <Form.Label className="h4 mb-3">Holiday</Form.Label>
                         <Form.Control
-                                name="HolidayCollection"
+                                name="holidayCollection"
                                 type="text" 
                                 placeholder="Enter the holiday of release" 
                                 className="mb-3 input"

@@ -57,7 +57,7 @@ function birdApi() {
 
             const deleteBird = await axios.delete(`${baseURL}/${birdId}`);
 
-            if (deleteBird.status === 204) {
+            if (deleteBird.status === 200) {
                 return 
             }
 

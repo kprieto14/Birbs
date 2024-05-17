@@ -141,7 +141,7 @@ export function BirdCageList() {
 
                             <Collapse in={isOpen(season)}>
                                 <div>
-                                    <h5>There are no bird cages to show :(</h5>
+                                    <h5>There are no bird cages to show</h5>
                                 </div>
                             </Collapse>
                         </section>
