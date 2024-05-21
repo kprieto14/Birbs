@@ -3,19 +3,21 @@ import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { GiNestBirds } from "react-icons/gi";
 import IconCenter from "../components/IconCenter";
 import { MdAddAPhoto } from "react-icons/md";
-import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { Bird, EditBirdParams } from "../types";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Bird } from "../types";
 import birdAPI from "../api/birdAPI";
 import { DeleteBirdModal } from "../components/DeleteBirdModal";
 
-const nullBird: EditBirdParams = {
+const nullBird: Bird = {
     id: 0,
     name: ' ',
     adoptedFrom: ' ',
     holidayCollection: ' ',
     yearPublished: 2012,
     seasonCollection: 'Spring',  
+    user: undefined,
+    userId: 0
 }
 
 export function EditBird() {
@@ -23,33 +25,56 @@ export function EditBird() {
 
     const { id } = useParams<{ id: string }>()
 
+    const queryClient = useQueryClient();
+
+    const navigate = useNavigate()
+
     const { data: bird = nullBird } = useQuery<Bird>({
         queryKey: ['bird', id],
         queryFn: () => birdAPI.getBird(Number(id)),
     })
 
-    const [ birdToUpdate, setBirdToUpdate ] = useState<EditBirdParams>({
+    const [ birdToUpdate, setBirdToUpdate ] = useState<Bird>({
         id: Number(id),
         name: bird.name,
         adoptedFrom: bird.adoptedFrom,
         holidayCollection: bird.holidayCollection,
         yearPublished: bird.yearPublished,
         seasonCollection: bird.seasonCollection,
+        user: bird.user,
+        userId: bird.userId
     })
     
     // Due to onSuccess being deprecated, the internet states the best way to set state on when useQuery is successful is to use useEffect instead and set state there
     useEffect(() => {
-        const foundBird: EditBirdParams = {
+        const foundBird: Bird = {
             id: Number(bird.id),
             name: bird.name,
             adoptedFrom: bird.adoptedFrom,
             holidayCollection: bird.holidayCollection,
             yearPublished: bird.yearPublished,
-            seasonCollection: bird.seasonCollection
+            seasonCollection: bird.seasonCollection,
+            userId: bird.userId
         }
 
         setBirdToUpdate(foundBird)
     }, [bird])
+
+    // Mutation to update a player
+    const updateBirdMutation = useMutation<Bird, Error, Bird>({
+        mutationFn: async (_variables: Bird) => birdAPI.updateBird(Number(id), _variables),
+        onSuccess: () => {
+            navigate('/birdcage-list')
+            queryClient.invalidateQueries({
+                queryKey: ['birds']
+            });
+        },
+        onError: (error: Error) => {
+            // Ignore TS error below, TS does not realize that response is a property of the error
+            // @ts-ignore
+            console.log(error.response?.data);
+        }
+    });
 
     function handleStringFieldChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
         e.preventDefault()
@@ -63,7 +88,7 @@ export function EditBird() {
     function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
 
-        console.log(birdToUpdate)
+        updateBirdMutation.mutate(birdToUpdate)
     }
 
     return (
@@ -72,7 +97,7 @@ export function EditBird() {
                 <GiNestBirds className="react-bird-icon mb-3"/>
                 <header className="delete-bird mb-4">
                     <h2>Edit Your Bird</h2>
-                    <DeleteBirdModal id={ birdToUpdate.id } name={ birdToUpdate.name }/>
+                    <DeleteBirdModal id={ birdToUpdate.id || 0 } name={ birdToUpdate.name }/>
                 </header>
                 
                 <Form>

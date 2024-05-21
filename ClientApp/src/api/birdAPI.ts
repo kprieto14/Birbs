@@ -35,14 +35,14 @@ function birdApi() {
             throw new Error('Failed to create bird');
         },
         // This updates a single user
-        updateBird: async (birdId: number | undefined, birdData: NewBirdParams): Promise<Bird> => {
+        updateBird: async (birdId: number | undefined, birdData: Bird): Promise<Bird> => {
             if (!birdId) {
                 throw new Error('Bird ID is required');
             }
 
             const updateBird = await axios.put(`${baseURL}/${birdId}`, birdData);
 
-            if (updateBird.status === 201) {
+            if (updateBird.status === 200) {
                 return updateBird.data;
             }
 
