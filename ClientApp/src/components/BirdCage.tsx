@@ -16,7 +16,7 @@ type BirdProps = {
 
 export function BirdCage({id, name, adoptedFrom, holiday, year, season}: BirdProps) {
     return (
-        <div className="bird-cage">
+        <article className="bird-cage">
             <Col md={7} className="ps-4">
                 <h3 className="mb-3"><strong>{ name }</strong></h3>
                 <p className="mb-1"><strong>Season: </strong>{ season }</p>
@@ -34,6 +34,6 @@ export function BirdCage({id, name, adoptedFrom, holiday, year, season}: BirdPro
             <Col md={5} className="bird-container">
               <img src={Junior} alt="Fabric Bird" className="bird-photo"/>  
             </Col>  
-        </div>
+        </article>
     )
 }

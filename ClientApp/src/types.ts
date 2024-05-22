@@ -16,10 +16,16 @@ export type LoginSuccess = {
 }
 
 export type User = {
-    id: string,
+    id: string
     firstName: string
     lastName: string
     password: string
+}
+
+export type BirdUser = {
+    id: string
+    firstName: string
+    lastName: string
 }
 
 export type Bird = {
