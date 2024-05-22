@@ -41,12 +41,3 @@ export type NewBirdParams = {
     seasonCollection: 'Spring' | 'Summer' | 'Fall' | 'Winter'
     userId: number
 }
-
-export type EditBirdParams = {
-    id: number
-    name: string
-    adoptedFrom: string
-    holidayCollection: string
-    yearPublished: number
-    seasonCollection: 'Spring' | 'Summer' | 'Fall' | 'Winter'
-}

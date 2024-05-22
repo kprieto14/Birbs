@@ -3,6 +3,7 @@ import Junior from "../assets/junior-bird.jpeg"
 import IconCenter from "./IconCenter";
 import { MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { Col } from "react-bootstrap";
 
 type BirdProps = {
     id: number
@@ -15,8 +16,8 @@ type BirdProps = {
 
 export function BirdCage({id, name, adoptedFrom, holiday, year, season}: BirdProps) {
     return (
-        <article className="bird-cage">
-            <aside>
+        <div className="bird-cage">
+            <Col md={7} className="ps-4">
                 <h3 className="mb-3"><strong>{ name }</strong></h3>
                 <p className="mb-1"><strong>Season: </strong>{ season }</p>
                 <p className="mb-1"><strong>Holiday: </strong>{ holiday }</p>
@@ -28,11 +29,11 @@ export function BirdCage({id, name, adoptedFrom, holiday, year, season}: BirdPro
                         <IconCenter reactIcon={<MdEdit />} text="Edit bird"/>
                     </button>
                 </Link>
-            </aside>
+            </Col>
             
-            <div className="bird-image">
-              <img src={Junior} alt="Fabric Bird" />  
-            </div>  
-        </article>
+            <Col md={5} className="bird-container">
+              <img src={Junior} alt="Fabric Bird" className="bird-photo"/>  
+            </Col>  
+        </div>
     )
 }

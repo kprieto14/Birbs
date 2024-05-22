@@ -194,28 +194,28 @@ footer {
   .bird-cage {
     display: flex;
     align-items: center;
-    max-height: 17rem;
-    max-width: 30rem;
-    gap: 1rem;
+    height: 20rem;
     background-color: var(--yellow);
     border: 1px solid #E3C6AE;
     border-radius: 1rem;
     box-shadow: 0px 3px 6px #8274E833;
 
-    aside {
-      padding: 2rem 0 2em 2rem;
-    }
-
     img {
-      height: 100%;
-      width: 100%;
       border-radius: 1rem;
+      object-fit: cover;
     }
   }
 
-  .bird-image {
+  .bird-container {
+    max-width: 100%;
     height: 100%;
-    width: 60%;
+    overflow: hidden;
+  }
+
+  .bird-photo {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
