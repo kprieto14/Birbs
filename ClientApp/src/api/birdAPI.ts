@@ -25,6 +25,16 @@ function birdApi() {
 
             throw new Error('Failed to load bird')
         },
+        // This grabs a single bird
+        getBirdOfTheDay: async () => {
+            const getBirdOfTheDay = await axios.get(`http://localhost:5000/api/BirdsOfTheDay`)
+
+            if (getBirdOfTheDay.status === 200) {
+                return getBirdOfTheDay.data
+            }
+
+            throw new Error('Failed to load bird')
+        },
         createNewBird: async (newBirdData: NewBirdParams): Promise<Bird> => {            
             const createBird = await axios.post(`${baseURL}`, newBirdData);
 

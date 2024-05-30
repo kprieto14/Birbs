@@ -111,6 +111,7 @@ export function BirdCageList() {
                             <Collapse in={isOpen(season)}>
                                 <Row>
                                     {
+                                        // SORT HERE USING A STATE? DEFAULT STATE BEING BY ID UNLESS USER CHOOSES OTHERWISE
                                         // Filters through the bird list by season and generates bird cards by season
                                         birdsList.filter(seasonName => seasonName.seasonCollection === season).map((bird, index) => (
                                             <Col md={4} className="mb-5" key={index}>

@@ -16,6 +16,7 @@ namespace Birbs.Models
         // Add database tables here
         public DbSet<User> Users { get; set; }
         public DbSet<Bird> Birds { get; set; }
+        public DbSet<BirdOfTheDay> BirdsOfTheDay { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
