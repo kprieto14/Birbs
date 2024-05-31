@@ -8,13 +8,16 @@ import { Col } from "react-bootstrap";
 type BirdProps = {
     id: number
     name: string
+    photoURL: string
     adoptedFrom: string
     holiday: string
     year: number
     season: 'Spring' | 'Summer' | 'Fall' | 'Winter'
 }
 
-export function BirdCage({id, name, adoptedFrom, holiday, year, season}: BirdProps) {
+export function BirdCage({ id, name, photoURL, adoptedFrom, holiday, year, season }: BirdProps) {
+    console.log(photoURL)
+    
     return (
         <article className="bird-cage">
             <Col md={7} className="ps-4">

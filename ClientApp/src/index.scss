@@ -61,6 +61,10 @@ footer {
   color: var(--blue)
 }
 
+input[type="file"] {
+  display: none;
+}
+
 .nav-header {
   background-color: var(--pink);
   font-family: "DM Serif Display", serif;
@@ -125,7 +129,7 @@ footer {
   color: white;
   font-size: 1.25rem;
   letter-spacing: 1px;
-  padding: 0 34px;
+  padding: 8px 34px;
   height: 49px;
   border-radius: 2rem;
 }

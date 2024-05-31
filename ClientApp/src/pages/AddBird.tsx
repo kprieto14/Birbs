@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
+import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { GiNestBirds } from "react-icons/gi";
-import IconCenter from "../components/IconCenter";
 import { MdAddAPhoto } from "react-icons/md";
+import { useNavigate } from "react-router";
+import { useDropzone } from 'react-dropzone'
 import { getUserId } from "../api/auth";
 import { Bird, NewBirdParams } from "../types";
-import { UseMutationResult, useMutation } from "@tanstack/react-query";
+import IconCenter from "../components/IconCenter";
 import birdAPI from "../api/birdAPI";
-import { useNavigate } from "react-router";
 
 export function AddBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
 
     const [newBird, setNewBird] = useState<NewBirdParams>({
         name: '',
+        photoURL: '',
         adoptedFrom: '',
         holidayCollection: '',
         yearPublished: 2012,
@@ -50,6 +52,16 @@ export function AddBird() {
         createBirdMutation.mutate(newBird)
     }
 
+    function onDropFile(acceptedFiles: File[]) {
+        // Do something with the files
+        const fileToUpload = acceptedFiles[0]
+        console.log(fileToUpload)
+      }
+
+      const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop: onDropFile,
+      })
+
     return (
         <section className="add-bird">
             <div className="middle-card w-100">
@@ -61,13 +73,23 @@ export function AddBird() {
                         <Form.Group>
                             <Form.Label className="h4 mb-3">Upload Bird Photo</Form.Label>
                             <InputGroup>
-                                <button className="upload-button"><IconCenter reactIcon={<MdAddAPhoto />} text="Choose File"/></button>
+                                <label className="upload-button">
+                                    <IconCenter reactIcon={<MdAddAPhoto />} text="Choose Photo"/>
+                                    <input 
+                                        name="photoURL" 
+                                        type="file" 
+                                    />  
+                                </label>
+                                
+                                
                                 <Form.Control
                                     type="text"
                                     id="photo-input"
                                     className="mb-3 input"
                                     size="lg"
-                                    value={"No file chosen"}
+                                    value={isDragActive
+                                        ? 'Drop photo here ...'
+                                        : 'Drag a photo here to upload'}
                                     disabled
                                 />
                             </InputGroup>

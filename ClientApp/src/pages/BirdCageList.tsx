@@ -118,6 +118,7 @@ export function BirdCageList() {
                                                 <BirdCage
                                                     id={ Number(bird.id) } 
                                                     name={ bird.name }
+                                                    photoURL= { bird.photoURL }
                                                     season={ bird.seasonCollection }
                                                     holiday={ bird.holidayCollection }
                                                     year={ bird.yearPublished }

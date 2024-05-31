@@ -22,8 +22,11 @@ export function SignIn() {
             // Manually set the location to refresh page so navbar can automatically update, do not use navigate
             window.location.assign('/')
         },
-        onError: () => {
-            setErrorMessage(Error.name)
+        onError: (error: Error) => {
+            // Ignore TS error below, TS does not realize that response is a property of the error
+            // @ts-ignore
+            console.log(error.response?.data);
+            setErrorMessage("Error")
         }
     })
 

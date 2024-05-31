@@ -8,8 +8,8 @@ namespace Birbs.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "You must provide a name for your bird")]
         public string Name { get; set; }
+        public string PhotoURL { get; set; }
         public string AdoptedFrom { get; set; }
-        // Change to YearReleased?
         [Required(ErrorMessage = "You must provide a year for your bird")]
         public int YearPublished { get; set; }
         

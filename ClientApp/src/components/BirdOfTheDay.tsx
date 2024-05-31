@@ -13,7 +13,8 @@ export function BirdOfTheDay() {
         adoptedFrom: ' ',
         holidayCollection: ' ',
         yearPublished: 2012,
-        seasonCollection: 'Spring',  
+        seasonCollection: 'Spring',
+        photoURL: '',  
         user: undefined,
         userId: 0
     }

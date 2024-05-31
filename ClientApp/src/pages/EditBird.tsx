@@ -12,6 +12,7 @@ import { DeleteBirdModal } from "../components/DeleteBirdModal";
 const nullBird: Bird = {
     id: 0,
     name: ' ',
+    photoURL: '',
     adoptedFrom: ' ',
     holidayCollection: ' ',
     yearPublished: 2012,
@@ -37,6 +38,7 @@ export function EditBird() {
     const [ birdToUpdate, setBirdToUpdate ] = useState<Bird>({
         id: Number(id),
         name: bird.name,
+        photoURL: bird.photoURL,
         adoptedFrom: bird.adoptedFrom,
         holidayCollection: bird.holidayCollection,
         yearPublished: bird.yearPublished,
@@ -50,6 +52,7 @@ export function EditBird() {
         const foundBird: Bird = {
             id: Number(bird.id),
             name: bird.name,
+            photoURL: bird.photoURL,
             adoptedFrom: bird.adoptedFrom,
             holidayCollection: bird.holidayCollection,
             yearPublished: bird.yearPublished,

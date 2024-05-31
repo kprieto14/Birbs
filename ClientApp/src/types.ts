@@ -31,6 +31,7 @@ export type BirdUser = {
 export type Bird = {
     id?: number
     name: string
+    photoURL: string
     adoptedFrom: string
     holidayCollection: string
     yearPublished: number
@@ -41,9 +42,14 @@ export type Bird = {
 
 export type NewBirdParams = {
     name: string
+    photoURL: string
     adoptedFrom: string
     holidayCollection: string
     yearPublished: number
     seasonCollection: 'Spring' | 'Summer' | 'Fall' | 'Winter'
     userId: number
+}
+
+export type UploadResponse = {
+    url: string
 }
