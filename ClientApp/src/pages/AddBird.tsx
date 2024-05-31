@@ -24,6 +24,8 @@ export function AddBird() {
         // In the future photoUrl here
     })
 
+    let dropzoneMessage = 'Drag a picture here'
+
     const navigate = useNavigate()
 
     const createBirdMutation: UseMutationResult<Bird, Error, NewBirdParams> = useMutation<Bird, Error, NewBirdParams> ({
@@ -58,9 +60,17 @@ export function AddBird() {
         console.log(fileToUpload)
       }
 
-      const { getRootProps, getInputProps, isDragActive } = useDropzone({
+      const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
         onDrop: onDropFile,
+        accept: {
+            'image/png': ['.png']
+        },
+        maxFiles: 1
       })
+
+      if(acceptedFiles.length > 0) {
+        dropzoneMessage = acceptedFiles[0].name
+      }
 
     return (
         <section className="add-bird">
@@ -72,27 +82,24 @@ export function AddBird() {
                     <Row>
                         <Form.Group>
                             <Form.Label className="h4 mb-3">Upload Bird Photo</Form.Label>
-                            <InputGroup>
-                                <label className="upload-button">
-                                    <IconCenter reactIcon={<MdAddAPhoto />} text="Choose Photo"/>
-                                    <input 
-                                        name="photoURL" 
-                                        type="file" 
-                                    />  
-                                </label>
-                                
-                                
-                                <Form.Control
-                                    type="text"
-                                    id="photo-input"
-                                    className="mb-3 input"
-                                    size="lg"
-                                    value={isDragActive
-                                        ? 'Drop photo here ...'
-                                        : 'Drag a photo here to upload'}
-                                    disabled
-                                />
-                            </InputGroup>
+                            <div {...getRootProps()}>
+                                <InputGroup >
+                                    <label className="upload-button">
+                                        <IconCenter reactIcon={<MdAddAPhoto />} text="Choose Photo"/>
+                                        <input {...getInputProps()}/>                
+                                    </label>
+                                    
+                                    
+                                    <Form.Control
+                                        type="text"
+                                        id="photo-input"
+                                        className="mb-3 input"
+                                        size="lg"
+                                        value={dropzoneMessage}
+                                        disabled
+                                    />                                    
+                                </InputGroup>                                    
+                            </div>
                         </Form.Group>
                     </Row>
 
