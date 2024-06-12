@@ -132,6 +132,10 @@ input[type="file"] {
   padding: 8px 34px;
   height: 49px;
   border-radius: 2rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .home {
