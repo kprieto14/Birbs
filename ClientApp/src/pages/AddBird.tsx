@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Alert, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { GiNestBirds } from "react-icons/gi";
 import { MdAddAPhoto } from "react-icons/md";
@@ -13,7 +13,7 @@ import birdAPI from "../api/birdAPI";
 export function AddBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
 
-    const [newBird, setNewBird] = useState<NewBirdParams>({
+    const [ newBird, setNewBird ] = useState<NewBirdParams>({
         name: '',
         photoURL: '',
         adoptedFrom: '',
@@ -24,7 +24,9 @@ export function AddBird() {
         // In the future photoUrl here
     })
 
-    let dropzoneMessage = 'Drag a picture here'
+    const [ errorMessage, setErrorMessage ] = useState<string | null>(null)
+
+    let dropzoneMessage = 'We accept PNG, JPEG/ JPG, and GIF up to 10MB'
 
     const navigate = useNavigate()
 
@@ -55,7 +57,14 @@ export function AddBird() {
     }
 
     function onDropFile(acceptedFiles: File[]) {
+        // Check if file is too large
+        if(acceptedFiles[0].size > 100 ) {
+            setErrorMessage("File size too large, please upload less than 10MB")
+            return
+        }
+
         // Do something with the files
+        setErrorMessage(null)
         const fileToUpload = acceptedFiles[0]
         console.log(fileToUpload)
       }
@@ -63,7 +72,9 @@ export function AddBird() {
       const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
         onDrop: onDropFile,
         accept: {
-            'image/png': ['.png']
+            'image/png': ['.png'],
+            'image/jpeg': ['.jpeg', '.jpg'],
+            'image/gif': ['.gif'],
         },
         maxFiles: 1
       })
@@ -101,6 +112,9 @@ export function AddBird() {
                                 </InputGroup>                                    
                             </div>
                         </Form.Group>
+
+                        {/* If the user enters a photo too large, then show this message */}
+                        {errorMessage ? (<Alert className="mb-3 h5" variant='danger'>{errorMessage}</Alert>) : null}
                     </Row>
 
                     <Row>
