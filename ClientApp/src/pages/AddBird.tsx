@@ -56,9 +56,23 @@ export function AddBird() {
         createBirdMutation.mutate(newBird)
     }
 
+    const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+        onDrop: onDropFile,
+        accept: {
+            'image/png': ['.png'],
+            'image/jpeg': ['.jpeg', '.jpg'],
+            'image/gif': ['.gif'],
+        },
+        maxFiles: 1
+    })
+
+    if(acceptedFiles.length > 0) {
+        dropzoneMessage = acceptedFiles[0].name
+    }
+
     function onDropFile(acceptedFiles: File[]) {
         // Check if file is too large
-        if(acceptedFiles[0].size > 100 ) {
+        if(acceptedFiles[0].size > 10_000_000 ) {
             setErrorMessage("File size too large, please upload less than 10MB")
             return
         }
@@ -67,21 +81,38 @@ export function AddBird() {
         setErrorMessage(null)
         const fileToUpload = acceptedFiles[0]
         console.log(fileToUpload)
-      }
 
-      const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
-        onDrop: onDropFile,
-        accept: {
-            'image/png': ['.png'],
-            'image/jpeg': ['.jpeg', '.jpg'],
-            'image/gif': ['.gif'],
-        },
-        maxFiles: 1
-      })
+        // Create a formData object so we can send the data to the API
+        const formData = new FormData()
 
-      if(acceptedFiles.length > 0) {
-        dropzoneMessage = acceptedFiles[0].name
-      }
+        // Append a field that is the form upload itself
+        formData.append('file', fileToUpload)
+
+        // try {
+        //     // Send upload to API
+        //     const response = await fetch('/api/Uploads', {
+        //     method: 'POST',
+        //     headers: {
+        //       ...authHeader(),
+        //     },
+        //     body: formData,
+        //   })   
+
+        //     if(response.status == 200) {
+        //         const apiResponse = await response.json()
+
+        //      const url = apiResponse.url
+
+        //      setNewBird({ ...newBird, photoURL: url })
+        //     } else {
+        //         setErrorMessage("Failed to upload image, please try again")
+        //     }
+        // } catch (error) {
+        //     // Catch any network errors and show the user we could not process their upload
+        //     console.debug(error)
+        //     setErrorMessage('Unable to upload image')
+        // }
+    }
 
     return (
         <section className="add-bird">
