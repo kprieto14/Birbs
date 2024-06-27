@@ -25,8 +25,6 @@ export function BirdCageList() {
         queryFn: () => birdAPI.getBirds(Number(user.id))
     })
 
-    console.log(birdsList)
-
     const [isOpenSpring, toggleSpring] = useToggle(true);
     const [isOpenSummer, toggleSummer] = useToggle(true);
     const [isOpenFall, toggleFall] = useToggle(true);

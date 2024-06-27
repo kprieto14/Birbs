@@ -9,6 +9,7 @@ import { getUserId } from "../api/auth";
 import { Bird, NewBirdParams } from "../types";
 import IconCenter from "../components/IconCenter";
 import birdAPI from "../api/birdAPI";
+import axios from "axios";
 
 export function AddBird() {
     const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
@@ -70,15 +71,17 @@ export function AddBird() {
         dropzoneMessage = acceptedFiles[0].name
     }
 
-    function onDropFile(acceptedFiles: File[]) {
+    async function onDropFile(acceptedFiles: File[]) {
         // Check if file is too large
         if(acceptedFiles[0].size > 10_000_000 ) {
             setErrorMessage("File size too large, please upload less than 10MB")
             return
         }
 
-        // Do something with the files
+        // Set the error message always to null just in case the user added something too large before
         setErrorMessage(null)
+
+        // Accepted files are always put into a list, always grab the first accepted file
         const fileToUpload = acceptedFiles[0]
         console.log(fileToUpload)
 
@@ -88,30 +91,22 @@ export function AddBird() {
         // Append a field that is the form upload itself
         formData.append('file', fileToUpload)
 
-        // try {
-        //     // Send upload to API
-        //     const response = await fetch('/api/Uploads', {
-        //     method: 'POST',
-        //     headers: {
-        //       ...authHeader(),
-        //     },
-        //     body: formData,
-        //   })   
+        try {
+            // Send upload to API
+            const newPhotoUrl = await axios.post(`http://localhost:5000/api/Uploads`, formData)
 
-        //     if(response.status == 200) {
-        //         const apiResponse = await response.json()
-
-        //      const url = apiResponse.url
-
-        //      setNewBird({ ...newBird, photoURL: url })
-        //     } else {
-        //         setErrorMessage("Failed to upload image, please try again")
-        //     }
-        // } catch (error) {
-        //     // Catch any network errors and show the user we could not process their upload
-        //     console.debug(error)
-        //     setErrorMessage('Unable to upload image')
-        // }
+            if (newPhotoUrl.status === 200) {
+                // setNewBird({ ...newBird, photoURL: newPhotoUrl.data })
+                console.log(newPhotoUrl)
+            } else {
+                setErrorMessage("Failed to upload image, please try again.")
+            }
+        } catch (error) {
+            // Catch any network errors and show the user we could not process their upload
+            console.log(error)
+            // @ts-ignore
+            setErrorMessage(error.response.statusText)
+        }
     }
 
     return (

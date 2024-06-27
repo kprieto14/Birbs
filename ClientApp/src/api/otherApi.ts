@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LoginSuccess, LoginUserType, NewUserType, UploadResponse, User } from '../types';
+import { LoginSuccess, LoginUserType, NewUserType, User } from '../types';
 
 const baseURL = 'http://localhost:5000/api'
 
@@ -24,15 +24,6 @@ function otherApi() {
 
             throw new Error('Failed to login')
         },
-        uploadPhoto: async (): Promise<UploadResponse> => {
-            const newPhotoUrl = await axios.post(`${baseURL}/Uploads`)
-
-            if (newPhotoUrl.status === 200) {
-                return newPhotoUrl.data
-            }
-
-            throw new Error('Failed to upload image')
-        }
     }
 }
 
