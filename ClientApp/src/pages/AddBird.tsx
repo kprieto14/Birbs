@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Alert, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Alert, Col, Form, Image, InputGroup, Row } from "react-bootstrap";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { GiNestBirds } from "react-icons/gi";
 import { MdAddAPhoto } from "react-icons/md";
 import { useNavigate } from "react-router";
+import { FaTrashCan } from "react-icons/fa6";
 import { useDropzone } from 'react-dropzone'
 import { getUserId } from "../api/auth";
 import { Bird, NewBirdParams } from "../types";
@@ -16,7 +17,7 @@ export function AddBird() {
 
     const [ newBird, setNewBird ] = useState<NewBirdParams>({
         name: '',
-        photoURL: '',
+        photoURL: 'https://res-console.cloudinary.com/dhhcadsts/thumbnails/v1/image/upload/v1719532410/ajdzdWJuZ2pnZzd2Nm40bHUwd3A=/drilldown',
         adoptedFrom: '',
         holidayCollection: '',
         yearPublished: 2012,
@@ -57,6 +58,19 @@ export function AddBird() {
         createBirdMutation.mutate(newBird)
     }
 
+    function handleImageRemoval(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault()
+        
+        // Remove URL from bird object and reset dropbox message 
+        const removePhoto = { ...newBird, photoURL: null }
+        dropzoneMessage = 'We accept PNG, JPEG/ JPG, and GIF up to 10MB'
+        
+        // Remove file from dropzone array
+        acceptedFiles.pop()
+
+        setNewBird(removePhoto)
+    }
+
     const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
         onDrop: onDropFile,
         accept: {
@@ -78,12 +92,16 @@ export function AddBird() {
             return
         }
 
+        // Remove file that has already been added if it exists
+        if(acceptedFiles.length > 0) {
+            acceptedFiles.pop()
+        }
+
         // Set the error message always to null just in case the user added something too large before
         setErrorMessage(null)
 
         // Accepted files are always put into a list, always grab the first accepted file
         const fileToUpload = acceptedFiles[0]
-        console.log(fileToUpload)
 
         // Create a formData object so we can send the data to the API
         const formData = new FormData()
@@ -96,7 +114,7 @@ export function AddBird() {
             const newPhotoUrl = await axios.post(`http://localhost:5000/api/Uploads`, formData)
 
             if (newPhotoUrl.status === 200) {
-                // setNewBird({ ...newBird, photoURL: newPhotoUrl.data })
+                setNewBird({ ...newBird, photoURL: newPhotoUrl.data.url })
                 console.log(newPhotoUrl)
             } else {
                 setErrorMessage("Failed to upload image, please try again.")
@@ -126,7 +144,6 @@ export function AddBird() {
                                         <input {...getInputProps()}/>                
                                     </label>
                                     
-                                    
                                     <Form.Control
                                         type="text"
                                         id="photo-input"
@@ -140,7 +157,15 @@ export function AddBird() {
                         </Form.Group>
 
                         {/* If the user enters a photo too large, then show this message */}
-                        {errorMessage ? (<Alert className="mb-3 h5" variant='danger'>{errorMessage}</Alert>) : null}
+                        {errorMessage ? <Alert className="mb-3 h5" variant='danger'>{errorMessage}</Alert> : null}
+                            {/* Show the photo when it uploads */}
+                            { newBird.photoURL ?
+                                <div className="remove-image">
+                                    <Image src={newBird.photoURL} alt="Upload of your bird photo" className="mb-3" thumbnail/> 
+
+                                    <button className="pink-outline mb-3" onClick={(e) => handleImageRemoval(e)}><IconCenter reactIcon={<FaTrashCan />} text="Remove"/></button>
+                                </div> 
+                                : null}
                     </Row>
 
                     <Row>

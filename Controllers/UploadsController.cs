@@ -13,7 +13,7 @@ namespace Birbs.Controllers
 {
     // All of these routes will be at the base URL:     /api/Uploads
     // That is what "api/[controller]" means below. It uses the name of the controller
-    // in this case RestaurantsController to determine the URL
+    // in this case UploadsController to determine the URL
     [Route("api/[controller]")]
     [ApiController]
     public class UploadsController : ControllerBase

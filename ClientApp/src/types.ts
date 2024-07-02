@@ -42,7 +42,7 @@ export type Bird = {
 
 export type NewBirdParams = {
     name: string
-    photoURL: string
+    photoURL: string | null
     adoptedFrom: string
     holidayCollection: string
     yearPublished: number
