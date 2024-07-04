@@ -1,25 +1,20 @@
 import React from "react";
 import { GiBirdCage } from "react-icons/gi";
 import Junior from "../assets/junior-bird.jpeg"
-import { Bird } from "../types";
+import { CurrentBirdOfTheDay } from "../types";
 import birdAPI from "../api/birdAPI";
 import { useQuery } from "@tanstack/react-query";
 
 export function BirdOfTheDay() {
 
-    const nullBird: Bird = {
+    const nullBird: CurrentBirdOfTheDay = {
         id: 0,
-        name: ' ',
-        adoptedFrom: ' ',
-        holidayCollection: ' ',
-        yearPublished: 2012,
-        seasonCollection: 'Spring',
-        photoURL: '',  
-        user: undefined,
-        userId: 0
+        birdId: 0,
+        bird: null,
+        chosenDate: null
     }
 
-    const { data: birdOfTheDay = nullBird } = useQuery<Bird[]>({
+    const { data: birdOfTheDay = nullBird } = useQuery<CurrentBirdOfTheDay>({
         queryKey: ['birdOfTheDay'],
         queryFn: () => birdAPI.getBirdOfTheDay()
     })
@@ -39,7 +34,7 @@ export function BirdOfTheDay() {
             </header>
 
             <div className="bird-day-info">
-                <h3 className="mb-3"><strong>Junior</strong></h3>
+                <h3 className="mb-3"><strong>{birdOfTheDay.bird?.name}</strong></h3>
                 <h4 className="mb-2"><strong>User:</strong> Me</h4>
                 <h4 className="mb-2"><strong>Season:</strong> Spring</h4>
                 <h4 className="mb-2"><strong>Holiday:</strong> Easter</h4>

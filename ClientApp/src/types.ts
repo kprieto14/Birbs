@@ -40,6 +40,13 @@ export type Bird = {
     userId: number
 }
 
+export type CurrentBirdOfTheDay = {
+    id: number
+    birdId: number
+    bird: Bird | null
+    chosenDate: Date | null
+}
+
 export type NewBirdParams = {
     name: string
     photoURL: string | null

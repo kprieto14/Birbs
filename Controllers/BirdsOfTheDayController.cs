@@ -33,21 +33,23 @@ namespace Birbs.Controllers
         [HttpGet]
         public async Task<ActionResult<BirdOfTheDay>> GetBirdsOfTheDay()
         {
-            // Uses the database context in `_context` to request all of the BirdsOfTheDay, then
-            // return the first bird in the array oof
+           var result =  await _context.BirdsOfTheDay.FirstOrDefaultAsync(b => b.ChosenDate == DateTime.Today.ToUniversalTime());
 
-            // Finds the list of birds by order of date
-            ////var birds = await _context.BirdsOfTheDay.OrderBy(row => row.id).ToListAsync();
+           if(result == null) {
+            var countOfBirds = _context.Birds.Count();
+            // Generate new bird of the day
+            result = new BirdOfTheDay() {
+                BirdId = new Random().Next(1, countOfBirds),
+                ChosenDate = DateTime.Today.ToUniversalTime()
+            }; 
 
-            // Checks list length
-            // If length = 0, add a random bird from the database by creating a new instance of BirdOfTheDay
-            // If length > 0
-                // Check to see that bird list greater than 7 and delete the the first in the array
-                // Finds the most recent bird, and checks the date
-                    // If its the same day, make sure the bird still exists & return the bird, else find a new bird
-                    // If the date is different, grab a random bird from the database, assign it to today, and return that bird              
+            // Assign new bird to result
+            _context.BirdsOfTheDay.Add(result);
+            await _context.SaveChangesAsync();
+           }
 
-            return await _context.BirdsOfTheDay.FirstOrDefaultAsync();
+           result.Bird = await _context.Birds.FirstOrDefaultAsync(b => b.Id == result.BirdId);
+           return result;
         }
 
         // Private helper method that looks up an existing birdOfTheDay by the supplied id

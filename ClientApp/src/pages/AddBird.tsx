@@ -93,7 +93,7 @@ export function AddBird() {
         }
 
         // Remove file that has already been added if it exists
-        if(acceptedFiles.length > 0) {
+        if(acceptedFiles.length > 1) {
             acceptedFiles.pop()
         }
 
