@@ -16,8 +16,6 @@ type BirdProps = {
 }
 
 export function BirdCage({ id, name, photoURL, adoptedFrom, holiday, year, season }: BirdProps) {
-    console.log(photoURL)
-    
     return (
         <article className="bird-cage">
             <Col md={7} className="ps-4">
@@ -35,7 +33,12 @@ export function BirdCage({ id, name, photoURL, adoptedFrom, holiday, year, seaso
             </Col>
             
             <Col md={5} className="bird-container">
-              <img src={Junior} alt="Fabric Bird" className="bird-photo"/>  
+                {
+                    photoURL ? 
+                        <img src={photoURL} alt="Fabric Bird" className="bird-photo"/>  
+                        :
+                        <img src={Junior} alt="Fabric Bird" className="bird-photo"/>
+                }
             </Col>  
         </article>
     )

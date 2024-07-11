@@ -35,10 +35,10 @@ export function BirdOfTheDay() {
 
             <div className="bird-day-info">
                 <h3 className="mb-3"><strong>{birdOfTheDay.bird?.name}</strong></h3>
-                <h4 className="mb-2"><strong>User:</strong> Me</h4>
-                <h4 className="mb-2"><strong>Season:</strong> Spring</h4>
-                <h4 className="mb-2"><strong>Holiday:</strong> Easter</h4>
-                <h4 className="mb-2"><strong>Year:</strong> 2024</h4>
+                <h4 className="mb-2"><strong>User:</strong> {birdOfTheDay.bird?.user?.firstName}</h4>
+                <h4 className="mb-2"><strong>Season:</strong> {birdOfTheDay.bird?.seasonCollection}</h4>
+                <h4 className="mb-2"><strong>Holiday:</strong> {birdOfTheDay.bird?.holidayCollection}</h4>
+                <h4 className="mb-2"><strong>Year:</strong> {birdOfTheDay.bird?.yearPublished}</h4>
             </div>
         </article>
     )

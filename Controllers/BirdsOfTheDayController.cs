@@ -57,7 +57,10 @@ namespace Birbs.Controllers
            }
 
             // Return the bird's information that matches the id of the bird in the database
-            result.Bird = await _context.Birds.FirstOrDefaultAsync(bird => bird.Id == result.BirdId);
+            // result.Bird = await _context.Birds.FirstOrDefaultAsync(bird => bird.Id == result.BirdId);
+            result.Bird = await _context.Birds.
+                                        Include(user => user.User).
+                                        Where(bird => bird.Id == result.BirdId).FirstOrDefaultAsync();
             return result;
         }
 

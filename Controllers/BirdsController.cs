@@ -33,8 +33,8 @@ namespace Birbs.Controllers
         [HttpGet("list/{userId}")]
         public async Task<ActionResult<IEnumerable<Bird>>> GetBirds(int userId)
         {
-            // Uses the database context in `_context` to request all of the Birds, sort
-            // them by row id and return them as a JSON array.
+            // Uses the database context in `_context` to request all of the Birds
+            // by matching user id and return them as a JSON array.
             return await _context.Birds.Where(user => user.UserId == userId).ToListAsync();
         }
 
