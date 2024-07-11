@@ -28,28 +28,37 @@ namespace Birbs.Controllers
 
         // GET: api/BirdsOfTheDay
         //
-        // Returns a Bird from the database, should eventually also assign a random bird
+        // Returns a Bird from the database, also assigns a new bird of the day if there is none
         //
         [HttpGet]
         public async Task<ActionResult<BirdOfTheDay>> GetBirdsOfTheDay()
         {
-           var result =  await _context.BirdsOfTheDay.FirstOrDefaultAsync(b => b.ChosenDate == DateTime.Today.ToUniversalTime());
+            // Search for bird that is equal to today's date
+            var result =  await _context.BirdsOfTheDay.FirstOrDefaultAsync(bird => bird.ChosenDate == DateTime.Today.ToUniversalTime());
 
-           if(result == null) {
-            var countOfBirds = _context.Birds.Count();
-            // Generate new bird of the day
-            result = new BirdOfTheDay() {
-                BirdId = new Random().Next(1, countOfBirds),
-                ChosenDate = DateTime.Today.ToUniversalTime()
-            }; 
+            // Checks if there is a bird of the day result   
+            if(result == null) {
+                // Grabs the list of the Birds of the Day
+                var listOfBirds = _context.Birds.ToListAsync();
+                Random rnd = new();
+                
+                // Chooses a random bird
+                var randomBird = rnd.Next((await listOfBirds).Count);
+                
+                // Generate new bird of the day and assign the random birds id
+                result = new BirdOfTheDay() {
+                    BirdId = randomBird,
+                    ChosenDate = DateTime.Today.ToUniversalTime()
+                }; 
 
-            // Assign new bird to result
-            _context.BirdsOfTheDay.Add(result);
-            await _context.SaveChangesAsync();
+                // Assign new bird to result
+                _context.BirdsOfTheDay.Add(result);
+                await _context.SaveChangesAsync();
            }
 
-           result.Bird = await _context.Birds.FirstOrDefaultAsync(b => b.Id == result.BirdId);
-           return result;
+            // Return the bird's information that matches the id of the bird in the database
+            result.Bird = await _context.Birds.FirstOrDefaultAsync(bird => bird.Id == result.BirdId);
+            return result;
         }
 
         // Private helper method that looks up an existing birdOfTheDay by the supplied id
