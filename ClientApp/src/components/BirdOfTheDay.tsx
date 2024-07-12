@@ -11,7 +11,8 @@ export function BirdOfTheDay() {
         id: 0,
         birdId: 0,
         bird: null,
-        chosenDate: null
+        chosenDate: null,
+        userName: null,
     }
 
     const { data: birdOfTheDay = nullBird } = useQuery<CurrentBirdOfTheDay>({
@@ -35,7 +36,7 @@ export function BirdOfTheDay() {
 
             <div className="bird-day-info">
                 <h3 className="mb-3"><strong>{birdOfTheDay.bird?.name}</strong></h3>
-                <h4 className="mb-2"><strong>User:</strong> {birdOfTheDay.bird?.user?.firstName}</h4>
+                <h4 className="mb-2"><strong>User:</strong> {birdOfTheDay.userName}</h4>
                 <h4 className="mb-2"><strong>Season:</strong> {birdOfTheDay.bird?.seasonCollection}</h4>
                 <h4 className="mb-2"><strong>Holiday:</strong> {birdOfTheDay.bird?.holidayCollection}</h4>
                 <h4 className="mb-2"><strong>Year:</strong> {birdOfTheDay.bird?.yearPublished}</h4>

@@ -17,7 +17,6 @@ namespace Birbs.Models
         [Required(ErrorMessage = "You must provide a season for your bird")]
         public string SeasonCollection { get; set; }
         public string HolidayCollection { get; set; } 
-        // Bird image here
         // Bird belongs to one user
         public int UserId { get; set; }
         public User User { get; set; }

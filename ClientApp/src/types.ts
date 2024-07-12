@@ -45,6 +45,7 @@ export type CurrentBirdOfTheDay = {
     birdId: number
     bird: Bird | null
     chosenDate: Date | null
+    userName: string | null
 }
 
 export type NewBirdParams = {

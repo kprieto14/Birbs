@@ -40,15 +40,20 @@ namespace Birbs.Controllers
             if(result == null) {
                 // Grabs the list of the Birds of the Day
                 var listOfBirds = _context.Birds.ToListAsync();
+                
+                // Chooses a random bird from all users
                 Random rnd = new();
-                
-                // Chooses a random bird
                 var randomBird = rnd.Next((await listOfBirds).Count);
+                var chosenBird = await _context.Birds.FirstOrDefaultAsync(bird => bird.Id == randomBird);
                 
-                // Generate new bird of the day and assign the random birds id
+                // Finds the user attached to the bird
+                var user = await _context.Users.FirstOrDefaultAsync(user => user.Id == chosenBird.UserId);
+                
+                // Generate new bird of the day
                 result = new BirdOfTheDay() {
                     BirdId = randomBird,
-                    ChosenDate = DateTime.Today.ToUniversalTime()
+                    ChosenDate = DateTime.Today.ToUniversalTime(),
+                    UserName = string.Concat(user.firstName, " ", user.lastName),
                 }; 
 
                 // Assign new bird to result
@@ -57,10 +62,8 @@ namespace Birbs.Controllers
            }
 
             // Return the bird's information that matches the id of the bird in the database
-            // result.Bird = await _context.Birds.FirstOrDefaultAsync(bird => bird.Id == result.BirdId);
-            result.Bird = await _context.Birds.
-                                        Include(user => user.User).
-                                        Where(bird => bird.Id == result.BirdId).FirstOrDefaultAsync();
+            result.Bird = await _context.Birds.FirstOrDefaultAsync(bird => bird.Id == result.BirdId);
+
             return result;
         }
 
