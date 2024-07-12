@@ -61,8 +61,8 @@ export function AddBird() {
     function handleImageRemoval(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault()
         
-        // Remove URL from bird object and reset dropbox message 
-        const removePhoto = { ...newBird, photoURL: null }
+        // Remove URL and photopublicId from bird object and reset dropbox message 
+        const removePhoto = { ...newBird, photoURL: null, photoPublicId: null }
         dropzoneMessage = 'We accept PNG, JPEG/ JPG, and GIF up to 10MB'
         
         // Remove file from dropzone array
@@ -127,8 +127,6 @@ export function AddBird() {
             setErrorMessage(error.response.statusText)
         }
     }
-
-    console.log(newBird)
 
     return (
         <section className="add-bird">
