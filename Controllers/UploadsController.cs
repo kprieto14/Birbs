@@ -72,14 +72,38 @@ namespace Birbs.Controllers
             // the URL to the client
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                var urlOfUploadedFile = result.SecureUrl.AbsoluteUri;
+                // var urlOfUploadedFile = result.SecureUrl.AbsoluteUri;
 
-                return Ok(new { url = urlOfUploadedFile });
+                // Need to figure out how to send the URL and the public_id :( or I can just send the public_id instead of URL?)
+                return Ok(result);
             }
             else
             {
                 // Otherwise there was some failure in uploading
                 return BadRequest("Upload failed");
+            }
+        }
+
+        [HttpPost("/destroy")]
+        public ActionResult Delete(string publicId)
+        {
+            // Create and configure a client object to be able to delete an image from Cloudinary
+            var cloudinaryClient = new Cloudinary(new Account(CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET));
+
+            var deletionParams = new DeletionParams(publicId)
+            {
+                ResourceType = ResourceType.Image
+            };
+
+            var deletionResult = cloudinaryClient.Destroy(deletionParams);
+
+            if (deletionResult.StatusCode == HttpStatusCode.OK)
+            {
+                return Ok("Successfully deleted");
+            }
+            else
+            {
+                return BadRequest("Removal of image failed");
             }
         }
     }

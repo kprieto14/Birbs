@@ -17,13 +17,13 @@ export function AddBird() {
 
     const [ newBird, setNewBird ] = useState<NewBirdParams>({
         name: '',
-        photoURL: 'https://res-console.cloudinary.com/dhhcadsts/thumbnails/v1/image/upload/v1719532410/ajdzdWJuZ2pnZzd2Nm40bHUwd3A=/drilldown',
+        photoURL: null,
+        photoPublicId: null,
         adoptedFrom: '',
         holidayCollection: '',
         yearPublished: 2012,
         seasonCollection: 'Spring',
         userId: Number(getUserId()),
-        // In the future photoUrl here
     })
 
     const [ errorMessage, setErrorMessage ] = useState<string | null>(null)
@@ -111,11 +111,12 @@ export function AddBird() {
 
         try {
             // Send upload to API
-            const newPhotoUrl = await axios.post(`http://localhost:5000/api/Uploads`, formData)
+            const newPhotoResult = await axios.post(`http://localhost:5000/api/Uploads`, formData)
 
-            if (newPhotoUrl.status === 200) {
-                setNewBird({ ...newBird, photoURL: newPhotoUrl.data.url })
-                console.log(newPhotoUrl)
+            if (newPhotoResult.status === 200) {
+                setNewBird({ ...newBird, photoURL: newPhotoResult.data.url, photoPublicId: newPhotoResult.data.public_id })
+
+                console.log(newPhotoResult)
             } else {
                 setErrorMessage("Failed to upload image, please try again.")
             }
@@ -126,6 +127,8 @@ export function AddBird() {
             setErrorMessage(error.response.statusText)
         }
     }
+
+    console.log(newBird)
 
     return (
         <section className="add-bird">
@@ -165,7 +168,8 @@ export function AddBird() {
 
                                     <button className="pink-outline mb-3" onClick={(e) => handleImageRemoval(e)}><IconCenter reactIcon={<FaTrashCan />} text="Remove"/></button>
                                 </div> 
-                                : null}
+                                : null
+                            }
                     </Row>
 
                     <Row>

@@ -32,6 +32,7 @@ export type Bird = {
     id?: number
     name: string
     photoURL: string
+    photoPublicId: string | null
     adoptedFrom: string
     holidayCollection: string
     yearPublished: number
@@ -51,6 +52,7 @@ export type CurrentBirdOfTheDay = {
 export type NewBirdParams = {
     name: string
     photoURL: string | null
+    photoPublicId: string | null
     adoptedFrom: string
     holidayCollection: string
     yearPublished: number
