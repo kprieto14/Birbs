@@ -58,17 +58,26 @@ export function AddBird() {
         createBirdMutation.mutate(newBird)
     }
 
-    function handleImageRemoval(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    async function handleImageRemoval(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault()
-        
-        // Remove URL and photopublicId from bird object and reset dropbox message 
-        const removePhoto = { ...newBird, photoURL: null, photoPublicId: null }
-        dropzoneMessage = 'We accept PNG, JPEG/ JPG, and GIF up to 10MB'
-        
-        // Remove file from dropzone array
-        acceptedFiles.pop()
 
-        setNewBird(removePhoto)
+        try {
+            // Send photoId to API to delete from Cloudinary
+            const removePhotoResult = await axios.post(`http://localhost:5000/api/Destroy/${newBird.photoPublicId}`)
+
+            if (removePhotoResult.status === 200) {
+                // Remove URL and photopublicId from bird object and reset dropbox message 
+                const removePhoto = { ...newBird, photoURL: null, photoPublicId: null }
+                dropzoneMessage = 'We accept PNG, JPEG/ JPG, and GIF up to 10MB'
+                
+                // Remove file from dropzone array
+                acceptedFiles.pop()
+
+                setNewBird(removePhoto)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
@@ -115,8 +124,6 @@ export function AddBird() {
 
             if (newPhotoResult.status === 200) {
                 setNewBird({ ...newBird, photoURL: newPhotoResult.data.url, photoPublicId: newPhotoResult.data.public_id })
-
-                console.log(newPhotoResult)
             } else {
                 setErrorMessage("Failed to upload image, please try again.")
             }

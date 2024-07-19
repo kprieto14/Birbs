@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -84,15 +85,19 @@ namespace Birbs.Controllers
             }
         }
 
-        [HttpPost("/destroy")]
+        [HttpPost("/api/Destroy/{publicId}")]
         public ActionResult Delete(string publicId)
         {
+            if (publicId == null) {
+                return BadRequest("No public id sent");
+            }
+
             // Create and configure a client object to be able to delete an image from Cloudinary
             var cloudinaryClient = new Cloudinary(new Account(CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET));
 
             var deletionParams = new DeletionParams(publicId)
             {
-                ResourceType = ResourceType.Image
+                ResourceType = ResourceType.Image,
             };
 
             var deletionResult = cloudinaryClient.Destroy(deletionParams);
