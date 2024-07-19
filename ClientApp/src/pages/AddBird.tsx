@@ -103,7 +103,20 @@ export function AddBird() {
 
         // Remove file that has already been added if it exists
         if(acceptedFiles.length > 1) {
+            // Send photoId to API to delete from Cloudinary
             acceptedFiles.pop()
+        }
+
+        // Checks if a bird image has already been uploaded to replace
+        if(newBird.photoPublicId) {
+            const response = await axios.post(`http://localhost:5000/api/Destroy/${newBird.photoPublicId}`)
+
+            if (response.status === 200) {
+                // Remove URL and photopublicId from bird object
+                const removePhoto = { ...newBird, photoURL: null, photoPublicId: null }
+
+                setNewBird(removePhoto)
+            }
         }
 
         // Set the error message always to null just in case the user added something too large before
