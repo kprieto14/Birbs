@@ -19,6 +19,7 @@ export function AddBird() {
         name: '',
         photoURL: null,
         photoPublicId: null,
+        photoFileName: null,
         adoptedFrom: '',
         holidayCollection: '',
         yearPublished: 2012,
@@ -136,7 +137,7 @@ export function AddBird() {
             const newPhotoResult = await axios.post(`http://localhost:5000/api/Uploads`, formData)
 
             if (newPhotoResult.status === 200) {
-                setNewBird({ ...newBird, photoURL: newPhotoResult.data.url, photoPublicId: newPhotoResult.data.public_id })
+                setNewBird({ ...newBird, photoURL: newPhotoResult.data.url, photoPublicId: newPhotoResult.data.public_id, photoFileName: acceptedFiles[0].name })
             } else {
                 setErrorMessage("Failed to upload image, please try again.")
             }
@@ -147,6 +148,8 @@ export function AddBird() {
             setErrorMessage(error.response.statusText)
         }
     }
+
+    console.log(newBird)
 
     return (
         <section className="add-bird">

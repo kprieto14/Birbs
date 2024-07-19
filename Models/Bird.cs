@@ -9,8 +9,8 @@ namespace Birbs.Models
         [Required(ErrorMessage = "You must provide a name for your bird")]
         public string Name { get; set; }
         public string PhotoURL { get; set; }
-        // Might need to add the photo public id so it can be deleted from Cloudinary later
         public string PhotoPublicId { get; set; }
+        public string PhotoFileName { get; set; }
         public string AdoptedFrom { get; set; }
         [Required(ErrorMessage = "You must provide a year for your bird")]
         public int YearPublished { get; set; }
