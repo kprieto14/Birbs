@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import birdAPI from "../api/birdAPI";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 type DeleteBirdProps = {
     id: number,
@@ -23,10 +24,17 @@ export function DeleteBirdModal({ id, name }: DeleteBirdProps) {
 
     const deleteMutation = useMutation({
         mutationFn: async () => birdAPI.deleteBird(id),
-        onSuccess: () => {
+        onSuccess: async () => {
             queryClient.invalidateQueries({
                 queryKey: ['birds']
             });
+
+            try {
+                // Send photoId to API to delete from Cloudinary
+                const removePhotoResult = await axios.post(`http://localhost:5000/api/Destroy/${id}`)
+            } catch (error) {
+                console.log(error)
+            }
 
             handleClose()
 
@@ -56,7 +64,7 @@ export function DeleteBirdModal({ id, name }: DeleteBirdProps) {
                     <button onClick={handleClose} className="pink-outline">
                         Cancel
                     </button>
-                    <button onClick={() => deleteMutation.mutate()} className="confirm-button">
+                    <button onClick={ () => deleteMutation.mutate() } className="confirm-button">
                         Yes :(
                     </button>
                 </Modal.Footer>

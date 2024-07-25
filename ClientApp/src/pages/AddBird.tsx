@@ -149,8 +149,6 @@ export function AddBird() {
         }
     }
 
-    console.log(newBird)
-
     return (
         <section className="add-bird">
             <div className="middle-card w-100">
