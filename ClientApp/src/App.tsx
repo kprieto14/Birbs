@@ -1,7 +1,7 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { Nav } from './components/Nav'
 import { Home } from './pages/Home'
-import { Route, Routes } from 'react-router-dom'
 import { Footer } from './components/Footer'
 import { AddBird } from './pages/AddBird'
 import { BirdCageList } from './pages/BirdCageList'

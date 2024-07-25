@@ -1,17 +1,17 @@
 import React from "react";
 import { Col, Collapse, Row } from "react-bootstrap";
-import IconCenter from "../components/IconCenter";
+import { useQuery } from "@tanstack/react-query";
 import { FaPlus } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import { BirdCage } from "../components/BirdCage";
-import useToggle from "../hooks/useToggle";
 import { getUser } from "../api/auth";
 import { Bird } from "../types";
-import { useQuery } from "@tanstack/react-query";
 import birdAPI from "../api/birdAPI";
+import IconCenter from "../components/IconCenter";
+import useToggle from "../hooks/useToggle";
 
 export function BirdCageList() {
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter']

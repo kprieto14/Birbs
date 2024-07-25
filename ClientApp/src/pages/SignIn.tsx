@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Form} from "react-bootstrap";
 import { FaUser } from "react-icons/fa";
-import { LoginSuccess, LoginUserType } from "../types";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
-import otherApi from "../api/otherApi";
+import { LoginSuccess, LoginUserType } from "../types";
 import { recordAuthentication } from "../api/auth";
+import otherApi from "../api/otherApi";
 
 export function SignIn() {
     const [user, setUser] = useState<LoginUserType>({

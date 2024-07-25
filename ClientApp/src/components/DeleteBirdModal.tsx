@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import IconCenter from "./IconCenter";
+import { useNavigate } from "react-router";
 import { FaTrashCan } from "react-icons/fa6";
 import { Modal } from "react-bootstrap";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import birdAPI from "../api/birdAPI";
-import { useNavigate } from "react-router";
+import IconCenter from "./IconCenter";
 import axios from "axios";
 
 type DeleteBirdProps = {

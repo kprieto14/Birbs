@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Col, Form, InputGroup, Row, Image } from "react-bootstrap";
 import { GiNestBirds } from "react-icons/gi";
-import IconCenter from "../components/IconCenter";
+import { FaTrashCan } from "react-icons/fa6";
 import { MdAddAPhoto } from "react-icons/md";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bird } from "../types";
-import birdAPI from "../api/birdAPI";
-import { DeleteBirdModal } from "../components/DeleteBirdModal";
 import { useDropzone } from "react-dropzone";
+import { DeleteBirdModal } from "../components/DeleteBirdModal";
+import { Bird } from "../types";
 import axios from "axios";
-import { FaTrashCan } from "react-icons/fa6";
+import birdAPI from "../api/birdAPI";
+import IconCenter from "../components/IconCenter";
 
 const nullBird: Bird = {
     id: 0,

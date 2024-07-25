@@ -1,9 +1,9 @@
 import React from "react";
 import { GiBirdCage } from "react-icons/gi";
-import Junior from "../assets/junior-bird.jpeg"
+import { useQuery } from "@tanstack/react-query";
 import { CurrentBirdOfTheDay } from "../types";
 import birdAPI from "../api/birdAPI";
-import { useQuery } from "@tanstack/react-query";
+import Junior from "../assets/junior-bird.jpeg"
 
 export function BirdOfTheDay() {
 
@@ -25,12 +25,12 @@ export function BirdOfTheDay() {
     return (
         <article className="bird-day mt-5">
             <aside>
-                <img src={Junior} alt="Fabric bird of the day"/>
+                <img src={ birdOfTheDay.bird?.photoURL ? birdOfTheDay.bird?.photoURL : Junior } alt="Fabric bird of the day"/>
             </aside>
 
             <header className="day-header">
                 <GiBirdCage className="react-icon"/>
-                <h3>Bird of the Day</h3>
+                    <h3>Bird of the Day</h3>
                 <GiBirdCage className="react-icon"/>
             </header>
 

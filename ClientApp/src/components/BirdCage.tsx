@@ -1,9 +1,10 @@
 import React from "react";
-import Junior from "../assets/junior-bird.jpeg"
-import IconCenter from "./IconCenter";
 import { MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
+import Junior from "../assets/junior-bird.jpeg"
+import IconCenter from "./IconCenter";
+
 
 type BirdProps = {
     id: number

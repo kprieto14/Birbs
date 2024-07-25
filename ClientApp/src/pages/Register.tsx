@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { FaClipboardCheck } from "react-icons/fa";
-import { NewUserType, User } from "../types";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
-import otherApi from "../api/otherApi";
 import { useNavigate } from "react-router";
+import { NewUserType, User } from "../types";
+import otherApi from "../api/otherApi";
 
 export function Register() {
     const [errorMessage, setErrorMessage] = useState('')

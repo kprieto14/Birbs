@@ -1,8 +1,8 @@
 import React from "react";
-import { GiBirdHouse } from "react-icons/gi";
-import IconCenter from "./IconCenter";
 import { Link } from "react-router-dom";
+import { GiBirdHouse } from "react-icons/gi";
 import { isLoggedIn, logout } from "../api/auth";
+import IconCenter from "./IconCenter";
 
 export function Nav() {
     function handleLogout() {
