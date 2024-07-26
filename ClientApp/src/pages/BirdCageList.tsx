@@ -104,7 +104,12 @@ export function BirdCageList() {
 
                     <Col md={4}>
                         <div className="float-end d-flex">
-                            <DropdownButton id="blue-outline" title={`Sort By: ${sortText}`} className="arrow-none cursor-pointer me-3">
+                            <DropdownButton 
+                                id="blue-outline" 
+                                title={`Sort By: ${sortText}`} 
+                                className="arrow-none cursor-pointer me-3"
+                                align={{ md: "end"}}
+                            >
                                 <Dropdown.Item onClick={ (e) => handleSort("ABC") } className="text-center">
                                     ABC
                                 </Dropdown.Item>

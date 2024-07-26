@@ -93,6 +93,10 @@ input[type="file"] {
   padding: 12px 34px;
   box-shadow: 0px 3px 12px var(--box-shadow-blue);
 
+  &#blue-outline {
+    padding: 12px 24px;
+  }
+
   &:hover {
     background: var(--blue);
     color: white;
