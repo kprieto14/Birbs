@@ -1,8 +1,7 @@
-import React from "react";
-import { Col, Collapse, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Collapse, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
 import { FaPlus } from "react-icons/fa";
-import { TiArrowSortedDown } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
@@ -29,6 +28,12 @@ export function BirdCageList() {
     const [isOpenSummer, toggleSummer] = useToggle(true);
     const [isOpenFall, toggleFall] = useToggle(true);
     const [isOpenWinter, toggleWinter] = useToggle(true);
+
+    const [ sortedBirds, setSortedBirds ] = useState<Bird[]>([])
+    const [ sortText, setSortText ] = useState<string>("ABC")
+
+    // Set the birds when they load by name
+    useEffect(() => setSortedBirds(birdsList.sort((bird, b) => bird.name.localeCompare(b.name))), [birdsList])
 
     function toggle(season: string) {
         switch(season) {
@@ -63,6 +68,32 @@ export function BirdCageList() {
         }
     }
 
+    // Function to sort the Birdss
+    function handleSort(value: string) {
+        switch(value) {
+            case "ABC":
+                const birdsByName = birdsList.sort((bird, b) => bird.name.localeCompare(b.name))
+
+                setSortedBirds([...birdsByName]);
+                setSortText("ABC");
+                break;
+
+            case "oldest":
+                const birdsByOldest = birdsList.sort((year, y) => year.yearPublished - y.yearPublished)
+
+                setSortedBirds([...birdsByOldest]);
+                setSortText("Oldest");
+                break;
+
+            case "newest":
+                const birdsByNewest = birdsList.sort((year, y) => y.yearPublished - year.yearPublished)
+
+                setSortedBirds([...birdsByNewest]);
+                setSortText("Newest");
+                break;
+        }            
+    }
+
     return (
         <main className="bird-cage-list">
             <header>
@@ -72,10 +103,20 @@ export function BirdCageList() {
                     </Col>
 
                     <Col md={4}>
-                        <div className="float-end">
-                            <button className="blue-outline me-3">
-                                <IconCenter reactIcon={<TiArrowSortedDown />} text="Sort By"/>
-                            </button>
+                        <div className="float-end d-flex">
+                            <DropdownButton id="blue-outline" title={`Sort By: ${sortText}`} className="arrow-none cursor-pointer me-3">
+                                <Dropdown.Item onClick={ (e) => handleSort("ABC") } className="text-center">
+                                    ABC
+                                </Dropdown.Item>
+
+                                <Dropdown.Item onClick={ (e) => handleSort("newest") } className="text-center">
+                                    Newest
+                                </Dropdown.Item>
+
+                                <Dropdown.Item onClick={ (e) => handleSort("oldest") } className="text-center">
+                                    Oldest
+                                </Dropdown.Item>
+                            </DropdownButton>
 
                             <Link to='/add-bird'>
                                 <button className="gradient-button">
@@ -111,18 +152,19 @@ export function BirdCageList() {
                                     {
                                         // SORT HERE USING A STATE? DEFAULT STATE BEING BY ID UNLESS USER CHOOSES OTHERWISE
                                         // Filters through the bird list by season and generates bird cards by season
-                                        birdsList.filter(seasonName => seasonName.seasonCollection === season).map((bird, index) => (
-                                            <Col md={4} className="mb-5" key={index}>
-                                                <BirdCage
-                                                    id={ Number(bird.id) } 
-                                                    name={ bird.name }
-                                                    photoURL= { bird.photoURL }
-                                                    season={ bird.seasonCollection }
-                                                    holiday={ bird.holidayCollection }
-                                                    year={ bird.yearPublished }
-                                                    adoptedFrom={ bird.adoptedFrom }
-                                                />
-                                            </Col> 
+                                        sortedBirds.filter(seasonName => seasonName.seasonCollection === season)
+                                            .map((bird, index) => (
+                                                <Col md={4} className="mb-5" key={index}>
+                                                    <BirdCage
+                                                        id={ Number(bird.id) } 
+                                                        name={ bird.name }
+                                                        photoURL= { bird.photoURL }
+                                                        season={ bird.seasonCollection }
+                                                        holiday={ bird.holidayCollection }
+                                                        year={ bird.yearPublished }
+                                                        adoptedFrom={ bird.adoptedFrom }
+                                                    />
+                                                </Col> 
                                         ))
                                     }
                                 </Row>

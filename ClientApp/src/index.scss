@@ -83,9 +83,10 @@ input[type="file"] {
   background-size: cover;
 }
 
-.blue-outline {
+.blue-outline, #blue-outline {
   color: var(--blue);
   font-size: 1.25rem;
+  background-color: transparent;
   letter-spacing: 1px;
   border: 2px solid var(--blue);
   border-radius: 2rem;
