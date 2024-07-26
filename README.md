@@ -5,7 +5,7 @@ A website for people who want a place to store a picture/ information about thei
 Welcome to the Birdhouse
 
 Tools used
-- Backend: C#
+- Backend: C#, PostgreSQL, Cloudinary
 - Frontend: React, TS, Bootstrap, ReactQuery
 
 Future Ideas/ Future Concerns
