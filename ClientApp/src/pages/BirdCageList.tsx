@@ -99,7 +99,7 @@ export function BirdCageList() {
             <header>
                 <Row className="mb-3">
                     <Col md={8}>
-                        <h1>Hello, {user.firstName}!</h1> 
+                        <h1>Hello, {user.username}!</h1> 
                     </Col>
 
                     <Col md={4}>

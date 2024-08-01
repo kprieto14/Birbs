@@ -76,11 +76,11 @@ export function SignIn() {
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>
-
-                    <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
-                        <h5>Sign in</h5>
-                    </button>
                 </Form>
+
+                <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
+                    <h5>Sign in</h5>
+                </button>
             </div>
         </section>   
     )
