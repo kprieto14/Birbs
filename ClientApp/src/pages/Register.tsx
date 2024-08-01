@@ -12,8 +12,7 @@ export function Register() {
     const navigate = useNavigate()
 
     const [newUser, setNewUser] = useState<NewUserType>({
-        firstName: '',
-        lastName: '',
+        username: '',
         email: '',
         password: '',
     })
@@ -43,8 +42,7 @@ export function Register() {
     function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault()
         const userParams = { 
-            firstName: newUser.firstName, 
-            lastName: newUser.lastName, 
+            username: newUser.username,
             email: newUser.email,
             password: newUser.password,
         };
@@ -60,34 +58,19 @@ export function Register() {
 
                 <Form>
                     <Row>
-                        {errorMessage ? <p>{errorMessage}</p> : null}
+                        { errorMessage ? <p>{ errorMessage }</p> : null}
                         <Col>
                             <Form.Group controlId="register-firstname">
-                                <Form.Label className="h4 mb-3">First Name</Form.Label>
+                                <Form.Label className="h4 mb-3">Username</Form.Label>
                                 <Form.Control
-                                    name="firstName"
+                                    name="username"
                                     type="text" 
-                                    placeholder="Enter your first name" 
+                                    placeholder="Enter a username for your account" 
                                     className="mb-3 input"
                                     size="lg"
                                     onChange={ (e) => handleStringFieldChange(e) }
                                 />
                             </Form.Group>
-                        </Col>
-
-
-                        <Col>
-                            <Form.Group controlId="register-lastname">
-                                <Form.Label className="h4 mb-3">Last Name</Form.Label>
-                                <Form.Control
-                                    name="lastName"
-                                    type="text" 
-                                    placeholder="Enter your last name/ initial" 
-                                    className="mb-3 input"
-                                    size="lg"
-                                    onChange={ (e) => handleStringFieldChange(e) }
-                                />
-                            </Form.Group>           
                         </Col>
                     </Row>
 
@@ -114,11 +97,11 @@ export function Register() {
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>
-
-                    <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
-                        <h5>Register</h5>
-                    </button>
                 </Form>
+
+                <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
+                    <h5>Register</h5>
+                </button>
             </div>
         </section>     
     )

@@ -7,14 +7,9 @@ namespace Birbs.Models
     public class User
     {
         public int Id { get; set; }
+        public string Username { get; set; }
 
         [Required(ErrorMessage = "You must provide your name")]
-        public string firstName { get; set; }
-
-        [Required(ErrorMessage = "You must provide your name")]
-        public string lastName { get; set; }
-
-        [Required(ErrorMessage = "You must provide your email")]
         public string Email { get; set; }
 
         [JsonIgnore]

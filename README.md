@@ -15,4 +15,6 @@ Future Ideas/ Future Concerns
 - 404 page should reroute you back to home if loggedin or sign-in if not
 - Fix error handling/ form validating
 - Add Forgot Password option/ functionality
+- Make site more secure in general
 - Add a page that shows the previous week's Bird of the Day
+- Mobile-Friendly Bird-List Page

@@ -53,7 +53,7 @@ namespace Birbs.Controllers
                 result = new BirdOfTheDay() {
                     BirdId = randomBird,
                     ChosenDate = DateTime.Today.ToUniversalTime(),
-                    UserName = string.Concat(user.firstName, " ", user.lastName),
+                    UserName = user.Username,
                 }; 
 
                 // Assign new bird to result
