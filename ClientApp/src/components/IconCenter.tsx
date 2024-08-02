@@ -11,7 +11,7 @@ const IconCenter: FunctionComponent<iconProps> = ({
     text
 }) => {
     return (
-        <div style={{display: "flex", alignItems: "center", gap:"5px"}}>
+        <div style={{ display: "flex", alignItems: "center", gap:"5px" }}>
             { reactIcon } <span>{text}</span>
         </div>
     )

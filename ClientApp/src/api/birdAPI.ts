@@ -27,7 +27,7 @@ function birdApi() {
         },
         // This grabs a single bird
         getBirdOfTheDay: async () => {
-            const getBirdOfTheDay = await axios.get(`http://localhost:5000/api/BirdsOfTheDay`)
+            const getBirdOfTheDay = await axios.get(`${baseURL}/BirdsOfTheDay`)
 
             if (getBirdOfTheDay.status === 200) {
                 return getBirdOfTheDay.data

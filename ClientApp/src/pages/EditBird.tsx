@@ -36,7 +36,7 @@ export function EditBird() {
     const navigate = useNavigate()
 
     const { data: bird = nullBird } = useQuery<Bird>({
-        queryKey: ['bird', id],
+        queryKey: [ 'bird', id ],
         queryFn: () => birdAPI.getBird(Number(id)),
     })
 
@@ -74,7 +74,7 @@ export function EditBird() {
         }
 
         setBirdToUpdate(foundBird)
-    }, [bird])
+    }, [ bird ])
 
     // Mutation to update a player
     const updateBirdMutation = useMutation<Bird, Error, Bird>({
@@ -82,7 +82,7 @@ export function EditBird() {
         onSuccess: () => {
             navigate('/birdcage-list')
             queryClient.invalidateQueries({
-                queryKey: ['birds']
+                queryKey: [ 'birds' ]
             });
         },
         onError: (error: Error) => {
@@ -136,9 +136,9 @@ export function EditBird() {
     const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
         onDrop: onDropFile,
         accept: {
-            'image/png': ['.png'],
-            'image/jpeg': ['.jpeg', '.jpg'],
-            'image/gif': ['.gif'],
+            'image/png': [ '.png' ],
+            'image/jpeg': [ '.jpeg', '.jpg' ],
+            'image/gif': [ '.gif' ],
         },
         maxFiles: 1
     })
@@ -242,9 +242,11 @@ export function EditBird() {
                             {/* Show the photo when it uploads */}
                             { birdToUpdate.photoURL ?
                                 <div className="remove-image">
-                                    <Image src={birdToUpdate.photoURL} alt="Upload of your bird photo" className="mb-3" thumbnail/> 
+                                    <Image src={ birdToUpdate.photoURL } alt="Upload of your bird photo" className="mb-3" thumbnail/> 
 
-                                    <button className="pink-outline mb-3" onClick={(e) => handleImageRemoval(e)}><IconCenter reactIcon={<FaTrashCan />} text="Remove"/></button>
+                                    <button className="pink-outline mb-3" onClick={ (e) => handleImageRemoval(e) }>
+                                        <IconCenter reactIcon={ <FaTrashCan /> } text="Remove"/>
+                                    </button>
                                 </div> 
                                 : null
                             }
@@ -335,8 +337,8 @@ export function EditBird() {
 
                     </Col>
                     <Col>
-                        <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
-                                <h5>Save Bird</h5>
+                        <button className="gradient-button w-100 mt-3" onClick={ (e) => handleSubmit(e) }>
+                            <h5>Save Bird</h5>
                         </button>                    
                     </Col>
                 </Row>

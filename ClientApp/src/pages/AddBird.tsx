@@ -13,7 +13,7 @@ import birdAPI from "../api/birdAPI";
 import axios from "axios";
 
 export function AddBird() {
-    const yearsOfRelease = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
+    const yearsOfRelease = [ '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024' ]
 
     const [ newBird, setNewBird ] = useState<NewBirdParams>({
         name: '',
@@ -84,9 +84,9 @@ export function AddBird() {
     const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
         onDrop: onDropFile,
         accept: {
-            'image/png': ['.png'],
-            'image/jpeg': ['.jpeg', '.jpg'],
-            'image/gif': ['.gif'],
+            'image/png': [ '.png' ],
+            'image/jpeg': [ '.jpeg', '.jpg' ],
+            'image/gif': [ '.gif' ],
         },
         maxFiles: 1
     })
@@ -159,11 +159,11 @@ export function AddBird() {
                     <Row>
                         <Form.Group>
                             <Form.Label className="h4 mb-3">Upload Bird Photo</Form.Label>
-                            <div {...getRootProps()}>
+                            <div { ...getRootProps() }>
                                 <InputGroup >
                                     <label className="upload-button">
-                                        <IconCenter reactIcon={<MdAddAPhoto />} text="Choose Photo"/>
-                                        <input {...getInputProps()}/>                
+                                        <IconCenter reactIcon={ <MdAddAPhoto /> } text="Choose Photo"/>
+                                        <input { ...getInputProps() }/>                
                                     </label>
                                     
                                     <Form.Control
@@ -171,7 +171,7 @@ export function AddBird() {
                                         id="photo-input"
                                         className="mb-3 input"
                                         size="lg"
-                                        value={dropzoneMessage}
+                                        value={ dropzoneMessage }
                                         disabled
                                     />                                    
                                 </InputGroup>                                    
@@ -183,9 +183,9 @@ export function AddBird() {
                             {/* Show the photo when it uploads */}
                             { newBird.photoURL ?
                                 <div className="remove-image">
-                                    <Image src={newBird.photoURL} alt="Upload of your bird photo" className="mb-3" thumbnail/> 
+                                    <Image src={ newBird.photoURL } alt="Upload of your bird photo" className="mb-3" thumbnail/> 
 
-                                    <button className="pink-outline mb-3" onClick={(e) => handleImageRemoval(e)}><IconCenter reactIcon={<FaTrashCan />} text="Remove"/></button>
+                                    <button className="pink-outline mb-3" onClick={(e) => handleImageRemoval(e)}><IconCenter reactIcon={ <FaTrashCan /> } text="Remove"/></button>
                                 </div> 
                                 : null
                             }
@@ -266,7 +266,7 @@ export function AddBird() {
                     </Form.Group>
                 </Form>
 
-                <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
+                <button className="gradient-button w-100 mt-3" onClick={ (e) => handleSubmit(e) }>
                         <h5>Add Bird</h5>
                 </button>
             </div>

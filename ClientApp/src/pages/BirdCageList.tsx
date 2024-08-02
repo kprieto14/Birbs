@@ -13,7 +13,7 @@ import IconCenter from "../components/IconCenter";
 import useToggle from "../hooks/useToggle";
 
 export function BirdCageList() {
-    const seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+    const seasons = [ 'Spring', 'Summer', 'Fall', 'Winter' ]
 
     const user = getUser()
 
@@ -24,10 +24,10 @@ export function BirdCageList() {
         queryFn: () => birdAPI.getBirds(Number(user.id))
     })
 
-    const [isOpenSpring, toggleSpring] = useToggle(true);
-    const [isOpenSummer, toggleSummer] = useToggle(true);
-    const [isOpenFall, toggleFall] = useToggle(true);
-    const [isOpenWinter, toggleWinter] = useToggle(true);
+    const [ isOpenSpring, toggleSpring ] = useToggle(true);
+    const [ isOpenSummer, toggleSummer ] = useToggle(true);
+    const [ isOpenFall, toggleFall ] = useToggle(true);
+    const [ isOpenWinter, toggleWinter ] = useToggle(true);
 
     const [ sortedBirds, setSortedBirds ] = useState<Bird[]>([])
     const [ sortText, setSortText ] = useState<string>("ABC")
@@ -74,21 +74,21 @@ export function BirdCageList() {
             case "ABC":
                 const birdsByName = birdsList.sort((bird, b) => bird.name.localeCompare(b.name))
 
-                setSortedBirds([...birdsByName]);
+                setSortedBirds([ ...birdsByName ]);
                 setSortText("ABC");
                 break;
 
             case "oldest":
                 const birdsByOldest = birdsList.sort((year, y) => year.yearPublished - y.yearPublished)
 
-                setSortedBirds([...birdsByOldest]);
+                setSortedBirds([ ...birdsByOldest ]);
                 setSortText("Oldest");
                 break;
 
             case "newest":
                 const birdsByNewest = birdsList.sort((year, y) => y.yearPublished - year.yearPublished)
 
-                setSortedBirds([...birdsByNewest]);
+                setSortedBirds([ ...birdsByNewest ]);
                 setSortText("Newest");
                 break;
         }            
@@ -99,14 +99,14 @@ export function BirdCageList() {
             <header>
                 <Row className="mb-3">
                     <Col md={8}>
-                        <h1>Hello, {user.username}!</h1> 
+                        <h1>Hello, { user.username }!</h1> 
                     </Col>
 
                     <Col md={4}>
                         <div className="float-end d-flex">
                             <DropdownButton 
                                 id="blue-outline" 
-                                title={`Sort By: ${sortText}`} 
+                                title={ `Sort By: ${sortText}` } 
                                 className="arrow-none cursor-pointer me-3"
                                 align={{ md: "end"}}
                             >
@@ -149,7 +149,7 @@ export function BirdCageList() {
                                     <FaAngleDown className="season-icon" /> :
                                     <FaAngleRight className="season-icon" />
                                 }
-                                <h2>Season: {season}</h2>
+                                <h2>Season: { season }</h2>
                             </header>
 
                             <Collapse in={isOpen(season)}>
@@ -159,7 +159,7 @@ export function BirdCageList() {
                                         // Filters through the bird list by season and generates bird cards by season
                                         sortedBirds.filter(seasonName => seasonName.seasonCollection === season)
                                             .map((bird, index) => (
-                                                <Col md={4} className="mb-5" key={index}>
+                                                <Col md={4} className="mb-5" key={ index }>
                                                     <BirdCage
                                                         id={ Number(bird.id) } 
                                                         name={ bird.name }
@@ -177,7 +177,7 @@ export function BirdCageList() {
                         </section> 
                         : 
                         // If there are no birds, generate a section that says there are no birds
-                        <section key={index}>
+                        <section key={ index }>
                             <header className="season-header mb-3" onClick={() => toggle(season)}>
                                 {
                                     // If the current collapseable section is opened, return a pic of an arrow facing down, else return an arrow to the left
@@ -185,7 +185,7 @@ export function BirdCageList() {
                                     <FaAngleDown className="season-icon" /> :
                                     <FaAngleRight className="season-icon" />
                                 }
-                                <h2>Season: {season}</h2>
+                                <h2>Season: { season }</h2>
                             </header>
 
                             <Collapse in={isOpen(season)}>

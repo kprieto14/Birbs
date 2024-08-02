@@ -8,7 +8,7 @@ export function ErrorPage() {
                 <h3 className="mb-5">Oops, looks like you got lost</h3>
 
                 {/* Make this go back to previous page user was in eventually */}
-                <Link to={'/'}>
+                <Link to='/'>
                     <button className="gradient-button w-100">Go Back</button>
                 </Link>             
             </section>

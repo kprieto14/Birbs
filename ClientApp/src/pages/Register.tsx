@@ -7,7 +7,7 @@ import { NewUserType, User } from "../types";
 import otherApi from "../api/otherApi";
 
 export function Register() {
-    const [errorMessage, setErrorMessage] = useState('')
+    const [ errorMessage, setErrorMessage ] = useState('')
 
     const navigate = useNavigate()
 

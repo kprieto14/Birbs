@@ -7,12 +7,12 @@ import { recordAuthentication } from "../api/auth";
 import otherApi from "../api/otherApi";
 
 export function SignIn() {
-    const [user, setUser] = useState<LoginUserType>({
+    const [ user, setUser ] = useState<LoginUserType>({
         email: '',
         password: '',
       })
 
-    const [errorMessage, setErrorMessage] = useState('')
+    const [ errorMessage, setErrorMessage ] = useState('')
 
     const loginUserMutation: UseMutationResult<LoginSuccess, Error, LoginUserType> = useMutation<LoginSuccess, Error, LoginUserType> ({
         mutationFn: async(_variables: LoginUserType) => otherApi.loginUser(_variables),
@@ -49,7 +49,7 @@ export function SignIn() {
             <div className="middle-card w-100">
                 <FaUser className="react-icon mb-3"/>
                 <h2 className="mb-4">Sign In to Your Account</h2>
-                {errorMessage ? <p>{errorMessage}</p> : null}
+                { errorMessage ? <p>{ errorMessage }</p> : null } 
                 <Form>
                     <Form.Group controlId="sign-in-email">
                         <Form.Label className="h4 mb-3">Email</Form.Label>
@@ -59,7 +59,7 @@ export function SignIn() {
                                 placeholder="Enter your email" 
                                 className="mb-3 input"
                                 size="lg"
-                                value={user.email}
+                                value={ user.email }
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>
@@ -72,13 +72,13 @@ export function SignIn() {
                                 placeholder="********" 
                                 className="mb-3 input"
                                 size="lg"
-                                value={user.password}
+                                value={ user.password }
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>
                 </Form>
 
-                <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
+                <button className="gradient-button w-100 mt-3" onClick={ (e) => handleSubmit(e) }>
                     <h5>Sign in</h5>
                 </button>
             </div>

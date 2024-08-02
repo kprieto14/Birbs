@@ -13,7 +13,7 @@ type DeleteBirdProps = {
 }
 
 export function DeleteBirdModal({ id, name }: DeleteBirdProps) {
-    const [show, setShow] = useState(false);
+    const [ show, setShow ] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -26,7 +26,7 @@ export function DeleteBirdModal({ id, name }: DeleteBirdProps) {
         mutationFn: async () => birdAPI.deleteBird(id),
         onSuccess: async () => {
             queryClient.invalidateQueries({
-                queryKey: ['birds']
+                queryKey: [ 'birds' ]
             });
 
             try {
@@ -49,19 +49,21 @@ export function DeleteBirdModal({ id, name }: DeleteBirdProps) {
     
     return (
         <>
-            <button className="pink-outline" onClick={handleShow}><IconCenter reactIcon={<FaTrashCan />} text="Delete Bird"/></button>
+            <button className="pink-outline" onClick={ handleShow }>
+                <IconCenter reactIcon={ <FaTrashCan /> } text="Delete Bird"/>
+            </button>
 
-            <Modal show={show} onHide={handleClose} centered>
+            <Modal show={ show } onHide={ handleClose } centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Release Bird</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body className="mt-4 mb-4">
-                    <h5>Are you sure you want to delete {name}?</h5>
+                    <h5>Are you sure you want to delete { name }?</h5>
                 </Modal.Body>
                 
                 <Modal.Footer>
-                    <button onClick={handleClose} className="pink-outline">
+                    <button onClick={ handleClose } className="pink-outline">
                         Cancel
                     </button>
                     <button onClick={ () => deleteMutation.mutate() } className="confirm-button">

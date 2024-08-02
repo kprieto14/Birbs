@@ -19,14 +19,14 @@ type BirdProps = {
 export function BirdCage({ id, name, photoURL, adoptedFrom, holiday, year, season }: BirdProps) {
     return (
         <article className="bird-cage">
-            <Col md={7} className="ps-4">
+            <Col md={ 7 } className="ps-4">
                 <h3 className="mb-3"><strong>{ name }</strong></h3>
                 <p className="mb-1"><strong>Season: </strong>{ season }</p>
                 <p className="mb-1"><strong>Holiday: </strong>{ holiday }</p>
                 <p className="mb-1"><strong>Year: </strong>{ year }</p>
                 <p className="mb-1"><strong>Adopted From: </strong>{ adoptedFrom }</p>
 
-                <Link to={`/edit-bird/${id}`}>
+                <Link to={`/edit-bird/${ id }`}>
                     <button className="pink-outline mt-3">
                         <IconCenter reactIcon={<MdEdit />} text="Edit bird"/>
                     </button>
@@ -36,9 +36,9 @@ export function BirdCage({ id, name, photoURL, adoptedFrom, holiday, year, seaso
             <Col md={5} className="bird-container">
                 {
                     photoURL ? 
-                        <img src={photoURL} alt="Fabric Bird" className="bird-photo"/>  
+                        <img src={ photoURL } alt="Fabric Bird" className="bird-photo"/>  
                         :
-                        <img src={Junior} alt="Fabric Bird" className="bird-photo"/>
+                        <img src={ Junior } alt="Fabric Bird" className="bird-photo"/>
                 }
             </Col>  
         </article>

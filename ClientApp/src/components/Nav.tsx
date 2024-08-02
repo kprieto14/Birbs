@@ -21,7 +21,7 @@ export function Nav() {
                             <>
                                 <Link to={'/'}>
                                     <button className="blue-outline">
-                                        <IconCenter reactIcon={ <GiBirdHouse/> } text="Home"/>
+                                        <IconCenter reactIcon={ <GiBirdHouse /> } text="Home"/>
                                     </button>
                                 </Link>   
 
@@ -41,7 +41,7 @@ export function Nav() {
                     {
                         isLoggedIn() ? (
                             <>
-                                <button className="blue-outline" onClick={handleLogout}>
+                                <button className="blue-outline" onClick={ handleLogout }>
                                     Logout
                                 </button>                 
                             </>
