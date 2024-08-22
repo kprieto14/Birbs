@@ -252,7 +252,7 @@ export function AddBird() {
                         </Col>
                     </Row>
 
-                    <Form.Group className="" controlId="">
+                    <Form.Group className="">
                         <Form.Label className="h4 mb-3">Holiday</Form.Label>
                         <Form.Control
                                 name="holidayCollection"

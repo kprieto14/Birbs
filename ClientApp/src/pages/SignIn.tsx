@@ -55,7 +55,8 @@ export function SignIn() {
                         <Form.Label className="h4 mb-3">Email</Form.Label>
                         <Form.Control
                                 name="email"
-                                type="text" 
+                                type="text"
+                                id="email" 
                                 placeholder="Enter your email" 
                                 className="mb-3 input"
                                 size="lg"
