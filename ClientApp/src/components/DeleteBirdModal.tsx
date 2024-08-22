@@ -31,7 +31,8 @@ export function DeleteBirdModal({ id, name }: DeleteBirdProps) {
 
             try {
                 // Send photoId to API to delete from Cloudinary
-                const removePhotoResult = await axios.post(`http://localhost:5000/api/Destroy/${id}`)
+                await axios.post(`http://localhost:5000/api/Destroy/${id}`)
+
             } catch (error) {
                 console.log(error)
             }

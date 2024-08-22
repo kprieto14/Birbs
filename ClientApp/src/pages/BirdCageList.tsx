@@ -29,11 +29,13 @@ export function BirdCageList() {
     const [ isOpenFall, toggleFall ] = useToggle(true);
     const [ isOpenWinter, toggleWinter ] = useToggle(true);
 
-    const [ sortedBirds, setSortedBirds ] = useState<Bird[]>([])
+    const [ sortedBirds, setSortedBirds ] = useState<Bird[]>(birdsList.sort((bird, b) => bird.name.localeCompare(b.name)))
     const [ sortText, setSortText ] = useState<string>("ABC")
 
     // Set the birds when they load by name
-    useEffect(() => setSortedBirds(birdsList.sort((bird, b) => bird.name.localeCompare(b.name))), [birdsList])
+    useEffect(() => 
+        setSortedBirds(birdsList)
+    , [birdsList])
 
     function toggle(season: string) {
         switch(season) {
@@ -68,29 +70,29 @@ export function BirdCageList() {
         }
     }
 
-    // Function to sort the Birdss
+    // Function to sort the Birds
     function handleSort(value: string) {
         switch(value) {
-            case "ABC":
+            case "ABC": {
                 const birdsByName = birdsList.sort((bird, b) => bird.name.localeCompare(b.name))
 
-                setSortedBirds([ ...birdsByName ]);
-                setSortText("ABC");
-                break;
+                setSortedBirds([ ...birdsByName ])
+                setSortText("ABC")
+            } break;
 
-            case "oldest":
+            case "oldest": {
                 const birdsByOldest = birdsList.sort((year, y) => year.yearPublished - y.yearPublished)
 
-                setSortedBirds([ ...birdsByOldest ]);
-                setSortText("Oldest");
-                break;
+                setSortedBirds([ ...birdsByOldest ])
+                setSortText("Oldest")
+            } break;
 
-            case "newest":
+            case "newest": {
                 const birdsByNewest = birdsList.sort((year, y) => y.yearPublished - year.yearPublished)
 
-                setSortedBirds([ ...birdsByNewest ]);
-                setSortText("Newest");
-                break;
+                setSortedBirds([ ...birdsByNewest ])
+                setSortText("Newest")  
+            } break;
         }            
     }
 
@@ -110,15 +112,15 @@ export function BirdCageList() {
                                 className="arrow-none cursor-pointer me-3"
                                 align={{ md: "end"}}
                             >
-                                <Dropdown.Item onClick={ (e) => handleSort("ABC") } className="text-center">
+                                <Dropdown.Item onClick={ () => handleSort("ABC") } className="text-center">
                                     ABC
                                 </Dropdown.Item>
 
-                                <Dropdown.Item onClick={ (e) => handleSort("newest") } className="text-center">
+                                <Dropdown.Item onClick={ () => handleSort("newest") } className="text-center">
                                     Newest
                                 </Dropdown.Item>
 
-                                <Dropdown.Item onClick={ (e) => handleSort("oldest") } className="text-center">
+                                <Dropdown.Item onClick={ () => handleSort("oldest") } className="text-center">
                                     Oldest
                                 </Dropdown.Item>
                             </DropdownButton>

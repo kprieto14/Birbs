@@ -19,7 +19,7 @@ namespace Birbs.Controllers
         // This is the variable you use to have access to your database
         private readonly DatabaseContext _context;
 
-        // Constructor that recives a reference to your database context
+        // Constructor that receives a reference to your database context
         // and stores it in _context for you to use in your API methods
         public BirdsOfTheDayController(DatabaseContext context)
         {
