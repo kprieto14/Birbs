@@ -20,7 +20,7 @@ export function BirdOfTheDay() {
         queryFn: () => birdAPI.getBirdOfTheDay()
     })
 
-    console.log(birdOfTheDay)
+    // console.log(birdOfTheDay)
 
     return (
         <article className="bird-day mt-5">
