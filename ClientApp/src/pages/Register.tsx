@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Form, FormGroup } from "react-bootstrap";
 import { FaClipboardCheck } from "react-icons/fa";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
@@ -39,8 +39,9 @@ export function Register() {
     }
 
     // When Register button is clicked, call for the mutation and send the register information
-    function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    function handleSubmit(e: React.FormEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
+
         const userParams = { 
             username: newUser.username,
             email: newUser.email,
@@ -56,27 +57,24 @@ export function Register() {
                 <FaClipboardCheck className="react-icon mb-3"/>
                 <h2 className="mb-4">Register Your Account</h2>
 
-                <Form>
-                    <Row>
+                <Form onSubmit={ (e) => handleSubmit(e) }>
+                    <FormGroup role="form">
                         { errorMessage ? <p>{ errorMessage }</p> : null}
-                        <Col>
-                            <Form.Group controlId="register-firstname">
-                                <Form.Label className="h4 mb-3">Username</Form.Label>
-                                <Form.Control
-                                    name="username"
-                                    type="text" 
-                                    placeholder="Enter a username for your account" 
-                                    className="mb-3 input"
-                                    size="lg"
-                                    autoComplete="off"
-                                    onChange={ (e) => handleStringFieldChange(e) }
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
 
-                    <Form.Group controlId="register-email">
-                        <Form.Label className="h4 mb-3">Email</Form.Label>
+                        <Form.Label className="h4 mb-3" htmlFor="new-user">Username</Form.Label>
+                        <Form.Control
+                            name="username"
+                            type="text" 
+                            placeholder="Enter a username for your account" 
+                            className="mb-3 input"
+                            size="lg"
+                            autoComplete="off"
+                            required
+                            id="new-user"
+                            onChange={ (e) => handleStringFieldChange(e) }
+                        />
+
+                        <Form.Label className="h4 mb-3" htmlFor="new-email">Email</Form.Label>
                         <Form.Control
                                 name="email"
                                 type="text" 
@@ -84,26 +82,30 @@ export function Register() {
                                 className="mb-3 input"
                                 size="lg"
                                 autoComplete="off"
+                                required
+                                id="new-email"
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
-                    </Form.Group>
 
-                    <Form.Group controlId="register-password">
-                        <Form.Label className="h4 mb-3">Password</Form.Label>
+                        <Form.Label className="h4 mb-3" htmlFor="new-pw">Password</Form.Label>
                         <Form.Control
                                 name="password"
                                 type="password" 
                                 placeholder="********" 
                                 className="mb-3 input"
                                 size="lg"
+                                required
+                                id="new-pw"
                                 onChange={ (e) => handleStringFieldChange(e) }
-                        />
-                    </Form.Group>
+                        />                       
+                    </FormGroup>
+
+                    <button className="gradient-button w-100 mt-3" onSubmit={(e) => handleSubmit(e)}>
+                        <h5>Register</h5>
+                    </button>                    
                 </Form>
 
-                <button className="gradient-button w-100 mt-3" onClick={(e) => handleSubmit(e)}>
-                    <h5>Register</h5>
-                </button>
+                <p className="mt-3">*This page was creating for hobby purposes, please do not save sensitive information :)</p>
             </div>
         </section>     
     )

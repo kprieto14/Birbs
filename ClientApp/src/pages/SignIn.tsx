@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form} from "react-bootstrap";
+import { Form, FormGroup} from "react-bootstrap";
 import { FaUser } from "react-icons/fa";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { LoginSuccess, LoginUserType } from "../types";
@@ -38,7 +38,7 @@ export function SignIn() {
         setUser(updatedUser)
     }
 
-    function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    function handleSubmit(e: React.FormEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         loginUserMutation.mutate(user)
@@ -50,8 +50,9 @@ export function SignIn() {
                 <FaUser className="react-icon mb-3"/>
                 <h2 className="mb-4">Sign In to Your Account</h2>
                 { errorMessage ? <p>{ errorMessage }</p> : null } 
-                <Form>
-                    <Form.Group controlId="sign-in-email">
+                
+                <Form onSubmit={ (e) => handleSubmit(e) }>
+                    <FormGroup role="form">
                         <Form.Label className="h4 mb-3" htmlFor="email">Email</Form.Label>
                         <Form.Control
                                 name="email"
@@ -61,12 +62,11 @@ export function SignIn() {
                                 className="mb-3 input"
                                 size="lg"
                                 autoComplete="email"
+                                required
                                 value={ user.email }
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
-                    </Form.Group>
 
-                    <Form.Group controlId="sign-in-pw">
                         <Form.Label className="h4 mb-3" htmlFor="password">Password</Form.Label>
                         <Form.Control
                                 name="password"
@@ -75,15 +75,16 @@ export function SignIn() {
                                 placeholder="********" 
                                 className="mb-3 input"
                                 size="lg"
+                                required
                                 value={ user.password }
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
-                    </Form.Group>
+                    </FormGroup>
+                
+                    <button type="submit" className="gradient-button w-100 mt-3" onSubmit={ (e) => handleSubmit(e) }>
+                        <h5>Sign in</h5>
+                    </button>
                 </Form>
-
-                <button className="gradient-button w-100 mt-3" onClick={ (e) => handleSubmit(e) }>
-                    <h5>Sign in</h5>
-                </button>
             </div>
         </section>   
     )
