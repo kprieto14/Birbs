@@ -100,11 +100,11 @@ export function BirdCageList() {
         <main className="bird-cage-list">
             <header>
                 <Row className="mb-3">
-                    <Col md={8}>
+                    <Col lg={ 6 } xl={ 8 }>
                         <h1>Hello, { user.username }!</h1> 
                     </Col>
 
-                    <Col md={4}>
+                    <Col lg={ 6 } xl={ 4 }>
                         <div className="float-end d-flex">
                             <DropdownButton 
                                 id="blue-outline" 
@@ -161,7 +161,7 @@ export function BirdCageList() {
                                         // Filters through the bird list by season and generates bird cards by season
                                         sortedBirds.filter(seasonName => seasonName.seasonCollection === season)
                                             .map((bird, index) => (
-                                                <Col md={4} className="mb-5" key={ index }>
+                                                <Col sm={ 9 } md={ 6 } lg={ 6 } xl={ 4 } className="mb-5" key={ index }>
                                                     <BirdCage
                                                         id={ Number(bird.id) } 
                                                         name={ bird.name }
