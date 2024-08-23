@@ -68,6 +68,7 @@ export function Register() {
                                     placeholder="Enter a username for your account" 
                                     className="mb-3 input"
                                     size="lg"
+                                    autoComplete="off"
                                     onChange={ (e) => handleStringFieldChange(e) }
                                 />
                             </Form.Group>
@@ -82,6 +83,7 @@ export function Register() {
                                 placeholder="Enter your email" 
                                 className="mb-3 input"
                                 size="lg"
+                                autoComplete="off"
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>

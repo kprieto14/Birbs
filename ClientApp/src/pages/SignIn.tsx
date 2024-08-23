@@ -52,7 +52,7 @@ export function SignIn() {
                 { errorMessage ? <p>{ errorMessage }</p> : null } 
                 <Form>
                     <Form.Group controlId="sign-in-email">
-                        <Form.Label className="h4 mb-3">Email</Form.Label>
+                        <Form.Label className="h4 mb-3" htmlFor="email">Email</Form.Label>
                         <Form.Control
                                 name="email"
                                 type="text"
@@ -60,16 +60,18 @@ export function SignIn() {
                                 placeholder="Enter your email" 
                                 className="mb-3 input"
                                 size="lg"
+                                autoComplete="email"
                                 value={ user.email }
                                 onChange={ (e) => handleStringFieldChange(e) }
                         />
                     </Form.Group>
 
                     <Form.Group controlId="sign-in-pw">
-                        <Form.Label className="h4 mb-3">Password</Form.Label>
+                        <Form.Label className="h4 mb-3" htmlFor="password">Password</Form.Label>
                         <Form.Control
                                 name="password"
-                                type="password" 
+                                type="password"
+                                id="password" 
                                 placeholder="********" 
                                 className="mb-3 input"
                                 size="lg"
