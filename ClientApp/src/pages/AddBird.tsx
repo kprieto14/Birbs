@@ -53,7 +53,7 @@ export function AddBird() {
         setNewBird(updatedBird)
     }
 
-    function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         createBirdMutation.mutate(newBird)
@@ -154,125 +154,125 @@ export function AddBird() {
             <div className="middle-card w-100">
                 <GiNestBirds className="react-bird-icon mb-3"/>
                 <h2 className="mb-4">Add a Bird to Your Aviary</h2>
+
+                <Row>
+                    <Form.Label className="h4 mb-3" htmlFor="new-bird-photo">Upload Bird Photo</Form.Label>
+                    <div { ...getRootProps() }>
+                        <InputGroup >
+                            <label className="upload-button">
+                                <IconCenter reactIcon={ <MdAddAPhoto /> } text="Choose Photo"/>
+                                <input { ...getInputProps() }/>                
+                            </label>
+                            
+                            <Form.Control
+                                type="text"
+                                id="new-bird-photo"
+                                className="mb-3 input"
+                                size="lg"
+                                value={ dropzoneMessage }
+                                disabled
+                            />                                    
+                        </InputGroup>                                    
+                    </div>
+
+                    {/* If the user enters a photo too large, then show this message */}
+                    {errorMessage ? <Alert className="mb-3 h5" variant='danger'>{errorMessage}</Alert> : null}
+                    {/* Show the photo when it uploads */}
+                    { newBird.photoURL ?
+                        <div className="remove-image">
+                            <Image src={ newBird.photoURL } alt="Upload of your bird photo" className="mb-3" thumbnail/> 
+
+                            <button className="pink-outline mb-3" onClick={(e) => handleImageRemoval(e)}><IconCenter reactIcon={ <FaTrashCan /> } text="Remove"/></button>
+                        </div> 
+                        : null
+                    }
+                </Row>                 
                 
-                <Form>
-                    <Row>
-                        <Form.Group>
-                            <Form.Label className="h4 mb-3" htmlFor="new-bird-photo">Upload Bird Photo</Form.Label>
-                            <div { ...getRootProps() }>
-                                <InputGroup >
-                                    <label className="upload-button">
-                                        <IconCenter reactIcon={ <MdAddAPhoto /> } text="Choose Photo"/>
-                                        <input { ...getInputProps() }/>                
-                                    </label>
-                                    
-                                    <Form.Control
-                                        type="text"
-                                        id="new-bird-photo"
-                                        className="mb-3 input"
-                                        size="lg"
-                                        value={ dropzoneMessage }
-                                        disabled
-                                    />                                    
-                                </InputGroup>                                    
-                            </div>
-                        </Form.Group>
+                <Form onSubmit={ (e) => handleSubmit(e) }>  
+                    <Form.Group role="form">
+                        <Row>
+                            <Col>
+                                <Form.Label className="h4 mb-3" htmlFor="new-bird-name">Name</Form.Label>
+                                <Form.Control
+                                    name="name"
+                                    type="text" 
+                                    placeholder="Enter name of bird" 
+                                    className="mb-3 input"
+                                    size="lg"
+                                    autoComplete="off"
+                                    id="new-bird-name"
+                                    value={ newBird.name }
+                                    onChange={ (e) => handleStringFieldChange(e) }
+                                />
+                            </Col>
 
-                        {/* If the user enters a photo too large, then show this message */}
-                        {errorMessage ? <Alert className="mb-3 h5" variant='danger'>{errorMessage}</Alert> : null}
-                            {/* Show the photo when it uploads */}
-                            { newBird.photoURL ?
-                                <div className="remove-image">
-                                    <Image src={ newBird.photoURL } alt="Upload of your bird photo" className="mb-3" thumbnail/> 
+                            <Col>
+                                <Form.Label className="h4 mb-3" htmlFor="new-bird-adoption">Adopted From</Form.Label>
+                                <Form.Control
+                                    name="adoptedFrom"
+                                    type="text" 
+                                    placeholder="Enter where you bought your bird" 
+                                    className="mb-3 input"
+                                    size="lg"
+                                    id="new-bird-adoption"
+                                    value={ newBird.adoptedFrom }
+                                    onChange={(e) => handleStringFieldChange(e)}
+                                />
+                            </Col>
+                        </Row>
 
-                                    <button className="pink-outline mb-3" onClick={(e) => handleImageRemoval(e)}><IconCenter reactIcon={ <FaTrashCan /> } text="Remove"/></button>
-                                </div> 
-                                : null
-                            }
-                    </Row>
+                        <Row>
+                            <Col>
+                                <Form.Label className="h4 mb-3" htmlFor="new-bird-year">Year</Form.Label>
+                                <Form.Select
+                                    name="yearPublished"
+                                    className="mb-3 input"
+                                    size="lg"
+                                    id="new-bird-year"
+                                    value={ newBird.yearPublished }
+                                    onChange={ (e) => handleStringFieldChange(e) }
+                                >
+                                    {yearsOfRelease.map((year, index) => (
+                                        <option key={index} value={year}>{year}</option>
+                                    ))}
+                                </Form.Select>
+                            </Col>
 
-                    <Row>
-                        <Col>
-                            <Form.Label className="h4 mb-3" htmlFor="new-bird-name">Name</Form.Label>
-                            <Form.Control
-                                name="name"
+                            <Col>
+                                <Form.Label className="h4 mb-3" htmlFor="new-bird-season">Season</Form.Label>
+                                <Form.Select
+                                    name="seasonCollection"
+                                    className="mb-3 input"
+                                    size="lg"
+                                    id="new-bird-season"
+                                    value={ newBird.seasonCollection }
+                                    onChange={ (e) => handleStringFieldChange(e) }
+                                >
+                                    <option>Spring</option>
+                                    <option>Summer</option>
+                                    <option>Fall</option>
+                                    <option>Winter</option>
+                                </Form.Select>
+                            </Col>
+                        </Row>
+
+                        <Form.Label className="h4 mb-3" htmlFor="new-bird-holiday">Holiday</Form.Label>
+                        <Form.Control
+                                name="holidayCollection"
                                 type="text" 
-                                placeholder="Enter name of bird" 
+                                placeholder="Enter the holiday of release" 
                                 className="mb-3 input"
                                 size="lg"
-                                autoComplete="off"
-                                id="new-bird-name"
-                                value={ newBird.name }
+                                id="new-bird-holiday"
+                                value={ newBird.holidayCollection }
                                 onChange={ (e) => handleStringFieldChange(e) }
-                            />
-                        </Col>
-
-                        <Col>
-                            <Form.Label className="h4 mb-3" htmlFor="new-bird-adoption">Adopted From</Form.Label>
-                            <Form.Control
-                                name="adoptedFrom"
-                                type="text" 
-                                placeholder="Enter where you bought your bird" 
-                                className="mb-3 input"
-                                size="lg"
-                                id="new-bird-adoption"
-                                value={ newBird.adoptedFrom }
-                                onChange={(e) => handleStringFieldChange(e)}
-                            />
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col>
-                            <Form.Label className="h4 mb-3" htmlFor="new-bird-year">Year</Form.Label>
-                            <Form.Select
-                                name="yearPublished"
-                                className="mb-3 input"
-                                size="lg"
-                                id="new-bird-year"
-                                value={ newBird.yearPublished }
-                                onChange={ (e) => handleStringFieldChange(e) }
-                            >
-                                {yearsOfRelease.map((year, index) => (
-                                    <option key={index} value={year}>{year}</option>
-                                ))}
-                            </Form.Select>
-                        </Col>
-
-                        <Col>
-                            <Form.Label className="h4 mb-3" htmlFor="new-bird-season">Season</Form.Label>
-                            <Form.Select
-                                name="seasonCollection"
-                                className="mb-3 input"
-                                size="lg"
-                                id="new-bird-season"
-                                value={ newBird.seasonCollection }
-                                onChange={ (e) => handleStringFieldChange(e) }
-                            >
-                                <option>Spring</option>
-                                <option>Summer</option>
-                                <option>Fall</option>
-                                <option>Winter</option>
-                            </Form.Select>
-                        </Col>
-                    </Row>
-
-                    <Form.Label className="h4 mb-3" htmlFor="new-bird-holiday">Holiday</Form.Label>
-                    <Form.Control
-                            name="holidayCollection"
-                            type="text" 
-                            placeholder="Enter the holiday of release" 
-                            className="mb-3 input"
-                            size="lg"
-                            id="new-bird-holiday"
-                            value={ newBird.holidayCollection }
-                            onChange={ (e) => handleStringFieldChange(e) }
-                    />
+                        />
+                    </Form.Group>
+                
+                    <button className="gradient-button w-100 mt-3" onClick={ (e) => handleSubmit(e) }>
+                            <h5>Add Bird</h5>
+                    </button>
                 </Form>
-
-                <button className="gradient-button w-100 mt-3" onClick={ (e) => handleSubmit(e) }>
-                        <h5>Add Bird</h5>
-                </button>
             </div>
         </section>
     )
