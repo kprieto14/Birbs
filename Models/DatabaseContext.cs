@@ -21,6 +21,7 @@ namespace Birbs.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(user => user.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(user => user.Username).IsUnique();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
