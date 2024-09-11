@@ -11,6 +11,7 @@ import { Bird } from "../types";
 import axios from "axios";
 import birdAPI from "../api/birdAPI";
 import IconCenter from "../components/IconCenter";
+import useEscape from "../hooks/useEscape";
 
 const nullBird: Bird = {
     id: 0,
@@ -35,6 +36,9 @@ export function EditBird() {
 
     const navigate = useNavigate()
 
+    // Hook that calls a function that redirects the user back to the birdCage list page
+    useEscape(handleCancel)
+
     const { data: bird = nullBird } = useQuery<Bird>({
         queryKey: [ 'bird', id ],
         queryFn: () => birdAPI.getBird(Number(id)),
@@ -57,24 +61,6 @@ export function EditBird() {
     })
 
     let dropzoneMessage = birdToUpdate.photoFileName ? birdToUpdate.photoFileName : 'We accept PNG, JPEG/ JPG, and GIF up to 10MB'
-    
-    // Due to onSuccess being deprecated, the internet states the best way to set state on when useQuery is successful is to use useEffect instead and set state there
-    useEffect(() => {
-        const foundBird: Bird = {
-            id: Number(bird.id),
-            name: bird.name,
-            photoURL: bird.photoURL,
-            photoPublicId: bird.photoPublicId,
-            photoFileName: bird.photoFileName,
-            adoptedFrom: bird.adoptedFrom,
-            holidayCollection: bird.holidayCollection,
-            yearPublished: bird.yearPublished,
-            seasonCollection: bird.seasonCollection,
-            userId: bird.userId
-        }
-
-        setBirdToUpdate(foundBird)
-    }, [ bird ])
 
     // Mutation to update a player
     const updateBirdMutation = useMutation<Bird, Error, Bird>({
@@ -101,10 +87,14 @@ export function EditBird() {
         setBirdToUpdate(updatedBird)
     }
 
-    function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
+    function handleSubmit(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         updateBirdMutation.mutate(birdToUpdate)
+    }
+
+    function handleCancel() {
+        navigate('/birdcage-list')
     }
 
     async function handleImageRemoval(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -205,6 +195,24 @@ export function EditBird() {
         }
     }
 
+    // Due to onSuccess being deprecated, the internet states the best way to set state on when useQuery is successful is to use useEffect instead and set state there
+    useEffect(() => {
+        const foundBird: Bird = {
+            id: Number(bird.id),
+            name: bird.name,
+            photoURL: bird.photoURL,
+            photoPublicId: bird.photoPublicId,
+            photoFileName: bird.photoFileName,
+            adoptedFrom: bird.adoptedFrom,
+            holidayCollection: bird.holidayCollection,
+            yearPublished: bird.yearPublished,
+            seasonCollection: bird.seasonCollection,
+            userId: bird.userId
+        }
+
+        setBirdToUpdate(foundBird)
+    }, [ bird ])
+
     return (
         <section className="edit-bird">
             <div className="middle-card w-100">
@@ -213,30 +221,26 @@ export function EditBird() {
                     <h2>Edit Your Bird</h2>
                     <DeleteBirdModal id={ birdToUpdate.id || 0 } name={ birdToUpdate.name }/>
                 </header>
-                
-                <Form>
 
                 <Row>
-                    <Form.Group>
-                        <Form.Label className="h4 mb-3" htmlFor="edit-bird-photo">Upload Bird Photo</Form.Label>
-                        <div {...getRootProps()}>
-                            <InputGroup >
-                                <label className="upload-button">
-                                    <IconCenter reactIcon={<MdAddAPhoto />} text={birdToUpdate.photoFileName ? "Edit/ Change Photo" : "Choose Photo"}/>
-                                    <input {...getInputProps()}/>                
-                                </label>
-                                
-                                <Form.Control
-                                    type="text"
-                                    id="edit-bird-photo"
-                                    className="mb-3 input"
-                                    size="lg"
-                                    value={ dropzoneMessage }
-                                    disabled
-                                />                                    
-                            </InputGroup>                                    
-                        </div>
-                    </Form.Group>
+                    <Form.Label className="h4 mb-3" htmlFor="edit-bird-photo">Upload Bird Photo</Form.Label>
+                    <div {...getRootProps()}>
+                        <InputGroup >
+                            <label className="upload-button">
+                                <IconCenter reactIcon={<MdAddAPhoto />} text={birdToUpdate.photoFileName ? "Edit/ Change Photo" : "Choose Photo"}/>
+                                <input {...getInputProps()}/>                
+                            </label>
+                            
+                            <Form.Control
+                                type="text"
+                                id="edit-bird-photo"
+                                className="mb-3 input"
+                                size="lg"
+                                value={ dropzoneMessage }
+                                disabled
+                            />                                    
+                        </InputGroup>                                    
+                    </div>
 
                     {/* If the user enters a photo too large, then show this message */}
                     {errorMessage ? <Alert className="mb-3 h5" variant='danger'>{errorMessage}</Alert> : null}
@@ -251,102 +255,107 @@ export function EditBird() {
                         </div> 
                         : null
                     }
-                </Row>
+                </Row>                
+                
+                <Form onSubmit={ (e) => handleSubmit(e) }>
+                    <Form.Group role="form">
+                        <Row>
+                            <Col>
+                                <Form.Label className="h4 mb-3" htmlFor="edit-bird-name">Name</Form.Label>
+                                <Form.Control
+                                    type="text" 
+                                    placeholder="Enter name of bird" 
+                                    className="mb-3 input"
+                                    size="lg"
+                                    name="name"
+                                    autoComplete="off"
+                                    id="edit-bird-name"
+                                    value={ birdToUpdate.name }
+                                    onChange={ (e) => handleStringFieldChange(e) }
+                                />
+                            </Col>
 
-                <Row>
-                    <Col>
-                        <Form.Label className="h4 mb-3" htmlFor="edit-bird-name">Name</Form.Label>
+                            <Col>
+                                <Form.Label className="h4 mb-3" htmlFor="edit-bird-adoption">Adopted From</Form.Label>
+                                <Form.Control
+                                    type="text" 
+                                    placeholder="Enter where you bought your bird" 
+                                    className="mb-3 input"
+                                    size="lg"
+                                    name="adoptedFrom"
+                                    id="edit-bird-adoption"
+                                    value={ birdToUpdate.adoptedFrom }
+                                    onChange={ (e) => handleStringFieldChange(e) }
+                                />
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col>
+                                <Form.Label className="h4 mb-3" htmlFor="edit-bird-year">Year</Form.Label>
+                                <Form.Select
+                                    className="mb-3 input"
+                                    size="lg"
+                                    name="yearPublished"
+                                    id="edit-bird-year"
+                                    value={ birdToUpdate.yearPublished }
+                                    onChange={ (e) => handleStringFieldChange(e) }
+                                >
+                                    {yearsOfRelease.map((year, index) => (
+                                        <option key={index} value={year}>{year}</option>
+                                    ))}
+                                </Form.Select>
+                            </Col>
+
+                            <Col>
+                                <Form.Label className="h4 mb-3" htmlFor="edit-bird-season">Season</Form.Label>
+                                <Form.Select
+                                    className="mb-3 input"
+                                    size="lg"
+                                    name="seasonCollection"
+                                    id="edit-bird-season"
+                                    value={ birdToUpdate.seasonCollection }
+                                    onChange={ (e) => handleStringFieldChange(e) }
+                                >
+                                    <option>Spring</option>
+                                    <option>Summer</option>
+                                    <option>Fall</option>
+                                    <option>Winter</option>
+                                </Form.Select>
+                            </Col>
+                        </Row>
+
+                        <Form.Label className="h4 mb-3" htmlFor="edit-bird-holiday">Holiday</Form.Label>
                         <Form.Control
                             type="text" 
-                            placeholder="Enter name of bird" 
+                            placeholder="Enter the holiday of release" 
                             className="mb-3 input"
                             size="lg"
-                            name="name"
-                            autoComplete="off"
-                            id="edit-bird-name"
-                            value={ birdToUpdate.name }
+                            name="holidayCollection"
+                            id="edit-bird-holiday"
+                            value={ birdToUpdate.holidayCollection }
                             onChange={ (e) => handleStringFieldChange(e) }
                         />
-                    </Col>
+                   
+                    </Form.Group>
 
-                    <Col>
-                        <Form.Label className="h4 mb-3" htmlFor="edit-bird-adoption">Adopted From</Form.Label>
-                        <Form.Control
-                            type="text" 
-                            placeholder="Enter where you bought your bird" 
-                            className="mb-3 input"
-                            size="lg"
-                            name="adoptedFrom"
-                            id="edit-bird-adoption"
-                            value={ birdToUpdate.adoptedFrom }
-                            onChange={ (e) => handleStringFieldChange(e) }
-                        />
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col>
-                        <Form.Label className="h4 mb-3" htmlFor="edit-bird-year">Year</Form.Label>
-                        <Form.Select
-                            className="mb-3 input"
-                            size="lg"
-                            name="yearPublished"
-                            id="edit-bird-year"
-                            value={ birdToUpdate.yearPublished }
-                            onChange={ (e) => handleStringFieldChange(e) }
-                        >
-                            {yearsOfRelease.map((year, index) => (
-                                <option key={index} value={year}>{year}</option>
-                            ))}
-                        </Form.Select>
-                    </Col>
-
-                    <Col>
-                        <Form.Label className="h4 mb-3" htmlFor="edit-bird-season">Season</Form.Label>
-                        <Form.Select
-                            className="mb-3 input"
-                            size="lg"
-                            name="seasonCollection"
-                            id="edit-bird-season"
-                            value={ birdToUpdate.seasonCollection }
-                            onChange={ (e) => handleStringFieldChange(e) }
-                        >
-                            <option>Spring</option>
-                            <option>Summer</option>
-                            <option>Fall</option>
-                            <option>Winter</option>
-                        </Form.Select>
-                    </Col>
-                </Row>
-
-                <Form.Label className="h4 mb-3" htmlFor="edit-bird-holiday">Holiday</Form.Label>
-                <Form.Control
-                        type="text" 
-                        placeholder="Enter the holiday of release" 
-                        className="mb-3 input"
-                        size="lg"
-                        name="holidayCollection"
-                        id="edit-bird-holiday"
-                        value={ birdToUpdate.holidayCollection }
-                        onChange={ (e) => handleStringFieldChange(e) }
-                />
+                    <Row>
+                        {/* Order-1 allows the save-bird to be on the far end, but button needs to be first so that when user presses enter on their keyboard, it submits the form */}
+                        <Col className="order-1">
+                            <button className="gradient-button w-100 mt-3" onClick={ (e) => handleSubmit(e) }>
+                                <h5>Save Bird</h5>
+                            </button>                    
+                        </Col>
+                        
+                        <Col>
+                            <Link to={'/birdcage-list'}>
+                                <button className="pink-outline w-100 mt-3 h-75">
+                                    <h5>Cancel</h5>
+                                </button>                        
+                            </Link>
+                        </Col>
+                    </Row> 
                 </Form>
-
-                <Row>
-                    <Col>
-                        <Link to={'/birdcage-list'}>
-                            <button className="pink-outline w-100 mt-3 h-75">
-                                <h5>Cancel</h5>
-                            </button>                        
-                        </Link>
-
-                    </Col>
-                    <Col>
-                        <button className="gradient-button w-100 mt-3" onClick={ (e) => handleSubmit(e) }>
-                            <h5>Save Bird</h5>
-                        </button>                    
-                    </Col>
-                </Row>
             </div>
         </section>
     )
