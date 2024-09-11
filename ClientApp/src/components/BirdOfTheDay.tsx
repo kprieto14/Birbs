@@ -20,8 +20,6 @@ export function BirdOfTheDay() {
         queryFn: () => birdAPI.getBirdOfTheDay()
     })
 
-    // console.log(birdOfTheDay)
-
     return (
         <article className="bird-day mt-5">
             <aside>
@@ -35,11 +33,11 @@ export function BirdOfTheDay() {
             </header>
 
             <div className="bird-day-info">
-                <h3 className="mb-3"><strong>{ birdOfTheDay.bird?.name }</strong></h3>
-                <h4 className="mb-2"><strong>User:</strong> { birdOfTheDay.userName }</h4>
-                <h4 className="mb-2"><strong>Season:</strong> { birdOfTheDay.bird?.seasonCollection }</h4>
-                <h4 className="mb-2"><strong>Holiday:</strong> { birdOfTheDay.bird?.holidayCollection }</h4>
-                <h4 className="mb-2"><strong>Year:</strong> { birdOfTheDay.bird?.yearPublished }</h4>
+                <h3 className="mb-3"><strong>{ birdOfTheDay.bird?.name || 'Loading' }</strong></h3>
+                <h4 className="mb-2"><strong>User:</strong> { birdOfTheDay.userName || 'Loading' }</h4>
+                <h4 className="mb-2"><strong>Season:</strong> { birdOfTheDay.bird?.seasonCollection || 'Loading' }</h4>
+                <h4 className="mb-2"><strong>Holiday:</strong> { birdOfTheDay.bird?.holidayCollection || 'Loading' }</h4>
+                <h4 className="mb-2"><strong>Year:</strong> { birdOfTheDay.bird?.yearPublished || 'Loading' }</h4>
             </div>
         </article>
     )
