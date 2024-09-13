@@ -41,7 +41,9 @@ export function SignIn() {
     function handleSubmit(e: React.FormEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        loginUserMutation.mutate(user)
+        const userParams = { ...user, email: user.email.toLowerCase() }
+
+        loginUserMutation.mutate(userParams)
     }
 
     return (

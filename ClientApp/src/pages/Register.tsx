@@ -43,8 +43,8 @@ export function Register() {
         e.preventDefault()
 
         const userParams = { 
-            username: newUser.username,
-            email: newUser.email,
+            username: newUser.username.toLowerCase(),
+            email: newUser.email.toLowerCase(),
             password: newUser.password,
         };
 
