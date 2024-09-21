@@ -101,11 +101,14 @@ export function BirdCageList() {
             <header>
                 <Row className="mb-3">
                     <Col lg={ 6 } xl={ 8 }>
-                        <h1>Hello, { user.username }!</h1> 
+                        <h1 className="mb-5">Hello, { user.username }!</h1>
+
+                        <h5>A list of your birds by season, you may sort your birds by name or year in each season.</h5>
+                        <h5 className="mt-1 pb-5">You may also add a bird if you want.</h5> 
                     </Col>
 
                     <Col lg={ 6 } xl={ 4 }>
-                        <div className="float-end d-flex">
+                        <div className="float-end d-flex header-buttons">
                             <DropdownButton 
                                 id="blue-outline" 
                                 title={ `Sort By: ${sortText}` } 
@@ -134,8 +137,6 @@ export function BirdCageList() {
                     </Col>
                 </Row>
                 
-                <h5>A list of your birds by season, you may sort your birds by name or year in each season.</h5>
-                <h5 className="mt-1 pb-5">You may also add a bird if you want.</h5>
             </header>
 
             <div className="bird-list mt-5">
@@ -161,7 +162,7 @@ export function BirdCageList() {
                                         // Filters through the bird list by season and generates bird cards by season
                                         sortedBirds.filter(seasonName => seasonName.seasonCollection === season)
                                             .map((bird, index) => (
-                                                <Col sm={ 9 } md={ 6 } lg={ 6 } xl={ 4 } className="mb-5" key={ index }>
+                                                <Col sm={ 12 } md={ 6 } lg={ 6 } xl={ 4 } className="mb-5" key={ index }>
                                                     <BirdCage
                                                         id={ Number(bird.id) } 
                                                         name={ bird.name }
