@@ -100,15 +100,15 @@ export function BirdCageList() {
         <main className="bird-cage-list">
             <header>
                 <Row className="mb-3">
-                    <Col lg={ 6 } xl={ 8 }>
+                    <Col xs={ 12 } lg={ 6 } xl={ 8 }>
                         <h1 className="mb-5">Hello, { user.username }!</h1>
 
                         <h5>A list of your birds by season, you may sort your birds by name or year in each season.</h5>
                         <h5 className="mt-1 pb-5">You may also add a bird if you want.</h5> 
                     </Col>
 
-                    <Col lg={ 6 } xl={ 4 }>
-                        <div className="float-end d-flex header-buttons">
+                    <Col xs={ 12 } lg={ 6 } xl={ 4 } className="header-buttons">
+                        <div className="float-end d-flex">
                             <DropdownButton 
                                 id="blue-outline" 
                                 title={ `Sort By: ${sortText}` } 

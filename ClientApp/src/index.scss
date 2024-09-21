@@ -328,6 +328,12 @@ input[type="file"] {
     }
 }
 
+@media screen and (max-width: 780px) {
+  .header-buttons {
+    display: flex;
+    justify-content: center;
+  }
+}
 
 
 
