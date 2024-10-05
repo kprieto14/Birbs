@@ -1,10 +1,21 @@
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { GiBirdHouse } from "react-icons/gi";
 import { isLoggedIn, logout } from "../api/auth";
 import IconCenter from "./IconCenter";
 
 export function Nav() {
+    const { loginWithRedirect } = useAuth0();
+
+    const handleLogin = async () => {
+        await loginWithRedirect({
+          appState: {
+            returnTo: "/profile",
+          },
+        });
+      };
+
     function handleLogout() {
         logout()
     
@@ -48,11 +59,14 @@ export function Nav() {
                         ) 
                         : 
                         <>
-                            <Link to='/login'>
+                            {/* <Link to='/login'>
                                 <button className="blue-outline">
                                     Log In
                                 </button>
-                            </Link>
+                            </Link> */}
+                            <button className="blue-outline" onClick={ handleLogin }>
+                                Log In
+                            </button>
 
                             <Link to='/register'>
                                 <button className="gradient-button">
