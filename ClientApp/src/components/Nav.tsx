@@ -14,7 +14,7 @@ export function Nav() {
             returnTo: "/profile",
           },
         });
-      };
+    };
 
     function handleLogout() {
         logout()
