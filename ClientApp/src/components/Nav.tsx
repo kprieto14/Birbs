@@ -2,25 +2,44 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { GiBirdHouse } from "react-icons/gi";
-import { isLoggedIn, logout } from "../api/auth";
+// import { isLoggedIn, logout } from "../api/auth";
 import IconCenter from "./IconCenter";
 
 export function Nav() {
-    const { loginWithRedirect } = useAuth0();
+    const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+
+    const handleSignUp = async () => {
+        await loginWithRedirect({
+            appState: {
+                returnTo: "/",
+            },
+            authorizationParams: {
+                screen_hint: "signup",
+            },
+        })
+    }
 
     const handleLogin = async () => {
         await loginWithRedirect({
-          appState: {
-            returnTo: "/profile",
-          },
-        });
-    };
-
-    function handleLogout() {
-        logout()
-    
-        window.location.assign('/')
+            appState: {
+                returnTo: "/",
+            },
+        })
     }
+
+    const handleLogout = () => {
+        logout({
+          logoutParams: {
+            returnTo: window.location.origin,
+          },
+        })
+    }
+
+    // function handleLogout() {
+    //     logout()
+    
+    //     window.location.assign('/')
+    // }
 
     return (
         <header className="nav-header">
@@ -28,7 +47,7 @@ export function Nav() {
                 <div>
                     {/* Should only show if user is logged in */}
                     {
-                        isLoggedIn() ? (
+                        !isAuthenticated && (
                             <>
                                 <Link to={'/'}>
                                     <button className="blue-outline">
@@ -42,37 +61,41 @@ export function Nav() {
                                     </button>
                                 </Link>                     
                             </>
-                        ) 
-                        : null
+                        )
                     }
                 </div>
 
                 <div>
                     {/* If user is logged in, make button to logout show, else show sign-in and register buttons */}
                     {
-                        isLoggedIn() ? (
+                        isAuthenticated ? (
                             <>
-                                <button className="blue-outline" onClick={ handleLogout }>
+                                <button className='blue-outline' onClick={ handleLogout }>
                                     Logout
                                 </button>                 
                             </>
                         ) 
                         : 
                         <>
+
+                            <button className='blue-outline' onClick={ handleLogin }>
+                                Log In
+                            </button>
+                            <button className='gradient-button' onClick={ handleSignUp }>
+                                Sign-Up
+                            </button>    
+                            
                             {/* <Link to='/login'>
                                 <button className="blue-outline">
                                     Log In
                                 </button>
                             </Link> */}
-                            <button className="blue-outline" onClick={ handleLogin }>
-                                Log In
-                            </button>
-
-                            <Link to='/register'>
+                            {/* <Link to='/register'>
                                 <button className="gradient-button">
                                     Register
                                 </button>  
-                            </Link>
+                            </Link> */}
+
                         </>
                     }
                 </div>
