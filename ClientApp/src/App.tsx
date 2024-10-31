@@ -31,13 +31,13 @@ export function App() {
 
         <div className='background-image'>
           <Routes>
-            <Route path={'/'} element={<Home />}/>
-            <Route path={'/birdcage-list'} element={<BirdCageList />}/>
-            <Route path={'/add-bird'} element={<AddBird />}/>
-            <Route path={'/edit-bird/:id'} element={<EditBird />}/>
-            <Route path={'/login'} element={<SignIn />} />
-            <Route path={'/register'} element={<Register />} />
-            <Route path={'*'} element={<ErrorPage />}/>
+            <Route path={'/'} element={ <Home /> }/>
+            <Route path={'/birdcage-list'} element={ <BirdCageList /> }/>
+            <Route path={'/add-bird'} element={ <AddBird /> }/>
+            <Route path={'/edit-bird/:id'} element={ <EditBird /> }/>
+            <Route path={'/login'} element={ <SignIn /> } />
+            <Route path={'/register'} element={ <Register /> } />
+            <Route path={'*'} element={ <ErrorPage /> }/>
             {/* <Route path={'/followers'} element={<Follow />} /> */}
           </Routes>
         </div>

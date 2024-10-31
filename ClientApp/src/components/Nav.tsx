@@ -47,10 +47,10 @@ export function Nav() {
                 <div>
                     {/* Should only show if user is logged in */}
                     {
-                        !isAuthenticated && (
+                        isAuthenticated ? (
                             <>
                                 <Link to={'/'}>
-                                    <button className="blue-outline">
+                                    <button className='blue-outline'>
                                         <IconCenter reactIcon={ <GiBirdHouse /> } text="Home"/>
                                     </button>
                                 </Link>   
@@ -61,7 +61,7 @@ export function Nav() {
                                     </button>
                                 </Link>                     
                             </>
-                        )
+                        ) : null
                     }
                 </div>
 
@@ -84,7 +84,7 @@ export function Nav() {
                             <button className='gradient-button' onClick={ handleSignUp }>
                                 Sign-Up
                             </button>    
-                            
+
                             {/* <Link to='/login'>
                                 <button className="blue-outline">
                                     Log In
