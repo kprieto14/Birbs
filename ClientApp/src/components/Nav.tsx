@@ -6,7 +6,10 @@ import { GiBirdHouse } from "react-icons/gi";
 import IconCenter from "./IconCenter";
 
 export function Nav() {
-    const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+
+    console.log(isAuthenticated)
+    console.log(user)
 
     const handleSignUp = async () => {
         await loginWithRedirect({
