@@ -6,22 +6,22 @@ import { Link } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import { BirdCage } from "../components/BirdCage";
+import { getUser } from "../api/auth";
 import { Bird } from "../types";
 import birdAPI from "../api/birdAPI";
 import IconCenter from "../components/IconCenter";
 import useToggle from "../hooks/useToggle";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export function BirdCageList() {
     const seasons = [ 'Spring', 'Summer', 'Fall', 'Winter' ]
 
-    const { user } = useAuth0()
+    const user = getUser()
 
     const nullBirdList: Bird[] = [];
 
     const { data: birdsList = nullBirdList } = useQuery<Bird[]>({
         queryKey: ['birds'],
-        queryFn: () => birdAPI.getBirds(1)
+        queryFn: () => birdAPI.getBirds(Number(user.id))
     })
 
     const [ isOpenSpring, toggleSpring ] = useToggle(true);
@@ -101,7 +101,7 @@ export function BirdCageList() {
             <header>
                 <Row className="mb-3">
                     <Col xs={ 12 } lg={ 6 } xl={ 8 }>
-                        {/* <h1 className="mb-5">Hello, { user.name }!</h1> */}
+                        <h1 className="mb-5">Hello, { user.username }!</h1>
 
                         <h5>A list of your birds by season, you may sort your birds by name or year in each season.</h5>
                         <h5 className="mt-1 pb-5">You may also add a bird if you want.</h5> 
@@ -155,7 +155,7 @@ export function BirdCageList() {
                                 <h2>Season: { season }</h2>
                             </header>
 
-                            <Collapse in={ isOpen(season) }>
+                            <Collapse in={isOpen(season)}>
                                 <Row>
                                     {
                                         // SORT HERE USING A STATE? DEFAULT STATE BEING BY ID UNLESS USER CHOOSES OTHERWISE

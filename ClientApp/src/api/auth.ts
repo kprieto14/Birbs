@@ -10,8 +10,6 @@
 //    body: JSON.stringify(thing)
 // })
 
-// This was an old way of doing login and authentication
-
 import { LoginSuccess } from '../types'
 
 // Returns the Authorization header for the the currently logged in in user.

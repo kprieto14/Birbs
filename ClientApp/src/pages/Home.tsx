@@ -1,7 +1,6 @@
 import React from "react";
 import { BirdOfTheDay } from "../components/BirdOfTheDay";
 import { isLoggedIn } from "../api/auth";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export function Home() {
     return (

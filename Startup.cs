@@ -174,7 +174,7 @@ namespace Birbs
                 if (env.IsDevelopment())
                 {
                     // Assume the client app is running on port 3000, this is
-                    // a big assumption since it might run on a different port
+                    // a big assumption since it might run on a differnet port
                     // if multiple react-scripts/create-react-app are running on
                     // the machine.
                     //

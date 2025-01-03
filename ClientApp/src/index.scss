@@ -100,7 +100,6 @@ input[type="file"] {
   &:hover {
     background: var(--blue);
     color: white;
-    cursor: pointer;
   }
 }
 
@@ -157,7 +156,7 @@ input[type="file"] {
   }
 }
 
-.register, .sign-in, .add-bird, .edit-bird, .call-back {
+.register, .sign-in, .add-bird, .edit-bird {
   display: flex;
   justify-content: center;
   align-items: center;

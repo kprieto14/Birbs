@@ -18,8 +18,3 @@ Future Ideas/ Future Concerns
 - Make site more secure in general
 - Add a page that shows the previous week's Bird of the Day
 - Mobile-Friendly Bird-List Page
-
-
-IMMEDIATE CONCERNS
-- Incorporate auth0 for login
-- Host on Azure or AWS
