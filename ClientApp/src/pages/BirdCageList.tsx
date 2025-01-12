@@ -32,17 +32,11 @@ export function BirdCageList() {
     const [ sortedBirds, setSortedBirds ] = useState<Bird[]>(birdsList.sort((bird, b) => bird.name.localeCompare(b.name)))
     const [ sortText, setSortText ] = useState<string>("ABC")
 
-    // Set the birds when they load by name
-    useEffect(() => 
-        setSortedBirds(birdsList)
-    , [birdsList])
-
     function toggle(season: string) {
         switch(season) {
             case "Spring":
                 toggleSpring()
                 break;
-
             case "Summer":
                 toggleSummer()
                 break;
@@ -95,7 +89,11 @@ export function BirdCageList() {
             } break;
         }            
     }
-
+    
+    // Set the birds when they load by name
+    useEffect(() => 
+        setSortedBirds(birdsList)
+    , [ birdsList ])
     return (
         <main className="bird-cage-list">
             <header>

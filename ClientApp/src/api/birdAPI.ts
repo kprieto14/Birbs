@@ -3,6 +3,8 @@ import { Bird, NewBirdParams } from '../types';
 
 const baseURL = 'http://localhost:5000/api'
 
+const pythonApiURL = 'http://localhost:5002/api'
+
 function birdApi() {
     return {
         // Bird Endpoints
@@ -27,7 +29,7 @@ function birdApi() {
         },
         // This grabs a single bird
         getBirdOfTheDay: async () => {
-            const getBirdOfTheDay = await axios.get(`${baseURL}/BirdsOfTheDay`)
+            const getBirdOfTheDay = await axios.get(`${pythonApiURL}/birdOfTheDay`)
 
             if (getBirdOfTheDay.status === 200) {
                 return getBirdOfTheDay.data

@@ -2,8 +2,8 @@ export type NewUserType = {
     username: string
     email: string
     password: string
-  }
-  
+}
+
 export type LoginUserType = {
     email: string
     password: string
@@ -40,12 +40,33 @@ export type Bird = {
     userId: number
 }
 
+// export type CurrentBirdOfTheDay = {
+//     id: number
+//     birdId: number
+//     bird: Bird | null
+//     chosenDate: Date | null
+//     userName: string | null
+// }
+
+type PythonBird = {
+    Id: number 
+    Name: string
+    PhotoURL: string 
+    PhotoPublicId: string | null
+    PhotoFileName: string | null
+    AdoptedFrom: string 
+    HolidayCollection: string 
+    YearPublished: number
+    SeasonCollection: 'Spring' | 'Summer' | 'Fall' | 'Winter'
+    UserId: number 
+}
+
 export type CurrentBirdOfTheDay = {
-    id: number
-    birdId: number
-    bird: Bird | null
-    chosenDate: Date | null
-    userName: string | null
+    Id: number
+    ChosenDate: Date | null
+    BirdId: number
+    UserName: string
+    bird: PythonBird | null
 }
 
 export type NewBirdParams = {

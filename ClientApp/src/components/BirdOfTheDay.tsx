@@ -3,16 +3,16 @@ import { GiBirdCage } from "react-icons/gi";
 import { useQuery } from "@tanstack/react-query";
 import { CurrentBirdOfTheDay } from "../types";
 import birdAPI from "../api/birdAPI";
-import Junior from "../assets/junior-bird.jpeg"
+// import Junior from "../assets/junior-bird.jpeg"
 
 export function BirdOfTheDay() {
 
     const nullBird: CurrentBirdOfTheDay = {
-        id: 0,
-        birdId: 0,
+        Id: 0,
+        BirdId: 0,
         bird: null,
-        chosenDate: null,
-        userName: null,
+        ChosenDate: null,
+        UserName: '',
     }
 
     const { data: birdOfTheDay = nullBird } = useQuery<CurrentBirdOfTheDay>({
@@ -20,10 +20,12 @@ export function BirdOfTheDay() {
         queryFn: () => birdAPI.getBirdOfTheDay()
     })
 
+    console.log(birdOfTheDay)
+
     return (
         <article className="bird-day mt-5">
             <aside>
-                <img src={ birdOfTheDay.bird?.photoURL ? birdOfTheDay.bird?.photoURL : Junior } alt="Fabric bird of the day"/>
+                <img src={ birdOfTheDay.bird?.PhotoURL ? birdOfTheDay.bird?.PhotoURL : '' } alt="Fabric bird of the day"/>
             </aside>
 
             <header className="day-header">
@@ -33,11 +35,11 @@ export function BirdOfTheDay() {
             </header>
 
             <div className="bird-day-info">
-                <h3 className="mb-3"><strong>{ birdOfTheDay.bird?.name || 'Loading' }</strong></h3>
-                <h4 className="mb-2"><strong>User:</strong> { birdOfTheDay.userName || 'Loading' }</h4>
-                <h4 className="mb-2"><strong>Season:</strong> { birdOfTheDay.bird?.seasonCollection || 'Loading' }</h4>
-                <h4 className="mb-2"><strong>Holiday:</strong> { birdOfTheDay.bird?.holidayCollection || 'Loading' }</h4>
-                <h4 className="mb-2"><strong>Year:</strong> { birdOfTheDay.bird?.yearPublished || 'Loading' }</h4>
+                <h3 className="mb-3"><strong>{ birdOfTheDay.bird?.Name || 'Loading' }</strong></h3>
+                <h4 className="mb-2"><strong>User:</strong> { birdOfTheDay.UserName || 'Loading' }</h4>
+                <h4 className="mb-2"><strong>Season:</strong> { birdOfTheDay.bird?.SeasonCollection || 'Loading' }</h4>
+                <h4 className="mb-2"><strong>Holiday:</strong> { birdOfTheDay.bird?.HolidayCollection || 'Loading' }</h4>
+                <h4 className="mb-2"><strong>Year:</strong> { birdOfTheDay.bird?.YearPublished || 'Loading' }</h4>
             </div>
         </article>
     )
